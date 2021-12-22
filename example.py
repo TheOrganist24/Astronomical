@@ -1,4 +1,4 @@
-from src.astronomical import sun
+from astronomical import sun
 
 latitude = 50.392189
 longitude = -3.941355
