@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, date
 from astronomical import __version__
 from astronomical.location import Location
 from astronomical import sun
-from astronomical.sleep import Requirements, duration
+from astronomical.sleep import Requirements, duration, alarms
 
 def test_version():
     assert __version__ == '0.1.0'
@@ -54,3 +54,11 @@ class TestSleepModule:
         for day in range(365):
             specific_date = date.today() + timedelta(days=day)
             assert min_duration <= duration(location, requirements, specific_date) <= max_duration
+        
+    def test_sleep_alarms_are_overnight(self):
+        location = Location("Ivybridge", -3.941355, 50.392189)
+        requirements = Requirements()
+        night = date.today()
+        go_to_bed, get_up = alarms(location, requirements, night)
+        assert go_to_bed.date() == date.today() \
+            and get_up.date() == (date.today() + timedelta(days=1))

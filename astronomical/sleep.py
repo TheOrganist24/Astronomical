@@ -1,6 +1,6 @@
 """Utilities related to sleep."""
 
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
 import math
 from . import sun
 
@@ -50,3 +50,8 @@ def duration(location, requirements, night_start=date.today()):
     season_diff = timedelta(seconds=(variance * cos_curve))
 
     return requirements.duration + season_diff
+
+
+def alarms(location, requirements, night_start=date.today()):
+    """Calculate going to bed, and waking up times."""
+    return datetime.now(), datetime.now()
