@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from astronomical import __version__
 from astronomical.location import Location
 from astronomical import sun
@@ -42,4 +42,5 @@ class TestSleepModule:
         assert requirements.duration == timedelta(hours=8) \
             and requirements.seasonal_variance == timedelta(hours=1) \
             and requirements.max_rise == None \
-            and requirements.min_rise == None
+            and requirements.min_rise == None \
+            and requirements.schedule_till ==  date.today() + timedelta(days=7)
