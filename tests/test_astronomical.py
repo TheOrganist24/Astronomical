@@ -22,11 +22,13 @@ class TestLocationClass:
 
 class TestSunModule:
     def test_sun_times_are_times(self):
-        sunrise, sunset = sun.sun_times(-3.941355, 50.392189)
+        location = Location("Ivybridge", -3.941355, 50.392189)
+        sunrise, sunset = sun.sun_times(location)
         assert isinstance(sunset, datetime) \
             and isinstance(sunrise, datetime)
 
     def test_sunset_is_after_sunrise(self):
-        sunrise, sunset = sun.sun_times(-3.941355, 50.392189)
+        location = Location("Ivybridge", -3.941355, 50.392189)
+        sunrise, sunset = sun.sun_times(location)
         assert sunset > sunrise
     
