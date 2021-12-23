@@ -1,7 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from astronomical import __version__
 from astronomical.location import Location
 from astronomical import sun
+from astronomical.sleep import Requirements
 
 def test_version():
     assert __version__ == '0.1.0'
@@ -31,4 +32,11 @@ class TestSunModule:
         location = Location("Ivybridge", -3.941355, 50.392189)
         sunrise, sunset = sun.sun_times(location)
         assert sunset > sunrise
-    
+
+class TestSleepModule:
+    def test_sleep_requirement_defaults(self):
+        requirements = Requirements()
+        assert requirements.duration == timedelta(hours=8) \
+            and requirements.seasonal_variance == timedelta(hours=1) \
+            and requirements.max_rise == None \
+            and requirements.min_rise == None
