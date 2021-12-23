@@ -7,6 +7,7 @@ from astronomical.sleep import Requirements
 def test_version():
     assert __version__ == '0.1.0'
 
+
 class TestLocationClass:
     def test_name_is_string(self):
         location = Location("Ivybridge", -3.941355, 50.392189)
@@ -21,6 +22,7 @@ class TestLocationClass:
         assert isinstance(location.location[0], float) \
             and isinstance(location.location[1], float)
 
+
 class TestSunModule:
     def test_sun_times_are_times(self):
         location = Location("Ivybridge", -3.941355, 50.392189)
@@ -32,6 +34,7 @@ class TestSunModule:
         location = Location("Ivybridge", -3.941355, 50.392189)
         sunrise, sunset = sun.sun_times(location)
         assert sunset > sunrise
+
 
 class TestSleepModule:
     def test_sleep_requirement_defaults(self):
