@@ -10,3 +10,9 @@ cd astronomical
 poetry install
 poetry run python3 example.py
 ```
+
+## Developing
+### Test
+```
+poetry run python3 -m pytest tests/.
+```
