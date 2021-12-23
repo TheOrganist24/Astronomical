@@ -1,6 +1,8 @@
 """Utilities related to sleep."""
 
 from datetime import timedelta, date
+import math
+from . import sun
 
 
 class Requirements:
@@ -12,7 +14,7 @@ class Requirements:
                  min_rise=None,
                  max_rise=None):
         """Define all instance attributes here."""
-        self.duration = duration
+        self.duration = duration  # minimum sleep
         self.seasonal_variance = seasonal_variance
         self.min_rise = min_rise
         self.max_rise = max_rise
@@ -29,6 +31,22 @@ class Requirements:
         """
 
 
-def duration(location, requirements, night_start):
+def duration(location, requirements, night_start=date.today()):
     """Calculate duration of sleep for a given night."""
-    return timedelta(hours=24)
+    # find last winter solstice (night time is at maximum)
+    last_winter = date(date.today().year - 1, 12, 21)
+    this_winter = date(date.today().year, 12, 21)
+
+    if night_start < this_winter:
+        winter = last_winter
+    elif this_winter <= night_start:
+        winter = this_winter
+
+    # calculate cos curve for night length
+    day_shift = (night_start - winter).total_seconds() / (60*60*24)
+    cos_curve = math.cos(2*math.pi*(day_shift/365))
+    cos_curve = (1 + cos_curve) / 2
+    variance = requirements.seasonal_variance.total_seconds()
+    season_diff = timedelta(seconds=(variance * cos_curve))
+
+    return requirements.duration + season_diff

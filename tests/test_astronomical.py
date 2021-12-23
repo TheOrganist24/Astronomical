@@ -49,8 +49,8 @@ class TestSleepModule:
         sleep_duration = timedelta(hours=8)
         variance = timedelta(hours=1)
         requirements = Requirements(duration=sleep_duration, seasonal_variance=variance)
-        max_duration = sleep_duration + (variance/2)
-        min_duration = sleep_duration - (variance/2)
+        max_duration = sleep_duration + variance
+        min_duration = sleep_duration
         for day in range(365):
             specific_date = date.today() + timedelta(days=day)
             assert min_duration <= duration(location, requirements, specific_date) <= max_duration
