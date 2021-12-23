@@ -22,8 +22,8 @@ This component assumes a get up time closest to sunrise (within an optional vari
 This component provides the following:
 ```
 sunrise, sunset = astronomical.sun.sun_times(location)
-sleep_duration = astronomical.sleep.duration(requirements, location)  # to be implemented
-bedtime, morning_alarm = astronomical.sleep.alarms(requirements, location)  # to be implemented
+sleep_duration = astronomical.sleep.duration(requirements, location, night=today())
+bedtime, morning_alarm = astronomical.sleep.alarms(requirements, location, night=today())
 ```
 
 
