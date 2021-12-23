@@ -43,4 +43,4 @@ class TestSleepModule:
             and requirements.seasonal_variance == timedelta(hours=1) \
             and requirements.max_rise == None \
             and requirements.min_rise == None \
-            and requirements.schedule_till ==  date.today() + timedelta(days=7)
+            and isinstance(requirements.dates, list)
