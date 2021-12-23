@@ -3,7 +3,7 @@
 from suntime import Sun, SunTimeException  # type: ignore
 
 
-def sun_times(location):
+def sun_times(location, day):
     """Return sunrise and sunset times."""
     sun = Sun(location.latitude, location.longitude)
     sunrise = sun.get_sunrise_time()

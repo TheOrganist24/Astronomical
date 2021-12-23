@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, date
 from astronomical import __version__
 from astronomical.location import Location
 from astronomical import sun
-from astronomical.sleep import Requirements
+from astronomical.sleep import Requirements, duration
 
 def test_version():
     assert __version__ == '0.1.0'
@@ -42,5 +42,15 @@ class TestSleepModule:
         assert requirements.duration == timedelta(hours=8) \
             and requirements.seasonal_variance == timedelta(hours=1) \
             and requirements.max_rise == None \
-            and requirements.min_rise == None \
-            and isinstance(requirements.dates, list)
+            and requirements.min_rise == None
+    
+    def test_sleep_duration_is_within_tolerance(self):
+        location = Location("Ivybridge", -3.941355, 50.392189)
+        sleep_duration = timedelta(hours=8)
+        variance = timedelta(hours=1)
+        requirements = Requirements(duration=sleep_duration, seasonal_variance=variance)
+        max_duration = sleep_duration + (variance/2)
+        min_duration = sleep_duration - (variance/2)
+        for day in range(365):
+            specific_date = date.today() + timedelta(days=day)
+            assert min_duration <= duration(location, requirements, specific_date) <= max_duration
