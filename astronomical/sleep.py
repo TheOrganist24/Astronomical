@@ -27,7 +27,7 @@ class Requirements:
         """Generate summary of class with minimal inputs."""
         return f"""Requirements \
         \n- hours sleep: {self.duration} \
-        \n- seasonal varience: {self.duration}
+        \n- seasonal varience: {self.seasonal_variance}
         """
 
 
