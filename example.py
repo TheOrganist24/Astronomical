@@ -17,14 +17,12 @@ the_sun.add_daughters(earth, 147.1*10**9)
 print("Orbital daughters of the {}:".format(the_sun.name))
 for daughter, details in the_sun.daughters.items():
     print(f" - {details}")
-print("Orbittal force on the {} from the {} is {:.2e}N".format(
-    earth.name,
-    the_sun.name,
-    the_sun.orbittal_force(earth.name)))
-print("Orbittal period of the {} round the {} is {}s".format(
-    earth.name,
-    the_sun.name,
-    int(the_sun.orbittal_period(earth.name))))
+print(f"Orbittal force on the {earth.name} " \
+      f"from the {the_sun.name} " \
+      f"is {the_sun.orbittal_force(earth.name):.2e}N")
+print(f"Orbittal period of the {earth.name} " \
+      f"round the {the_sun.name} " \
+      f"is {int(the_sun.orbittal_period(earth.name))}s")
 
 print("\nSunrise/Sunset Times \
       \n====================")
@@ -33,10 +31,9 @@ home = Location("Ivybridge", -3.9413, 50.3921)
 print(home)
 
 sunrise, sunset = sun.sun_times(home)
-print("""Sun times today in {}:
-Sunrise today: {:%H:%M}
-Sunset today: {:%H:%M}
-""".format(home.name, sunrise, sunset))
+print("Sun times today in {home.name}: \n" \
+      f"Sunrise today: {sunrise:%H:%M} \n" \
+      f"Sunset today: {sunset:%H:%M} \n")
 
 
 
@@ -48,8 +45,7 @@ requirements = Requirements(min_duration=timedelta(hours=7),
                             max_rise=time(hour=7))
 print(requirements)
 
-print("""Duration: {}
-""".format(requirements.duration()))
+print(f"Duration: {requirements.duration()}")
 
 print("""Alarms:
 Got to bed: {:%H:%M}
