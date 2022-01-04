@@ -25,13 +25,14 @@ print("Sleep Times \
       \n===========")
 
 requirements = Requirements(duration=timedelta(hours=7),
-                            min_rise=time(hour=6))
+                            min_rise=time(hour=6),
+                            max_rise=time(hour=7))
 print(requirements)
 
-print("""Duration: {}
+print("""Duration: {:%H:%M}
 """.format(duration(requirements)))
 
 print("""Alarms:
-Got to bed: {}
-Get up: {}
+Got to bed: {:%H:%M}
+Get up: {:%H:%M}
 """.format(*alarms(home, requirements)))
