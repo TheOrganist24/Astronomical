@@ -6,7 +6,12 @@ from . import sun
 
 
 class Requirements:
-    """User defined sleep requirements."""
+    """User defined sleep requirements.
+    
+    This is where the user can tailor their needs. Defaults are based around
+    needing 8 hours sleep, and 1 hour of seasonal variance in wake-up times.
+    If not limits are set on wake-up times then it defaults to sunrise.
+    """
 
     def __init__(self,
                  duration=timedelta(hours=8),
@@ -31,8 +36,14 @@ class Requirements:
         """
 
 
-def duration(location, requirements, night_start=date.today()):
-    """Calculate duration of sleep for a given night."""
+def duration(requirements, night_start=date.today()):
+    """Calculate duration of sleep for a given night.
+    
+    This function calculates sleep duration based on the requirements provided
+    in the requirements class, including the length requirements, and the
+    seasonal shift. This has no need to know about location since it is purely
+    based on user preference.
+    """
     # find last winter solstice (night time is at maximum)
     last_winter = date(date.today().year - 1, 12, 21)
     this_winter = date(date.today().year, 12, 21)
@@ -56,10 +67,15 @@ def duration(location, requirements, night_start=date.today()):
 
 
 def alarms(location, requirements, night_start=date.today()):
-    """Calculate going to bed, and waking up times."""
+    """Calculate going to bed, and waking up times.
+    
+    This function provides the time for waking up according to location and
+    user requirements, and the calulcated time to go to sleep according to
+    wake-up time and duration.
+    """
     # get sleep duration
     tomorrow = date.today() + timedelta(days=1)
-    sleep_duration = duration(location, requirements, tomorrow)
+    sleep_duration = duration(requirements, tomorrow)
 
     # calculate getting up time
     sunrise, sunset = sun.sun_times(location, tomorrow)

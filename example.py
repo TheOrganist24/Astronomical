@@ -28,7 +28,7 @@ requirements = Requirements(min_rise=timedelta(hours=7), max_rise=timedelta(hour
 print(requirements)
 
 print("""Duration: {}
-""".format(duration(home, requirements)))
+""".format(duration(requirements)))
 
 print("""Alarms:
 Got to bed: {}
