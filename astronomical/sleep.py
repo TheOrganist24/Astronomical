@@ -43,10 +43,9 @@ class Requirements:
     def duration(self, night_start: date = date.today()) -> timedelta:
         """Calculate duration of sleep for a given night.
 
-        This function calculates sleep duration based on the requirements
-        provided in the requirements class, including the length requirements,
-        and the seasonal shift. This has no need to know about location since
-        it is purely based on user preference.
+        This function calculates sleep duration based on the requirements,
+        including the length of sleep and the seasonal shift. This has no need
+        to know about location since it is purely based on user preference.
         """
         # find last winter solstice (night time is at maximum)
         last_winter = date(date.today().year - 1, 12, 21)
