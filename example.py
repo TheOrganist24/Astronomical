@@ -24,7 +24,9 @@ Sunset today: {:%H:%M}
 print("Sleep Times \
       \n===========")
 
-requirements = Requirements(min_rise=timedelta(hours=7), max_rise=timedelta(hours=8))
+requirements = Requirements(duration=timedelta(hours=7),
+                            min_rise=timedelta(hours=6),
+                            max_rise=timedelta(hours=7))
 print(requirements)
 
 print("""Duration: {}

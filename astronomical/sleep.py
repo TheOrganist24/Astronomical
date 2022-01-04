@@ -3,7 +3,11 @@
 from datetime import timedelta, date, datetime, time
 from typing import Optional, Tuple
 import math
+import pytz
+
 from . import sun, location
+
+utc=pytz.UTC
 
 
 class Requirements:
@@ -17,8 +21,8 @@ class Requirements:
     def __init__(self,
                  duration: timedelta = timedelta(hours=8),
                  seasonal_variance: timedelta = timedelta(hours=1),
-                 min_rise: Optional[datetime] = None,
-                 max_rise: Optional[datetime] = None) -> None:
+                 min_rise: Optional[timedelta] = None,
+                 max_rise: Optional[timedelta] = None) -> None:
         """Define all instance attributes here."""
         self.duration = duration  # minimum sleep
         self.seasonal_variance = seasonal_variance
@@ -69,7 +73,7 @@ def duration(requirements: Requirements,
 
 
 def alarms(location: location.Location,
-           requirements,
+           requirements: Requirements,
            night_start: date = date.today()) -> Tuple[datetime, datetime]:
     """Calculate going to bed, and waking up times.
 
@@ -83,16 +87,17 @@ def alarms(location: location.Location,
 
     # calculate getting up time
     sunrise, sunset = sun.sun_times(location, tomorrow)
-    maxima = requirements.max_rise
-    minima = requirements.min_rise
-    if ((maxima == minima) and maxima) \
-            or (maxima and not minima) \
-            or (minima and not maxima):
-        if maxima:
-            get_up = maxima
-        else:
-            get_up = minima
-    elif maxima != minima:
+
+    # What is the logic here?
+    # if min and max rise times are defined return cos curve between the two
+    # if neither, get_up is sunrise
+    # if one or t'othergo for sunrise or max(/min) whichever is earlier(/later)
+    if requirements.max_rise is None \
+            and requirements.min_rise is None:
+        get_up = sunrise
+        
+    elif requirements.max_rise is not None \
+            and requirements.min_rise is not None: 
         # find last winter solstice (night time is at maximum)
         last_winter = date(date.today().year - 1, 12, 21)
         this_winter = date(date.today().year, 12, 21)
@@ -106,11 +111,25 @@ def alarms(location: location.Location,
         day_shift = (night_start - winter).total_seconds() / (60*60*24)
         cos_curve = math.cos(2*math.pi*(day_shift/365))
         cos_curve = (1 + cos_curve) / 2
-        variance = (maxima - minima).total_seconds()
+        variance = (requirements.max_rise - requirements.min_rise).total_seconds()
         season_diff = timedelta(seconds=(variance * cos_curve))
-        get_up = datetime.combine(tomorrow, time()) + minima + season_diff
-    else:
-        get_up = sunrise
+        get_up = datetime.combine(tomorrow, time()) + requirements.min_rise + season_diff
+        
+    elif requirements.max_rise is None \
+            and requirements.min_rise is not None:
+        limit = utc.localize(datetime.today() + requirements.min_rise)
+        if limit >= sunrise:
+            get_up = limit
+        else:
+            get_up = sunrise
+            
+    elif requirements.max_rise is not None \
+            and requirements.min_rise is None:
+        limit = utc.localize(datetime.today() + timedelta(days=1) + requirements.max_rise)
+        if limit <= sunrise:
+            get_up = limit
+        else:
+            get_up = sunrise
 
     # floor to minutes
     discard = timedelta(seconds=get_up.second,
