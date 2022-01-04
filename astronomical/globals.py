@@ -35,9 +35,10 @@ class CelestialBody:
         """Add daugters to self."""
         daughter.add_orbital_distance(orbital_distance)
         self.daughters[daughter.name] = daughter
-    
+
     def orbittal_force(self,
                        daughter: str) -> float:
+        """Apply Universal Law of Gravitation to specific daughter."""
         return gravitational_force(self.mass,
                                    self.daughters[daughter].mass,
                                    self.daughters[daughter].orbital_distance)
