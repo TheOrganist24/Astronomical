@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, date
 from astronomical import __version__
 from astronomical.location import Location
 from astronomical import sun
-from astronomical.sleep import Requirements, duration, alarms
+from astronomical.sleep import Requirements, alarms
 
 def test_version():
     assert __version__ == '0.1.0'
@@ -39,7 +39,7 @@ class TestSunModule:
 class TestSleepModule:
     def test_sleep_requirement_defaults(self):
         requirements = Requirements()
-        assert requirements.duration == timedelta(hours=8) \
+        assert requirements.min_duration == timedelta(hours=8) \
             and requirements.seasonal_variance == timedelta(hours=1) \
             and requirements.max_rise == None \
             and requirements.min_rise == None
@@ -48,12 +48,12 @@ class TestSleepModule:
         location = Location("Ivybridge", -3.941355, 50.392189)
         sleep_duration = timedelta(hours=8)
         variance = timedelta(hours=1)
-        requirements = Requirements(duration=sleep_duration, seasonal_variance=variance)
+        requirements = Requirements(min_duration=sleep_duration, seasonal_variance=variance)
         max_duration = sleep_duration + variance
         min_duration = sleep_duration
         for day in range(365):
             specific_date = date.today() + timedelta(days=day)
-            assert min_duration <= duration(requirements, specific_date) <= max_duration
+            assert min_duration <= requirements.duration(specific_date) <= max_duration
         
     def test_sleep_alarms_are_overnight(self):
         location = Location("Ivybridge", -3.941355, 50.392189)

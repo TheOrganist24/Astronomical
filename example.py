@@ -1,7 +1,7 @@
 from datetime import timedelta, time
 from astronomical import sun
 from astronomical.location import Location
-from astronomical.sleep import Requirements, duration, alarms
+from astronomical.sleep import Requirements, alarms
 
 print("""TheOrganist24: Astronomical
 Library of utilities related to astronomical movements
@@ -24,13 +24,13 @@ Sunset today: {:%H:%M}
 print("Sleep Times \
       \n===========")
 
-requirements = Requirements(duration=timedelta(hours=7),
+requirements = Requirements(min_duration=timedelta(hours=7),
                             min_rise=time(hour=6),
                             max_rise=time(hour=7))
 print(requirements)
 
 print("""Duration: {}
-""".format(duration(requirements)))
+""".format(requirements.duration()))
 
 print("""Alarms:
 Got to bed: {:%H:%M}

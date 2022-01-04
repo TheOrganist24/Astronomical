@@ -19,12 +19,12 @@ class Requirements:
     """
 
     def __init__(self,
-                 duration: timedelta = timedelta(hours=8),
+                 min_duration: timedelta = timedelta(hours=8),
                  seasonal_variance: timedelta = timedelta(hours=1),
                  min_rise: Optional[time] = None,
                  max_rise: Optional[time] = None) -> None:
         """Define all instance attributes here."""
-        self.duration = duration  # minimum sleep
+        self.min_duration = min_duration  # minimum sleep
         self.seasonal_variance = seasonal_variance
         self.min_rise = min_rise
         self.max_rise = max_rise
@@ -36,40 +36,38 @@ class Requirements:
     def __str__(self) -> str:
         """Generate summary of class with minimal inputs."""
         return f"""Requirements \
-        \n- hours sleep: {self.duration} \
+        \n- hours sleep: {self.min_duration} \
         \n- seasonal varience: {self.seasonal_variance}
         """
 
+    def duration(self, night_start: date = date.today()) -> timedelta:
+        """Calculate duration of sleep for a given night.
 
-def duration(requirements: Requirements,
-             night_start: date = date.today()) -> timedelta:
-    """Calculate duration of sleep for a given night.
+        This function calculates sleep duration based on the requirements
+        provided in the requirements class, including the length requirements,
+        and the seasonal shift. This has no need to know about location since
+        it is purely based on user preference.
+        """
+        # find last winter solstice (night time is at maximum)
+        last_winter = date(date.today().year - 1, 12, 21)
+        this_winter = date(date.today().year, 12, 21)
 
-    This function calculates sleep duration based on the requirements provided
-    in the requirements class, including the length requirements, and the
-    seasonal shift. This has no need to know about location since it is purely
-    based on user preference.
-    """
-    # find last winter solstice (night time is at maximum)
-    last_winter = date(date.today().year - 1, 12, 21)
-    this_winter = date(date.today().year, 12, 21)
+        if night_start < this_winter:
+            winter = last_winter
+        elif this_winter <= night_start:
+            winter = this_winter
 
-    if night_start < this_winter:
-        winter = last_winter
-    elif this_winter <= night_start:
-        winter = this_winter
+        # calculate cos curve for night length
+        day_shift = (night_start - winter).total_seconds() / (60*60*24)
+        cos_curve = math.cos(2*math.pi*(day_shift/365))
+        cos_curve = (1 + cos_curve) / 2
+        variance = self.seasonal_variance.total_seconds()
+        season_diff = timedelta(seconds=(variance * cos_curve))
 
-    # calculate cos curve for night length
-    day_shift = (night_start - winter).total_seconds() / (60*60*24)
-    cos_curve = math.cos(2*math.pi*(day_shift/365))
-    cos_curve = (1 + cos_curve) / 2
-    variance = requirements.seasonal_variance.total_seconds()
-    season_diff = timedelta(seconds=(variance * cos_curve))
-
-    # round to minutes
-    seconds = int((requirements.duration + season_diff).total_seconds())
-    td = timedelta(minutes=seconds//60)
-    return td
+        # round to minutes
+        seconds = int((self.min_duration + season_diff).total_seconds())
+        td = timedelta(minutes=seconds//60)
+        return td
 
 
 def alarms(location: location.Location,
@@ -83,7 +81,7 @@ def alarms(location: location.Location,
     """
     # get sleep duration
     tomorrow = date.today() + timedelta(days=1)
-    sleep_duration = duration(requirements, tomorrow)
+    sleep_duration = requirements.duration(tomorrow)
 
     # calculate getting up time
     sunrise, sunset = sun.sun_times(location, tomorrow)
