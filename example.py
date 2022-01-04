@@ -1,4 +1,5 @@
 from datetime import timedelta, time
+from astronomical.globals import CelestialBody
 from astronomical import sun
 from astronomical.location import Location
 from astronomical.sleep import Requirements, alarms
@@ -10,7 +11,7 @@ Library of utilities related to astronomical movements
 print("Sunrise/Sunset Times \
       \n====================")
 
-home = Location("Ivybridge", -3.941355, 50.392189)
+home = Location("Ivybridge", -3.9413, 50.3921)
 print(home)
 
 sunrise, sunset = sun.sun_times(home)

@@ -3,6 +3,8 @@
 # Astronomical
 > Library of utilities related to astronomical movements
 
+This module provides information about the sun, moon, seasons and tides according to the user's current whereabouts and whenabouts.
+
 ## Get Started
 ```
 git clone git@gitlab.com:TheOrganist24/astronomical.git
@@ -11,8 +13,26 @@ poetry install
 poetry run python3 example.py
 ```
 
-## Components
-### The Daily Hours
+## Modules
+### Location
+> Utilities related to location.
+
+This module returns the `Location` class for use throughout the rest of the package.
+```
+location = Location("Ivybridge", -3.9413, 50.3921)
+```
+
+### Sun
+> Utilities related to the sun; including sunrise and sunset times.
+
+This module currently returns sunrise and sunset times.
+```
+sunrise, sunset = sun.sun_times(location)
+```
+
+### Sleep
+> Utilities related to sleep; including duration and alarms.
+
 See [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4720388/) which seems to suggest that natural sleep cycles are determined by temperature and sunrise times.  A rough summary for our purposes is that there is a sleep variation of ~1 hour between summer and winter (based around the soltices as maxima and minima) and that sleep length ranges from ~7-9 hours.  Additionally awakening time seems to be most directly correlated to sunrise and thus dictates the settling down to sleep time.
 
 This component assumes a get up time closest to sunrise (within an optional varience), and an optionally defined sleep duration and varience.
@@ -22,7 +42,8 @@ This component assumes a get up time closest to sunrise (within an optional vari
 This component provides the following:
 ```
 sunrise, sunset = astronomical.sun.sun_times(location)
-sleep_duration = astronomical.sleep.duration(requirements, location, night=today())
+requirements = astronomical.sleep.Requirements()
+sleep_duration = requirements.duration(night=today())
 bedtime, morning_alarm = astronomical.sleep.alarms(requirements, location, night=today())
 ```
 

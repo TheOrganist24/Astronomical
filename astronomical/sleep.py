@@ -1,4 +1,4 @@
-"""Utilities related to sleep."""
+"""Utilities related to sleep; including duration and alarms."""
 
 from datetime import timedelta, date, datetime, time
 from typing import Optional, Tuple
