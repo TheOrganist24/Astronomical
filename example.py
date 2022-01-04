@@ -31,10 +31,9 @@ home = Location("Ivybridge", -3.9413, 50.3921)
 print(home)
 
 sunrise, sunset = sun.sun_times(home)
-print("Sun times today in {home.name}: \n" \
+print(f"Sun times today in {home.name}: \n" \
       f"Sunrise today: {sunrise:%H:%M} \n" \
       f"Sunset today: {sunset:%H:%M} \n")
-
 
 
 print("Sleep Times \
