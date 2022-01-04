@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, time
 from astronomical import sun
 from astronomical.location import Location
 from astronomical.sleep import Requirements, duration, alarms
@@ -25,8 +25,7 @@ print("Sleep Times \
       \n===========")
 
 requirements = Requirements(duration=timedelta(hours=7),
-                            min_rise=timedelta(hours=6),
-                            max_rise=timedelta(hours=7))
+                            min_rise=time(hour=6))
 print(requirements)
 
 print("""Duration: {}

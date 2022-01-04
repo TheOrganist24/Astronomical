@@ -7,7 +7,7 @@ import pytz
 
 from . import sun, location
 
-utc=pytz.UTC
+utc = pytz.UTC
 
 
 class Requirements:
@@ -21,8 +21,8 @@ class Requirements:
     def __init__(self,
                  duration: timedelta = timedelta(hours=8),
                  seasonal_variance: timedelta = timedelta(hours=1),
-                 min_rise: Optional[timedelta] = None,
-                 max_rise: Optional[timedelta] = None) -> None:
+                 min_rise: Optional[time] = None,
+                 max_rise: Optional[time] = None) -> None:
         """Define all instance attributes here."""
         self.duration = duration  # minimum sleep
         self.seasonal_variance = seasonal_variance
@@ -95,9 +95,9 @@ def alarms(location: location.Location,
     if requirements.max_rise is None \
             and requirements.min_rise is None:
         get_up = sunrise
-        
+
     elif requirements.max_rise is not None \
-            and requirements.min_rise is not None: 
+            and requirements.min_rise is not None:
         # find last winter solstice (night time is at maximum)
         last_winter = date(date.today().year - 1, 12, 21)
         this_winter = date(date.today().year, 12, 21)
@@ -111,21 +111,27 @@ def alarms(location: location.Location,
         day_shift = (night_start - winter).total_seconds() / (60*60*24)
         cos_curve = math.cos(2*math.pi*(day_shift/365))
         cos_curve = (1 + cos_curve) / 2
-        variance = (requirements.max_rise - requirements.min_rise).total_seconds()
+
+        variance = ((requirements.max_rise.hour
+                     - requirements.min_rise.hour)*60*60
+                    + (requirements.max_rise.minute
+                       - requirements.min_rise.minute)*60
+                    )
         season_diff = timedelta(seconds=(variance * cos_curve))
-        get_up = datetime.combine(tomorrow, time()) + requirements.min_rise + season_diff
-        
+        get_up = datetime.combine(tomorrow, requirements.min_rise) \
+            + season_diff
+
     elif requirements.max_rise is None \
             and requirements.min_rise is not None:
-        limit = utc.localize(datetime.today() + requirements.min_rise)
+        limit = utc.localize(datetime.combine(tomorrow, requirements.min_rise))
         if limit >= sunrise:
             get_up = limit
         else:
             get_up = sunrise
-            
+
     elif requirements.max_rise is not None \
             and requirements.min_rise is None:
-        limit = utc.localize(datetime.today() + timedelta(days=1) + requirements.max_rise)
+        limit = utc.localize(datetime.combine(tomorrow, requirements.max_rise))
         if limit <= sunrise:
             get_up = limit
         else:

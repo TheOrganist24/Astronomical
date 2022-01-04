@@ -53,7 +53,7 @@ class TestSleepModule:
         min_duration = sleep_duration
         for day in range(365):
             specific_date = date.today() + timedelta(days=day)
-            assert min_duration <= duration(location, requirements, specific_date) <= max_duration
+            assert min_duration <= duration(requirements, specific_date) <= max_duration
         
     def test_sleep_alarms_are_overnight(self):
         location = Location("Ivybridge", -3.941355, 50.392189)
