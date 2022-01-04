@@ -29,7 +29,7 @@ requirements = Requirements(duration=timedelta(hours=7),
                             max_rise=time(hour=7))
 print(requirements)
 
-print("""Duration: {:%H:%M}
+print("""Duration: {}
 """.format(duration(requirements)))
 
 print("""Alarms:
