@@ -10,6 +10,7 @@ This module provides information about the sun, moon, seasons and tides accordin
 ```
 git clone git@gitlab.com:TheOrganist24/astronomical.git
 cd astronomical
+cp pre-commit .git/hooks/
 poetry install
 poetry run python3 example.py
 ```
