@@ -49,7 +49,10 @@ def duration(location, requirements, night_start=date.today()):
     variance = requirements.seasonal_variance.total_seconds()
     season_diff = timedelta(seconds=(variance * cos_curve))
 
-    return requirements.duration + season_diff
+    # round to minutes
+    seconds = int((requirements.duration + season_diff).total_seconds())
+    td = timedelta(minutes=seconds//60)
+    return td
 
 
 def alarms(location, requirements, night_start=date.today()):
@@ -88,6 +91,11 @@ def alarms(location, requirements, night_start=date.today()):
         get_up = datetime.combine(tomorrow, time()) + minima + season_diff
     else:
         get_up = sunrise
+
+    # floor to minutes
+    discard = timedelta(seconds=get_up.second,
+                        microseconds=get_up.microsecond)
+    get_up -= discard
 
     # calculate bed time
     bed_time = get_up - sleep_duration
