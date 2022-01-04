@@ -5,6 +5,7 @@
 
 This module provides information about the sun, moon, seasons and tides according to the user's current whereabouts and whenabouts.
 
+
 ## Get Started
 ```
 git clone git@gitlab.com:TheOrganist24/astronomical.git
@@ -13,11 +14,22 @@ poetry install
 poetry run python3 example.py
 ```
 
+
 ## Modules
+### Physics
+> Collection of Physics Equations for use in the rest of the package.
+
+So far the module contains:
+* Newton's Universal Law of Gravitation
+* Kepler's Laws of Orbits
+* Kepler's Law of Periods
+
+
 ### Globals
 > Utilities related to the heavenly spheres.
 
 This module returns the `CelstialBody` class, and the "Earth" object.
+
 
 ### Location
 > Utilities related to location.
@@ -27,6 +39,7 @@ This module returns the `Location` class for use throughout the rest of the pack
 location = Location("Ivybridge", -3.9413, 50.3921)
 ```
 
+
 ### Sun
 > Utilities related to the sun; including sunrise and sunset times.
 
@@ -34,6 +47,7 @@ This module currently returns sunrise and sunset times.
 ```
 sunrise, sunset = sun.sun_times(location)
 ```
+
 
 ### Sleep
 > Utilities related to sleep; including duration and alarms.
