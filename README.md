@@ -14,6 +14,11 @@ poetry run python3 example.py
 ```
 
 ## Modules
+### Globals
+> Utilities related to the heavenly spheres.
+
+This module returns the `CelstialBody` class, and the "Earth" object.
+
 ### Location
 > Utilities related to location.
 

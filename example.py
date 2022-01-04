@@ -1,5 +1,5 @@
 from datetime import timedelta, time
-from astronomical.globals import CelestialBody
+from astronomical.globals import CelestialBody, earth
 from astronomical import sun
 from astronomical.location import Location
 from astronomical.sleep import Requirements, alarms
@@ -7,6 +7,10 @@ from astronomical.sleep import Requirements, alarms
 print("""TheOrganist24: Astronomical
 Library of utilities related to astronomical movements
 """)
+
+print("Heavenly Bodies \
+      \n================")
+print(str(earth) + "\n")
 
 print("Sunrise/Sunset Times \
       \n====================")
