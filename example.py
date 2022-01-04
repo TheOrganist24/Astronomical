@@ -16,7 +16,7 @@ print(the_sun)
 the_sun.add_daughters(earth, 147.1*10**9)
 print("Orbital daughters of the {}:".format(the_sun.name))
 for daughter, details in the_sun.daughters.items():
-    print(" - {}".format(details))
+    print(f" - {details}")
 print("Orbittal force on the {} from the {} is {:.2e}N".format(
     earth.name,
     the_sun.name,
