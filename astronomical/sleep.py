@@ -1,34 +1,35 @@
 """Utilities related to sleep."""
 
 from datetime import timedelta, date, datetime, time
+from typing import Optional, Tuple
 import math
-from . import sun
+from . import sun, location
 
 
 class Requirements:
     """User defined sleep requirements.
-    
+
     This is where the user can tailor their needs. Defaults are based around
     needing 8 hours sleep, and 1 hour of seasonal variance in wake-up times.
     If not limits are set on wake-up times then it defaults to sunrise.
     """
 
     def __init__(self,
-                 duration=timedelta(hours=8),
-                 seasonal_variance=timedelta(hours=1),
-                 min_rise=None,
-                 max_rise=None):
+                 duration: timedelta = timedelta(hours=8),
+                 seasonal_variance: timedelta = timedelta(hours=1),
+                 min_rise: Optional[datetime] = None,
+                 max_rise: Optional[datetime] = None) -> None:
         """Define all instance attributes here."""
         self.duration = duration  # minimum sleep
         self.seasonal_variance = seasonal_variance
         self.min_rise = min_rise
         self.max_rise = max_rise
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Produce code to initialise this class."""
         return f"Requirments()"
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Generate summary of class with minimal inputs."""
         return f"""Requirements \
         \n- hours sleep: {self.duration} \
@@ -36,9 +37,10 @@ class Requirements:
         """
 
 
-def duration(requirements, night_start=date.today()):
+def duration(requirements: Requirements,
+             night_start: date = date.today()) -> timedelta:
     """Calculate duration of sleep for a given night.
-    
+
     This function calculates sleep duration based on the requirements provided
     in the requirements class, including the length requirements, and the
     seasonal shift. This has no need to know about location since it is purely
@@ -66,9 +68,11 @@ def duration(requirements, night_start=date.today()):
     return td
 
 
-def alarms(location, requirements, night_start=date.today()):
+def alarms(location: location.Location,
+           requirements,
+           night_start: date = date.today()) -> Tuple[datetime, datetime]:
     """Calculate going to bed, and waking up times.
-    
+
     This function provides the time for waking up according to location and
     user requirements, and the calulcated time to go to sleep according to
     wake-up time and duration.
