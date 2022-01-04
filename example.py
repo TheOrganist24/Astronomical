@@ -9,10 +9,20 @@ Library of utilities related to astronomical movements
 """)
 
 print("Heavenly Bodies \
-      \n================")
-print(str(earth) + "\n")
+      \n===============")
+the_sun = CelestialBody("Sun", 1.989*10**30)
+print(the_sun)
 
-print("Sunrise/Sunset Times \
+the_sun.add_daughters(earth, 147.1*10**9)
+print("Orbital daughters of the {}:".format(the_sun.name))
+for daughter, details in the_sun.daughters.items():
+    print(" - {}".format(details))
+print("Orbittal force on the {} from the {} is {:.2e}N".format(
+    earth.name,
+    the_sun.name,
+    the_sun.orbittal_force(earth.name)))
+
+print("\nSunrise/Sunset Times \
       \n====================")
 
 home = Location("Ivybridge", -3.9413, 50.3921)
