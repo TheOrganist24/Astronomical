@@ -21,6 +21,10 @@ print("Orbittal force on the {} from the {} is {:.2e}N".format(
     earth.name,
     the_sun.name,
     the_sun.orbittal_force(earth.name)))
+print("Orbittal period of the {} round the {} is {}s".format(
+    earth.name,
+    the_sun.name,
+    int(the_sun.orbittal_period(earth.name))))
 
 print("\nSunrise/Sunset Times \
       \n====================")

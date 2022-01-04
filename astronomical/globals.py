@@ -1,7 +1,7 @@
 """Utilities related to the heavenly spheres."""
 
 from typing import Optional, Dict
-from .physics import gravitational_force
+from .physics import gravitational_force, law_of_periods
 
 
 class CelestialBody:
@@ -11,7 +11,7 @@ class CelestialBody:
                  name: str,
                  mass: float,
                  daughters: Dict[str, "CelestialBody"] = {},
-                 orbital_distance: Optional[float] = None
+                 semimajor_axis: Optional[float] = None
                  ) -> None:
         """Define all instance attributes here."""
         self.name = name
@@ -26,22 +26,27 @@ class CelestialBody:
         """Generate summary of class with minimal inputs."""
         return f"CelestialBody \"{self.name.title()}\": ({self.mass:.2e}kg)"
 
-    def add_orbital_distance(self, orbital_distance: float) -> None:
+    def add_semimajor_axis(self, semimajor_axis: float) -> None:
         """Add orbital distance to parent."""
-        self.orbital_distance = orbital_distance
+        self.semimajor_axis = semimajor_axis
 
     def add_daughters(self, daughter: "CelestialBody",
-                      orbital_distance: float) -> None:
+                      semimajor_axis: float) -> None:
         """Add daugters to self."""
-        daughter.add_orbital_distance(orbital_distance)
+        daughter.add_semimajor_axis(semimajor_axis)
         self.daughters[daughter.name] = daughter
 
-    def orbittal_force(self,
-                       daughter: str) -> float:
+    def orbittal_force(self, daughter: str) -> float:
         """Apply Universal Law of Gravitation to specific daughter."""
         return gravitational_force(self.mass,
                                    self.daughters[daughter].mass,
-                                   self.daughters[daughter].orbital_distance)
+                                   self.daughters[daughter].semimajor_axis)
+
+    def orbittal_period(self, daughter: str) -> float:
+        """Apply Kepler's Law of Periods to specific daughter."""
+        return law_of_periods(self.mass,
+                              self.daughters[daughter].mass,
+                              self.daughters[daughter].semimajor_axis)
 
 
 earth = CelestialBody("Earth", 5*10**24)
