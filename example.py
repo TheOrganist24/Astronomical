@@ -10,10 +10,10 @@ Library of utilities related to astronomical movements
 
 print("Heavenly Bodies \
       \n===============")
-the_sun = CelestialBody("Sun", 1.989*10**30)
+the_sun = CelestialBody("Sun", 1.9885*10**30)
 print(the_sun)
 
-the_sun.add_daughters(earth, 147.1*10**9)
+the_sun.add_daughters(earth, 149.60*10**9)
 print("Orbital daughters of the {}:".format(the_sun.name))
 for daughter, details in the_sun.daughters.items():
     print(f" - {details}")

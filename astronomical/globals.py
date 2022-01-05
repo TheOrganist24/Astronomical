@@ -49,4 +49,4 @@ class CelestialBody:
                               self.daughters[daughter].semimajor_axis)
 
 
-earth = CelestialBody("Earth", 5*10**24)
+earth = CelestialBody("Earth", 5.9722*10**24)
