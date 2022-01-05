@@ -21,15 +21,31 @@ poetry run python3 example.py
 > Collection of Physics Equations for use in the rest of the package.
 
 So far the module contains:
-* Newton's Universal Law of Gravitation
-* Kepler's Laws of Orbits
-* Kepler's Law of Periods
+* **Constants**:
+  * Universal Gravitational Constant
+* **Conversions**:
+  * Rotational Period -> Angular Velocity
+* **Laws**:
+  * Newton's Universal Law of Gravitation
+  * Kepler's Laws of Orbits
+  * Kepler's Law of Periods
 
 
 ### Globals
 > Utilities related to the heavenly spheres.
 
-This module returns the `CelstialBody` class, and the "Earth" object.
+This module returns the `CelstialBody` class, and the "Earth" object. Instantiated `CelestialBody` objects can have many of the expected attributes associated with them (eg. mass, sidereal period etc); however when it comes to orbittal relationships between bodies the following attributes are relevent:
+
+```
+sun = CelestialBody("Sun", 1.9885*10**30)      # Declare the Sun
+earth = CelestialBody("Earth", 5.9722*10**24)  # Declare the earth
+
+# Add the earth object to the sun object's `daughters` dictionary
+# and set the earth object's `semimajor_axis` (to parent) attribute.
+the_sun.add_daughters(earth, 149.60*10**9)
+```
+
+Calculations relating to orbittal mechanics then come from the the parent and often take the form `parent.orbittal_calculation(daughter.name)`.
 
 
 ### Location
