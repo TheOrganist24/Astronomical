@@ -12,7 +12,7 @@ G = 6.67408*10**-11
 # Conversions
 def angular_velocity(T: timedelta) -> float:
     """Calculate angular velocity.
-    
+
     Where:
     w = Anugular velocity
     T = Period of rotation (orbit)
