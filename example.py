@@ -22,7 +22,12 @@ print(f"Orbittal force on the {earth.name} " \
       f"is {the_sun.orbittal_force(earth.name):.2e}N")
 print(f"Orbittal period of the {earth.name} " \
       f"round the {the_sun.name} " \
-      f"is {int(the_sun.orbittal_period(earth.name))}s")
+      f"is {the_sun.orbittal_period(earth.name).total_seconds()}s")
+print(f"Orbittal velocity of the {earth.name} " \
+      f"round the {the_sun.name} " \
+      f"is {the_sun.orbittal_velocity(earth.name):.2e} radians per second")
+print(f"Axial velocity of the {earth.name} " \
+      f"is {earth.axial_velocity():.2e} radians per second")
 
 print("\nSunrise/Sunset Times \
       \n====================")

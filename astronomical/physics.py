@@ -1,12 +1,27 @@
 """Collection of Physics Equations for use in the rest of the package."""
 
+from datetime import timedelta
 from typing import Tuple
 import math
 
 
+# Constants
 G = 6.67408*10**-11
 
 
+# Conversions
+def angular_velocity(T: timedelta) -> float:
+    """Calculate angular velocity.
+    
+    Where:
+    w = Anugular velocity
+    T = Period of rotation (orbit)
+    """
+    w = (2*math.pi) / T.total_seconds()
+    return w
+
+
+# Laws
 def gravitational_force(M: float, m: float, r: float) -> float:
     """Calculate force between two bodies.
 
@@ -55,7 +70,7 @@ def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
     return law_of_orbits_aphelion(a, e), law_of_orbits_perihelion(a, e)
 
 
-def law_of_periods(M: float, m: float, a: float) -> float:
+def law_of_periods(M: float, m: float, a: float) -> timedelta:
     """Calculate Kepler's Law of Orbits.
 
     Where:
@@ -66,4 +81,5 @@ def law_of_periods(M: float, m: float, a: float) -> float:
     a = Semimajor axis
     """
     T_sqrd = ((4*math.pi**2) / (G * (M+m))) * a**3
-    return math.sqrt(T_sqrd)
+    T = timedelta(seconds=math.sqrt(T_sqrd))
+    return T

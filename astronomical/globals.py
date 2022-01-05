@@ -1,7 +1,8 @@
 """Utilities related to the heavenly spheres."""
 
+from datetime import time, timedelta
 from typing import Optional, Dict
-from .physics import gravitational_force, law_of_periods
+from .physics import angular_velocity, gravitational_force, law_of_periods
 
 
 class CelestialBody:
@@ -10,13 +11,16 @@ class CelestialBody:
     def __init__(self,
                  name: str,
                  mass: float,
+                 sidereal_period: timedelta = timedelta(seconds=1),
                  daughters: Dict[str, "CelestialBody"] = {},
-                 semimajor_axis: Optional[float] = None
+                 semimajor_axis: float = 1,
                  ) -> None:
         """Define all instance attributes here."""
         self.name = name
         self.mass = mass
+        self.sidereal_period = sidereal_period
         self.daughters = daughters
+        self.semimajor_axis = semimajor_axis
 
     def __repr__(self) -> str:
         """Procuce code to initialise this class."""
@@ -42,11 +46,26 @@ class CelestialBody:
                                    self.daughters[daughter].mass,
                                    self.daughters[daughter].semimajor_axis)
 
-    def orbittal_period(self, daughter: str) -> float:
+    def orbittal_period(self, daughter: str) -> timedelta:
         """Apply Kepler's Law of Periods to specific daughter."""
         return law_of_periods(self.mass,
                               self.daughters[daughter].mass,
                               self.daughters[daughter].semimajor_axis)
 
+    def orbittal_velocity(self, daughter: str) -> float:
+        """Convert orbittal period to orbittal velocity."""
+        return angular_velocity(
+            self.orbittal_period(
+                self.daughters[daughter].name))
 
-earth = CelestialBody("Earth", 5.9722*10**24)
+    def axial_velocity(self) -> float:
+        """Convert sidereal period to axial velocity."""
+        return angular_velocity(self.sidereal_period)
+
+
+earth = CelestialBody(name="Earth",
+                      mass=5.9722*10**24,
+                      sidereal_period=timedelta(hours=23,
+                                                minutes=56,
+                                                seconds=4,
+                                                microseconds=90053))
