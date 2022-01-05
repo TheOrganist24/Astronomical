@@ -1,4 +1,4 @@
-![TheOrganist24 Code](https://hosted.courtman.me.uk/img/logos/theorganist24_banner_code.png "TheOrganist24 Code")
+![TheOrganist24 Code](https://hosted.courtman.me.uku/img/logos/theorganist24_banner_code.png "TheOrganist24 Code")
 
 # Astronomical
 > Library of utilities related to astronomical movements
