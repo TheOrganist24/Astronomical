@@ -1,8 +1,10 @@
 """Utilities related to the heavenly spheres."""
 
 from datetime import datetime, time, timedelta
+import math
 from typing import Optional, Dict
-from .physics import angular_velocity, gravitational_force, law_of_periods
+from .physics import angular_velocity, gravitational_force, law_of_periods, \
+    a_sin_theta
 from .location import Location
 
 
@@ -85,9 +87,14 @@ class CelestialBody:
         """Calculate horizontal angle of self from POV of daughter."""
         return location.longitude
 
-    def declination(self, location: Location, daughter: str) -> float:
+    def declination(self,
+                    daughter: str,
+                    instant: datetime = datetime.now()) -> float:
         """Calculate daughters angle to the ecliptic."""
-        return location.latitude
+        elapsed_vernal = instant - self.daughters[daughter].vernal_equinox
+        procession_fraction = elapsed_vernal / self.orbittal_period(daughter)
+        return a_sin_theta(-self.daughters[daughter].ecliptic_obliquity,
+                           procession_fraction)
 
     def elevation(self, location: Location, daughter: str) -> float:
         """Calculate vertical angle of self from POV of daughter."""

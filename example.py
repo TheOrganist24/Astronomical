@@ -17,20 +17,11 @@ the_sun.add_daughters(earth, 149.598*10**9)
 print("Orbital daughters of the {}:".format(the_sun.name))
 for daughter, details in the_sun.daughters.items():
     print(f" - {details}")
-print(f"Orbittal force on the {earth.name} " \
-      f"from the {the_sun.name} " \
-      f"is {the_sun.orbittal_force(earth.name):.2e}N")
-print(f"Orbittal period of the {earth.name} " \
-      f"round the {the_sun.name} " \
-      f"is {the_sun.orbittal_period(earth.name).total_seconds()}s")
-print(f"Orbittal velocity of the {earth.name} " \
-      f"round the {the_sun.name} " \
-      f"is {the_sun.orbittal_velocity(earth.name):.2e} degrees per second")
-print(f"Axial velocity of the {earth.name} " \
-      f"is {earth.axial_velocity():.2e} degrees per second")
+print(f"Current orbittal declination for {earth.name} " \
+      f"is {the_sun.declination(earth.name):.2f} degrees")
 
 print("\nSunrise/Sunset Times \
-      \n====================")
+       \n====================")
 
 home = Location("Ivybridge", -3.9413, 50.3921)
 print(home)

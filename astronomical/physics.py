@@ -21,6 +21,17 @@ def angular_velocity(T: timedelta) -> float:
     return w
 
 
+def a_sin_theta(a: float, theta: float) -> float:
+    """Calulate sin curve of function f(a, theta) = a sin(theta).
+
+    Where:
+    a -> magnitude
+    theta -> fractional revolution
+    """
+    result = a * math.sin(theta * (360/(2*math.pi)))
+    return result
+
+
 # Laws
 def gravitational_force(M: float, m: float, r: float) -> float:
     """Calculate force between two bodies.
