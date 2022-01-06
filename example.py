@@ -13,7 +13,7 @@ print("Heavenly Bodies \
 the_sun = CelestialBody("Sun", 1.9885*10**30)
 print(the_sun)
 
-the_sun.add_daughters(earth, 149.60*10**9)
+the_sun.add_daughters(earth, 149.598*10**9)
 print("Orbital daughters of the {}:".format(the_sun.name))
 for daughter, details in the_sun.daughters.items():
     print(f" - {details}")
@@ -25,9 +25,9 @@ print(f"Orbittal period of the {earth.name} " \
       f"is {the_sun.orbittal_period(earth.name).total_seconds()}s")
 print(f"Orbittal velocity of the {earth.name} " \
       f"round the {the_sun.name} " \
-      f"is {the_sun.orbittal_velocity(earth.name):.2e} radians per second")
+      f"is {the_sun.orbittal_velocity(earth.name):.2e} degrees per second")
 print(f"Axial velocity of the {earth.name} " \
-      f"is {earth.axial_velocity():.2e} radians per second")
+      f"is {earth.axial_velocity():.2e} degrees per second")
 
 print("\nSunrise/Sunset Times \
       \n====================")
