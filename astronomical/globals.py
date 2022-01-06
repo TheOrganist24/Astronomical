@@ -85,6 +85,10 @@ class CelestialBody:
         """Calculate horizontal angle of self from POV of daughter."""
         return location.longitude
 
+    def declination(self, location: Location, daughter: str) -> float:
+        """Calculate daughters angle to the ecliptic."""
+        return location.latitude
+
     def elevation(self, location: Location, daughter: str) -> float:
         """Calculate vertical angle of self from POV of daughter."""
         return location.latitude
