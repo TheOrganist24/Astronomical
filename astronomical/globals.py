@@ -1,6 +1,6 @@
 """Utilities related to the heavenly spheres."""
 
-from datetime import datetime, time, timedelta
+from datetime import datetime, date, time, timedelta
 import math
 from typing import Optional, Dict
 from .physics import angular_velocity, gravitational_force, law_of_periods, \
@@ -99,15 +99,15 @@ class CelestialBody:
         """Calculate vertical angle of self from POV of daughter."""
         # This section needs to be in terms of body day length not 24h
         day_length = timedelta(days=1)
-        if instant - datetime.today() >= day_length/4:
+        todays_datetime = datetime.combine(date.today(), time(hour=0))
+        if instant - todays_datetime >= day_length/4:
             elapsed_parentrise = instant - (day_length/4)
         else:
             elapsed_parentrise = instant + ((3*day_length)/4)
-        day_fraction = (elapsed_parentrise - datetime.today()) \
-            / timedelta(days=1)
-        angle = a_sin_theta(self.declination(daughter, instant=instant),
-                            day_fraction)
-        return angle
+        day_fraction = (elapsed_parentrise - todays_datetime) \
+            / day_length
+        declination = self.declination(daughter, instant=instant)
+        return a_sin_theta(location.latitude, day_fraction) - declination
 
     def azimuth(self, location: Location, daughter: str) -> float:
         """Calculate horizontal angle of self from POV of daughter."""

@@ -22,7 +22,7 @@ for daughter, details in the_sun.daughters.items():
     print(f" - {details}")
 print(f"Current orbittal declination for {earth.name} " \
       f"is {the_sun.declination(earth.name):.2f} degrees")
-print(f"Current angle to {the_sun.name} from {earth.name} " \
+print(f"Current elevation to {the_sun.name} from {earth.name} " \
       f"is {the_sun.elevation(earth.name, home):.2f} degrees")
 
 print("\nSunrise/Sunset Times \

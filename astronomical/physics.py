@@ -28,7 +28,7 @@ def a_sin_theta(a: float, theta: float) -> float:
     a -> magnitude
     theta -> fractional revolution
     """
-    result = a * math.sin(theta * (360/(2*math.pi)))
+    result = a * math.sin(theta * (2*math.pi))
     return result
 
 
