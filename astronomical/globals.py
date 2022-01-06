@@ -83,10 +83,6 @@ class CelestialBody:
         """Convert sidereal period to axial velocity."""
         return angular_velocity(self.sidereal_period)
 
-    def azimuth(self, location: Location, daughter: str) -> float:
-        """Calculate horizontal angle of self from POV of daughter."""
-        return location.longitude
-
     def declination(self,
                     daughter: str,
                     instant: datetime = datetime.now()) -> float:
@@ -96,9 +92,26 @@ class CelestialBody:
         return a_sin_theta(-self.daughters[daughter].ecliptic_obliquity,
                            procession_fraction)
 
-    def elevation(self, location: Location, daughter: str) -> float:
+    def elevation(self,
+                  daughter: str,
+                  location: Location,
+                  instant: datetime = datetime.now()) -> float:
         """Calculate vertical angle of self from POV of daughter."""
-        return location.latitude
+        # This section needs to be in terms of body day length not 24h
+        day_length = timedelta(days=1)
+        if instant - datetime.today() >= day_length/4:
+            elapsed_parentrise = instant - (day_length/4)
+        else:
+            elapsed_parentrise = instant + ((3*day_length)/4)
+        day_fraction = (elapsed_parentrise - datetime.today()) \
+            / timedelta(days=1)
+        angle = a_sin_theta(self.declination(daughter, instant=instant),
+                            day_fraction)
+        return angle
+
+    def azimuth(self, location: Location, daughter: str) -> float:
+        """Calculate horizontal angle of self from POV of daughter."""
+        return location.longitude
 
 
 earth = CelestialBody(name="Earth",
