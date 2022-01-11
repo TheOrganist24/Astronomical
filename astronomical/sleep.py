@@ -5,7 +5,7 @@ from typing import Optional, Tuple
 import math
 import pytz
 
-from . import sun, location
+from .interfaces import sun, location
 
 utc = pytz.UTC
 

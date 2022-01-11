@@ -5,7 +5,7 @@ import math
 from typing import Optional, Dict
 from .services.physics import angular_velocity, gravitational_force, \
     law_of_periods, a_sin_theta
-from .location import Location
+from .interfaces.location import Location
 
 
 reference_date = datetime

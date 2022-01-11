@@ -1,7 +1,7 @@
 from datetime import timedelta, time
 from astronomical.globals import CelestialBody, earth
-from astronomical import sun
-from astronomical.location import Location
+from astronomical.interfaces import sun
+from astronomical.interfaces.location import Location
 from astronomical.sleep import Requirements, alarms
 
 print("""TheOrganist24: Astronomical
