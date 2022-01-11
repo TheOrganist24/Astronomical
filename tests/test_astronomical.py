@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, date
 from astronomical import __version__
-from astronomical.location import Location
-from astronomical import sun
+from astronomical.interfaces.location import Location
+from astronomical.interfaces import sun
 from astronomical.sleep import Requirements, alarms
 
 def test_version():
