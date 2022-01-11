@@ -3,8 +3,8 @@
 from datetime import datetime, date, time, timedelta
 import math
 from typing import Optional, Dict
-from .physics import angular_velocity, gravitational_force, law_of_periods, \
-    a_sin_theta
+from .services.physics import angular_velocity, gravitational_force, \
+    law_of_periods, a_sin_theta
 from .location import Location
 
 
