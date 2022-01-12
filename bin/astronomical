@@ -2,31 +2,40 @@
 
 
 import getopt
+import inspect
 import sys
 import astronomical
-from astronomical import defaults
+from astronomical.interfaces.cli_arguments import (
+    Sun,
+    Alarms,
+    Time
+)
 
 
+# help, usage , and docs
 usage = f"Usage: {astronomical.__name__} [OPTION]..."
 doc_summary = astronomical.__doc__.split("\n")[0]
 arguments = {
     "version": "Output version information and exit.",
     "help": "Display this help and exit.",
-    "sun": astronomical.SunTimes.__doc__
+    "sun": Sun.__doc__,
+    "alarms": Alarms.__doc__,
+    "time": Time.__doc__
 }
 arg_str = ""
 for argument, summary in arguments.items():
     arg_str += f"  -{argument[0]}, --{argument}\t{summary}\n"
 help = f"{usage}\n\n{doc_summary}\n\n{arg_str}"
 
+short_opts = "".join([arg[0] for arg in arguments])
+long_opts = [arg for arg in arguments]
+
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,
-                                   "vhsta",
-                                   ["version", "help", "sun", "time", "help"])
+        opts, args = getopt.getopt(argv, short_opts, long_opts)
     except getopt.GetoptError:
-        print("Nope")
+        print(usage)
         sys.exit(2)
     for opt, arg in opts:
         # standard functions
