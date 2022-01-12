@@ -6,7 +6,7 @@ STATUS=0
 for LINTER in "pydocstyle" "pycodestyle" "mypy"
 do 
   echo Running $LINTER
-  if $LINTER astronomical
+  if $LINTER astronomical bin/astronomical
   then
     echo -e " -> \e[32mpassed\e[0m"
   else
