@@ -1,6 +1,9 @@
 """This module provides the dataclasses for celestials in astronomical."""
 
 from dataclasses import dataclass
+from datetime import (
+    timedelta
+)
 
 
 @dataclass
@@ -26,7 +29,7 @@ class OrbittalBody(Body):
 class SpinningBody(Body):
     """Base spinning body class; extends Body()."""
 
-    sidereal_period: float
+    sidereal_period: timedelta
 
 
 @dataclass
