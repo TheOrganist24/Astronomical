@@ -8,13 +8,18 @@ import astronomical
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv, "v", ["version"])
+        opts, args = getopt.getopt(argv, "vs:", ["version", "sun="])
     except getopt.GetoptError:
         print("Nope")
         sys.exit(2)
     for opt, arg in opts:
         if opt in ("-v", "--version"):
             print(astronomical.__version__)
+        elif opt in ("-s", "--sun"):
+            if arg == "rise":
+                print(astronomical.sunrise)
+            elif arg == "set":
+                print(astronomical.sunset)
 
 
 if __name__ == "__main__":
