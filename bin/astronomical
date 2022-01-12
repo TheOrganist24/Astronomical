@@ -7,18 +7,37 @@ import astronomical
 from astronomical import defaults
 
 
+usage = f"Usage: {astronomical.__name__} [OPTION]..."
+doc_summary = astronomical.__doc__.split("\n")[0]
+arguments = {
+    "version": "Output version information and exit.",
+    "help": "Display this help and exit.",
+    "sun": astronomical.SunTimes.__doc__
+}
+arg_str = ""
+for argument, summary in arguments.items():
+    arg_str += f"  -{argument[0]}, --{argument}\t{summary}\n"
+help = f"{usage}\n\n{doc_summary}\n\n{arg_str}"
+
+
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv, "vs", ["version", "sun"])
+        opts, args = getopt.getopt(argv,
+                                   "vhsta",
+                                   ["version", "help", "sun", "time", "help"])
     except getopt.GetoptError:
         print("Nope")
         sys.exit(2)
     for opt, arg in opts:
+        # standard functions
         if opt in ("-v", "--version"):
             print(astronomical.__version__)
+            sys.exit(0)
         elif opt in ("-h", "--help"):
             # print out help content
-            print("help")
+            print(help)
+            sys.exit(0)
+        # core functions
         elif opt in ("-s", "--sun"):
             # print out sun facts: rise/set, elevation/azmituh, distance
             print("sun")

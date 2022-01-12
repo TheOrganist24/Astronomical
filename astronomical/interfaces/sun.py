@@ -13,7 +13,7 @@ from .location import Location
 
 
 class SunTimes:
-    """Interface class for the Sun."""
+    """Return sunrise and sunset times."""
 
     def __init__(self, location: Location) -> None:
         """Initialise variables."""
