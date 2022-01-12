@@ -12,18 +12,15 @@ from suntime import (  # type: ignore
 from .location import Location
 
 
-home = Location("Ivybridge", -3.9413, 50.3921)
-
-
-class Sun:
+class SunTimes:
     """Interface class for the Sun."""
 
-    def __init__(self) -> None:
+    def __init__(self, location: Location) -> None:
         """Initialise variables."""
-        self.rise, self.set = self.__sun_times(home)
+        self.rise, self.set = self.__sun_times()
+        self.location = location
 
     def __sun_times(self,
-                    location: Location,
                     day: date = date.today()) -> Tuple[datetime, datetime]:
         """Return sunrise and sunset times.
 
@@ -31,7 +28,7 @@ class Sun:
         class. That class should calculate this from first principles instead
         of pulling from an API.
         """
-        sun = Sun_Import(location.latitude, location.longitude)
+        sun = Sun_Import(self.location.latitude, self.location.longitude)
         sunrise = sun.get_sunrise_time(day)
         sunset = sun.get_sunset_time(day)
         return sunrise, sunset
