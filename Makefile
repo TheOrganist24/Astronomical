@@ -4,10 +4,9 @@ EXECUTE=poetry run
 
 # code
 PACKAGE=astronomical
-SCRIPT=bin/astronomical
 
 # file groups
-LINT_GROUP=$(PACKAGE) $(SCRIPT)
+LINT_GROUP=$(PACKAGE)
 TEST_GROUP=tests/.
 
 # targets
@@ -24,7 +23,7 @@ info:
 
 check: lint test
 
-## particulars
+## less standard
 lint:
 	pycodestyle $(LINT_GROUP)
 	pydocstyle $(LINT_GROUP)
@@ -33,4 +32,8 @@ lint:
 test:
 	$(EXECUTE) python3 -m pytest $(TEST_GROUP)
 
+build:
+	poetry build
+
+## custom
 pre-commit: check
