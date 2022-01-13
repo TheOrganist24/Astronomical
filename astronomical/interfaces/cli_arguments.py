@@ -9,13 +9,25 @@ from suntime import (  # type: ignore
 from .location import Location
 
 
+d = u"\N{DEGREE SIGN}"
+
+
 class Sun:
-    """Return sunrise and sunset times."""
+    """Return sunrise/set times, elevation/azimuth, and distance."""
 
     def __init__(self, location: Location) -> None:
         """Initialise variables."""
-        self.rise, self.set = self.__sun_times()
         self.location = location
+        self.rise, self.set = self.__sun_times()
+
+    def __str__(self) -> str:
+        """Generate summary of class."""
+        sunrise = self.rise.strftime("%I:%M%p")
+        sunset = self.set.strftime("%I:%M%p")
+        return(f"Sun data:\n"
+               f"- Rise-> set: \t\t{sunrise}-> {sunset}\n"
+               f"- Elevation/Azimuth:\t{sunrise}{d}/{sunset}{d}\n"
+               f"- Current Distance:\t{sunrise}m")
 
     def __sun_times(self,
                     day: date = date.today()) -> Tuple[datetime, datetime]:
@@ -34,6 +46,14 @@ class Sun:
 class Alarms:
     """Return alarm type objects for going to sleep and getting up."""
 
+    def __str__(self) -> str:
+        """Generate summary of class."""
+        return(f"Alarms:")
+
 
 class Time:
     """Return current time as defined by me."""
+
+    def __str__(self) -> str:
+        """Generate summary of class."""
+        return(f"Time:")

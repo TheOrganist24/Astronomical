@@ -10,6 +10,7 @@ from astronomical.interfaces.cli_arguments import (
     Alarms,
     Time
 )
+from astronomical import default_planetary_location
 
 
 # help, usage , and docs
@@ -49,13 +50,16 @@ def main(argv):
         # core functions
         elif opt in ("-s", "--sun"):
             # print out sun facts: rise/set, elevation/azmituh, distance
-            print("sun")
+            sun = Sun(location=default_planetary_location)
+            print(sun)
         elif opt in ("-t", "--time"):
             # print out time facts: Current time, TO24 time
-            print("time")
+            time = Time()
+            print(time)
         elif opt in ("-a", "--alarms"):
             # print out alarms for tonight and tomorrow morning
-            print("alarms")
+            alarms = Alarms()
+            print(alarms)
 
 
 if __name__ == "__main__":
