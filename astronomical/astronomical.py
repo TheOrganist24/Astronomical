@@ -3,6 +3,7 @@
 
 import argparse
 import sys
+import astronomical
 from .interfaces.cli_arguments import (
     Sun,
     Alarms,
@@ -25,7 +26,7 @@ def main():
     args = parser.parse_args()
 
     if args.version:
-        print("version!!!")
+        print(astronomical.__version__)
         sys.exit(0)
     elif args.sun:
         sun = Sun(location=default_planetary_location)
