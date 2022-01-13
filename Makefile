@@ -1,5 +1,6 @@
 # environment
 SHELL=/bin/bash
+EXECUTE=poetry run
 
 # code
 PACKAGE=astronomical
@@ -9,12 +10,27 @@ SCRIPT=bin/astronomical
 LINT_GROUP=$(PACKAGE) $(SCRIPT)
 TEST_GROUP=tests/.
 
-pre-commit: lint test
+# targets
+## standard
+all:
 
+install:
+
+uninstall:
+
+clean:
+
+info:
+
+check: lint test
+
+## particulars
 lint:
 	pycodestyle $(LINT_GROUP)
 	pydocstyle $(LINT_GROUP)
 	mypy $(LINT_GROUP)
 
 test:
-	poetry run python3 -m pytest $(TEST_GROUP)
+	$(EXECUTE) python3 -m pytest $(TEST_GROUP)
+
+pre-commit: check
