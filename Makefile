@@ -28,12 +28,12 @@ dev-environment:
 	cp pre-commit .git/hooks/
 	poetry install
 lint:
-	pycodestyle $(LINT_GROUP)
-	pydocstyle $(LINT_GROUP)
-	mypy $(LINT_GROUP)
+	$(EXECUTE) pycodestyle $(LINT_GROUP)
+	$(EXECUTE) pydocstyle $(LINT_GROUP)
+	$(EXECUTE) mypy $(LINT_GROUP)
 
 test:
-	$(EXECUTE) python3 -m pytest $(TEST_GROUP)
+	$(EXECUTE) pytest $(TEST_GROUP)
 
 build:
 	poetry build
