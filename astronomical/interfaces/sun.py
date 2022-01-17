@@ -1,6 +1,8 @@
 """Sun interface for astronomical.
 
 This module provides sunrise and sunset times.
+
+FOR DELETION: Only keeping around for reference.
 """
 
 from datetime import date, datetime

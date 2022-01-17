@@ -1,4 +1,7 @@
-"""Utilities related to the heavenly spheres."""
+"""Utilities related to the heavenly spheres.
+
+FOR DELETION: Only keeping around for reference.
+"""
 
 from datetime import datetime, date, time, timedelta
 import math

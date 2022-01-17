@@ -1,4 +1,7 @@
-"""Utilities related to sleep; including duration and alarms."""
+"""Utilities related to sleep; including duration and alarms.
+
+FOR DELETION: Only keeping around for reference.
+"""
 
 from datetime import timedelta, date, datetime, time
 from typing import Optional, Tuple

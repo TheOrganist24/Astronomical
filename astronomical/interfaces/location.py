@@ -1,4 +1,7 @@
-"""Utilities related to location."""
+"""Utilities related to location.
+
+FOR DELETION: Only keeping around for reference.
+"""
 
 
 class Location:
