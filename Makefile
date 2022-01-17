@@ -24,6 +24,8 @@ info:
 check: lint test
 
 ## less standard
+setup:
+
 lint:
 	pycodestyle $(LINT_GROUP)
 	pydocstyle $(LINT_GROUP)
