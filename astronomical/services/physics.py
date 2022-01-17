@@ -17,7 +17,10 @@ def angular_velocity(T: timedelta) -> float:
     w = Anugular velocity
     T = Period of rotation (orbit)
     """
-    w = 360 / T.total_seconds()
+    if T.total_seconds() == 0.0:
+        w = 0.0
+    else:
+        w = 360 / T.total_seconds()
     return w
 
 
