@@ -24,8 +24,9 @@ info:
 check: lint test
 
 ## less standard
-setup:
-
+dev-environment:
+	cp pre-commit .git/hooks/
+	poetry install
 lint:
 	pycodestyle $(LINT_GROUP)
 	pydocstyle $(LINT_GROUP)
