@@ -19,14 +19,10 @@ poetry run python3 example.py
 ### Lint and Test
 Code should be compliant with PEPs 8, 256, 484, and 526.
 ```
-for LINTER in "pydocstyle" "pycodestyle" "mypy"
-do 
-  echo Running $LINTER
-  $LINTER astronomical && echo -e " -> \e[32mpassed\e[0m" || echo -e " -> \e[31mfailed\e[0m"
-done
+make lint
 ```
 
 To test:
 ```
-poetry run python3 -m pytest tests/.
+make test
 ```
