@@ -2,7 +2,7 @@
 name = "astronomical"
 version = "0.1.0"
 description = "Library of utilities related to astronomical movements."
-authors = ["TheOrganist24 <programming@courtman.me.uk>"]
+authors = ["TheOrganist24 <code@theorganist24.co.uk>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
