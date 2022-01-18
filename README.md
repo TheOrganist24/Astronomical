@@ -13,8 +13,10 @@ astronomical --help
 ```
 
 ### Set a Default Location
+You can setup an optional location, if you don't it'll default to London.
+
 ```
-# .astronomical.ini
+# .astronomical
 
 [location]
 name = "London"
