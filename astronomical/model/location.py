@@ -1,9 +1,9 @@
 """This module provides the dataclasses for location in astronomical."""
 
 from dataclasses import dataclass
-from .celestials import (
+from ..services.solar_system import (
     Planet,
-    default_planet as earth
+    earth
 )
 
 
