@@ -3,8 +3,8 @@
 
 import argparse
 import sys
-from loguru import logger
 import astronomical
+from astronomical import logger
 from .interfaces.cli_arguments import (
     Sun,
     Alarms,
@@ -15,6 +15,8 @@ from .model.location import default_planetary_location
 
 def main():
     """Provide options for script."""
+    logger.info("CLI: Tool invoked.")
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--version", help="show the version and exit",
                         action="store_true")
@@ -28,6 +30,7 @@ def main():
 
     if args.version:
         print(astronomical.__version__)
+        logger.debug("CLI: Tool completed succesfully.")
         sys.exit(0)
     elif args.sun:
         sun = Sun(location=default_planetary_location)
@@ -38,3 +41,5 @@ def main():
     elif args.alarms:
         alarms = Alarms()
         print(alarms)
+
+    logger.debug("CLI: Tool completed succesfully.")

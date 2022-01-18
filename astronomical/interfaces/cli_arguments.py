@@ -6,6 +6,7 @@ from suntime import (  # type: ignore
     Sun as Sun_Import,
     SunTimeException
 )
+from astronomical import logger
 from .location import Location
 
 
@@ -37,6 +38,7 @@ class Sun:
         class. That class should calculate this from first principles instead
         of pulling from an API.
         """
+        logger.debug(f"method from \"{self.__class__.__name__}\" invoked.")
         sun = Sun_Import(self.location.latitude, self.location.longitude)
         sunrise = sun.get_sunrise_time(day)
         sunset = sun.get_sunset_time(day)
