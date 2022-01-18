@@ -21,13 +21,13 @@ class Defaults:
             }
         }
 
-    def __check_for_user_defined_defaults(self):
+    def _check_for_user_defined_defaults(self):
         """Check that a user config exists."""
         if exists(self.config_ini):
             return True
         return False
 
-    def __load_defaults(self):
+    def _load_defaults(self):
         """Load user configurations.
 
         If parameters are missing leave blank.
@@ -47,8 +47,8 @@ class Defaults:
 
         If entire configuration ismissing, set to London.
         """
-        if self.__check_for_user_defined_defaults():
-            self.__load_defaults()
+        if self._check_for_user_defined_defaults():
+            self._load_defaults()
         else:
             self.defaults["location"]["name"] = "London"
             self.defaults["location"]["longitude"] = 0.1276
