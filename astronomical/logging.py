@@ -27,3 +27,11 @@ def setup_logging():
                        f"\ttry one of {log_levels}\n"
                        f"\teg. `export LOG_LEVEL=DEBUG`.\n"
                        f"\tLog level will be set to \"DEBUG\".")
+
+
+def log_calculations(func):
+    """Decorate to log calculations."""
+    def wrap(*args, **kwargs):
+        logger.debug(f"Calculation \"{func.__name__}\" invoked.")
+        return func(*args, **kwargs)
+    return wrap

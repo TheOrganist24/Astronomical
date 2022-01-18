@@ -1,9 +1,10 @@
 """Collection of Physics Equations for use in the rest of the package."""
 
 from datetime import timedelta
+import math
 from typing import Tuple
 from loguru import logger
-import math
+from ..logging import log_calculations
 
 
 # Constants
@@ -11,6 +12,7 @@ G = 6.67408*10**-11
 
 
 # Conversions
+@log_calculations
 def angular_velocity(T: timedelta) -> float:
     """Calculate angular velocity.
 
@@ -18,7 +20,6 @@ def angular_velocity(T: timedelta) -> float:
     w = Anugular velocity
     T = Period of rotation (orbit)
     """
-    logger.trace("Running Angular Velocity")
     if T.total_seconds() == 0.0:
         w = 0.0
     else:
@@ -26,6 +27,7 @@ def angular_velocity(T: timedelta) -> float:
     return w
 
 
+@log_calculations
 def a_sin_theta(a: float, theta: float) -> float:
     """Calulate sin curve of function f(a, theta) = a sin(theta).
 
@@ -38,6 +40,7 @@ def a_sin_theta(a: float, theta: float) -> float:
 
 
 # Laws
+@log_calculations
 def gravitational_force(M: float, m: float, r: float) -> float:
     """Calculate force between two bodies.
 
@@ -52,6 +55,7 @@ def gravitational_force(M: float, m: float, r: float) -> float:
     return F
 
 
+@log_calculations
 def law_of_orbits_aphelion(a: float, e: float) -> float:
     """Calculate aphelion from Kepler's Law or Orbits.
 
@@ -64,6 +68,7 @@ def law_of_orbits_aphelion(a: float, e: float) -> float:
     return R
 
 
+@log_calculations
 def law_of_orbits_perihelion(a: float, e: float) -> float:
     """Calculate aphelion from Kepler's Law or Orbits.
 
@@ -76,6 +81,7 @@ def law_of_orbits_perihelion(a: float, e: float) -> float:
     return R
 
 
+@log_calculations
 def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
     """Calculate Kepler's Law of Orbits.
 
@@ -86,6 +92,7 @@ def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
     return law_of_orbits_aphelion(a, e), law_of_orbits_perihelion(a, e)
 
 
+@log_calculations
 def law_of_periods(M: float, m: float, a: float) -> timedelta:
     """Calculate Kepler's Law of Orbits.
 
