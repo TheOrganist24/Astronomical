@@ -35,6 +35,9 @@ lint:
 test:
 	$(EXECUTE) pytest $(TEST_GROUP)
 
+coverage:
+	$(EXECUTE) pytest --cov=$(PACKAGE) $(TEST_GROUP)
+
 build:
 	poetry build
 
