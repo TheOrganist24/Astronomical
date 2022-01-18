@@ -17,7 +17,7 @@ astronomical --help
 # .astronomical.ini
 
 [location]
-name = "Ivybridge"
+name = "London"
 longitude = 0.1276
 latitude = 51.5072
 ```
