@@ -2,6 +2,7 @@
 
 from datetime import timedelta
 from typing import Tuple
+from loguru import logger
 import math
 
 
@@ -17,6 +18,7 @@ def angular_velocity(T: timedelta) -> float:
     w = Anugular velocity
     T = Period of rotation (orbit)
     """
+    logger.trace("Running Angular Velocity")
     if T.total_seconds() == 0.0:
         w = 0.0
     else:

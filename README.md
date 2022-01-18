@@ -11,6 +11,7 @@ This module provides information about the sun, moon, seasons and tides accordin
 git clone git@gitlab.com:TheOrganist24/astronomical.git
 cd astronomical
 make dev-environment
+export LOG_LEVEL=ERROR  # Optional; supports DEBUG, INFO, WARNING, ERROR, CRITICAL
 poetry run python3 example.py
 ```
 
@@ -22,7 +23,6 @@ Code should be compliant with PEPs 8, 256, 484, and 526.
 make lint
 ```
 
-To test:
 ```
 make test
 ```

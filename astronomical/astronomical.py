@@ -3,6 +3,7 @@
 
 import argparse
 import sys
+from loguru import logger
 import astronomical
 from .interfaces.cli_arguments import (
     Sun,
