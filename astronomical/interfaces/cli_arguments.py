@@ -7,6 +7,7 @@ from suntime import (  # type: ignore
     SunTimeException
 )
 from astronomical import logger
+from ..services.solar_system import earth
 from .location import Location
 
 

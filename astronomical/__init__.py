@@ -6,7 +6,7 @@ according to the user's current whereabouts and whenabouts.
 
 import os
 import sys
-from .logging import logger, setup_logging
+from .utils.logging import logger, setup_logging
 from .interfaces.sun import sun_times
 from .interfaces.location import Location
 from .model.location import (
