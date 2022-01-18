@@ -48,9 +48,9 @@ class TestGravitationalForce:
         test_r = 6371*10**3
         test_f = 981
         
-        f = int(gravitational_force(test_M, test_m, test_r))
+        f = gravitational_force(test_M, test_m, test_r)
         
-        assert f == test_f
+        assert int(f) == int(test_f)  # round to integers
 
 
 class TestLawOfOrbits:
