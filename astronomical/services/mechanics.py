@@ -1,6 +1,7 @@
 """This module calculates the orbittal mechanics."""
 
 from datetime import timedelta
+from .. import logger
 from ..model.celestials import (
     OrbittalBody,
     SpinningBody
@@ -20,6 +21,7 @@ class RotationalMechanicsService(SpinningBody):
 
         Returns angular velocity (degrees/s).
         """
+        logger.debug(f"method from \"{self.__class__.__name__}\" invoked.")
         return angular_velocity(self.sidereal_period)
 
 
@@ -31,6 +33,7 @@ class OrbittalMechanicsService(OrbittalBody):
 
         Returns force (N).
         """
+        logger.debug(f"method from \"{self.__class__.__name__}\" invoked.")
         return gravitational_force(self.mass,
                                    self.parent.mass,
                                    self.semimajor_axis)
@@ -40,6 +43,7 @@ class OrbittalMechanicsService(OrbittalBody):
 
         Returns period (timedelta).
         """
+        logger.debug(f"method from \"{self.__class__.__name__}\" invoked.")
         return law_of_periods(self.mass,
                               self.parent.mass,
                               self.semimajor_axis)
