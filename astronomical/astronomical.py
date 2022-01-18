@@ -10,7 +10,6 @@ from .interfaces.cli_arguments import (
     Alarms,
     Time
 )
-from .model.location import default_planetary_location
 
 
 def main():
@@ -33,7 +32,7 @@ def main():
         logger.debug("CLI: Tool completed succesfully.")
         sys.exit(0)
     elif args.sun:
-        sun = Sun(location=default_planetary_location)
+        sun = Sun()
         print(sun)
     elif args.time:
         time = Time()

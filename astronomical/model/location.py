@@ -21,10 +21,3 @@ class PlanetaryLocation(Location):
     """Location situated on a planet."""
 
     planet: Planet
-
-
-default_location = Location("London", 0.1276, 51.5072)
-default_planetary_location = PlanetaryLocation("London",
-                                               0.1276,
-                                               51.5072,
-                                               earth)

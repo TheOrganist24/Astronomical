@@ -7,6 +7,7 @@ from suntime import (  # type: ignore
     SunTimeException
 )
 from astronomical import logger
+from ..utils.configuration import Defaults
 from ..services.solar_system import earth
 from .location import Location
 
@@ -17,9 +18,10 @@ d = u"\N{DEGREE SIGN}"
 class Sun:
     """Return sunrise/set times, elevation/azimuth, and distance."""
 
-    def __init__(self, location: Location) -> None:
+    def __init__(self) -> None:
         """Initialise variables."""
-        self.location = location
+        locale = Defaults()
+        self.location = locale.location()
         self.rise, self.set = self.__sun_times()
 
     def __str__(self) -> str:

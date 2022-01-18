@@ -9,13 +9,7 @@ import sys
 from .utils.logging import logger, setup_logging
 from .interfaces.sun import sun_times
 from .interfaces.location import Location
-from .model.location import (
-    default_planetary_location
-)
 from .interfaces import cli_arguments
-defaults = {
-    "planetary_location": default_planetary_location
-}
 
 setup_logging()
 __version__ = "0.1.0"

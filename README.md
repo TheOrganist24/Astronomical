@@ -7,7 +7,24 @@ This module provides information about the sun, moon, seasons and tides accordin
 
 
 ## Get Started
+Once installed run:
+```bash
+astronomical --help
 ```
+
+### Set a Default Location
+```
+# .astronomical.ini
+
+[location]
+name = "Ivybridge"
+longitude = 0.1276
+latitude = 51.5072
+```
+
+## Development
+### Setting up Environment
+```bash
 git clone git@gitlab.com:TheOrganist24/astronomical.git
 cd astronomical
 make dev-environment
@@ -15,14 +32,9 @@ export LOG_LEVEL=ERROR  # Optional; supports DEBUG, INFO, WARNING, ERROR, CRITIC
 poetry run python3 example.py
 ```
 
-
-## Development
 ### Lint and Test
 Code should be compliant with PEPs 8, 256, 484, and 526.
-```
+```bash
 make lint
-```
-
-```
 make test
 ```
