@@ -36,7 +36,7 @@ class OrbittalMechanicsService(OrbittalBody):
                                    self.semimajor_axis)
 
     def _calculate_orbittal_period(self) -> timedelta:
-        """Apply Kepler's Law of Periods to specific daughter.
+        """Apply Kepler's Law of Periods.
 
         Returns period (timedelta).
         """
