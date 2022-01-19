@@ -31,8 +31,14 @@ def setup_logging():
 
 # DEBUG logging
 def log_base_functions(func):
-    """Decorate to log calculations."""
+    """Decorate to log base functions."""
     def wrap(*args, **kwargs):
-        logger.debug(f"Calculation \"{func.__name__}\" invoked.")
+        logger.debug(f"BASE FUNCTION: \"{func.__name__}\" invoked.")
         return func(*args, **kwargs)
     return wrap
+
+
+def log_cli_option(option):
+    """Log base functions."""
+    logger.debug(f"CLI OPTION: \"{option}\" invoked.")
+    return

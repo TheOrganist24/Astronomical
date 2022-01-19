@@ -4,7 +4,9 @@
 import argparse
 import sys
 import astronomical
-from astronomical import logger
+from .utils.logging import (
+    log_cli_option
+)
 from .interfaces.cli_arguments import (
     Sun,
     Alarms,
@@ -14,8 +16,6 @@ from .interfaces.cli_arguments import (
 
 def main():
     """Provide options for script."""
-    logger.info("CLI: Tool invoked.")
-
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--version", help="show the version and exit",
                         action="store_true")
@@ -29,16 +29,16 @@ def main():
 
     if args.version:
         print(astronomical.__version__)
-        logger.debug("CLI: Tool completed succesfully.")
         sys.exit(0)
     elif args.sun:
+        log_cli_option("sun")
         sun = Sun()
         print(sun)
     elif args.time:
+        log_cli_option("time")
         time = Time()
         print(time)
     elif args.alarms:
+        log_cli_option("alarms")
         alarms = Alarms()
         print(alarms)
-
-    logger.debug("CLI: Tool completed succesfully.")
