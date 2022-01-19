@@ -4,7 +4,7 @@ from datetime import timedelta
 import math
 from typing import Tuple
 from ..utils.logging import (
-    log_calculations
+    log_base_functions
 )
 
 
@@ -13,7 +13,7 @@ G = 6.67408*10**-11
 
 
 # Conversions
-@log_calculations
+@log_base_functions
 def angular_velocity(T: timedelta) -> float:
     """Calculate angular velocity.
 
@@ -28,7 +28,7 @@ def angular_velocity(T: timedelta) -> float:
     return w
 
 
-@log_calculations
+@log_base_functions
 def a_sin_theta(a: float, theta: float) -> float:
     """Calulate sin curve of function f(a, theta) = a sin(theta).
 
@@ -41,7 +41,7 @@ def a_sin_theta(a: float, theta: float) -> float:
 
 
 # Laws
-@log_calculations
+@log_base_functions
 def gravitational_force(M: float, m: float, r: float) -> float:
     """Calculate force between two bodies.
 
@@ -56,7 +56,7 @@ def gravitational_force(M: float, m: float, r: float) -> float:
     return F
 
 
-@log_calculations
+@log_base_functions
 def law_of_orbits_aphelion(a: float, e: float) -> float:
     """Calculate aphelion from Kepler's Law or Orbits.
 
@@ -69,7 +69,7 @@ def law_of_orbits_aphelion(a: float, e: float) -> float:
     return R
 
 
-@log_calculations
+@log_base_functions
 def law_of_orbits_perihelion(a: float, e: float) -> float:
     """Calculate aphelion from Kepler's Law or Orbits.
 
@@ -82,7 +82,7 @@ def law_of_orbits_perihelion(a: float, e: float) -> float:
     return R
 
 
-@log_calculations
+@log_base_functions
 def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
     """Calculate Kepler's Law of Orbits.
 
@@ -93,7 +93,7 @@ def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
     return law_of_orbits_aphelion(a, e), law_of_orbits_perihelion(a, e)
 
 
-@log_calculations
+@log_base_functions
 def law_of_periods(M: float, m: float, a: float) -> timedelta:
     """Calculate Kepler's Law of Orbits.
 

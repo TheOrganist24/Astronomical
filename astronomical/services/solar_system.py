@@ -4,9 +4,6 @@ from dataclasses import dataclass
 from datetime import (
     timedelta
 )
-from ..utils.logging import (
-    log_calculations
-)
 from ..model.celestials import (
     Body
 )
