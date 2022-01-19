@@ -16,7 +16,7 @@ astronomical --help
 You can setup an optional location, if you don't it'll default to London.
 
 ```
-# .astronomical
+# ~/.astronomical
 
 [location]
 name = "London"
