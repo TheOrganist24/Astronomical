@@ -6,11 +6,11 @@ from suntime import (  # type: ignore
     Sun as Sun_Import,
     SunTimeException
 )
-from astronomical import (
-    logger
-)
 from ..utils.configuration import (
     Defaults
+)
+from ..utils.logging import (
+    logger
 )
 from ..model.location import (
     Location
@@ -28,9 +28,11 @@ class Sun:
 
     def __init__(self) -> None:
         """Initialise variables."""
+        logger.info(f"INTERFACE: \"{self.__class__.__name__}\" "
+                    f"instantiating.")
         locale = Defaults()
         self.location = locale.location()
-        self.rise, self.set = self.__sun_times()
+        self.rise, self.set = self._sun_times()
 
     def __str__(self) -> str:
         """Generate summary of class."""
@@ -41,18 +43,18 @@ class Sun:
                f"- Elevation/Azimuth:\t{sunrise}{d}/{sunset}{d}\n"
                f"- Current Distance:\t{sunrise}m")
 
-    def __sun_times(self,
-                    day: date = date.today()) -> Tuple[datetime, datetime]:
+    def _sun_times(self,
+                   day: date = date.today()) -> Tuple[datetime, datetime]:
         """Return sunrise and sunset times.
 
         This function should be retired in favour of one part of the Sun
         class. That class should calculate this from first principles instead
         of pulling from an API.
         """
-        logger.debug(f"method from \"{self.__class__.__name__}\" invoked.")
         sun = Sun_Import(self.location.latitude, self.location.longitude)
         sunrise = sun.get_sunrise_time(day)
         sunset = sun.get_sunset_time(day)
+        logger.info(f"METHOD: completed.")
         return sunrise, sunset
 
 

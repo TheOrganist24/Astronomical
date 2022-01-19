@@ -5,7 +5,7 @@ import argparse
 import sys
 import astronomical
 from .utils.logging import (
-    log_cli_option
+    logger
 )
 from .interfaces.cli_arguments import (
     Sun,
@@ -31,14 +31,14 @@ def main():
         print(astronomical.__version__)
         sys.exit(0)
     elif args.sun:
-        log_cli_option("sun")
+        logger.debug(f"CLI OPTION: \"sun\" invoked.")
         sun = Sun()
         print(sun)
     elif args.time:
-        log_cli_option("time")
+        logger.debug(f"CLI OPTION: \"time\" invoked.")
         time = Time()
         print(time)
     elif args.alarms:
-        log_cli_option("alarms")
+        logger.debug(f"CLI OPTION: \"alarms\" invoked.")
         alarms = Alarms()
         print(alarms)

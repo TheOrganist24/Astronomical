@@ -27,34 +27,3 @@ def setup_logging():
                        f"\ttry one of {log_levels}\n"
                        f"\teg. `export LOG_LEVEL=DEBUG`.\n"
                        f"\tLog level will be set to \"DEBUG\".")
-
-
-# DEBUG logging
-def log_base_functions(func):
-    """Decorate to log base functions."""
-    def wrap(*args, **kwargs):
-        logger.debug(f"BASE FUNCTION: \"{func.__name__}\" invoked.")
-        return func(*args, **kwargs)
-    return wrap
-
-
-def log_base_class(base_class):
-    """Log base class instantiation."""
-    logger.debug(f"CLASS: \"{base_class}\" instantiated.")
-    return
-
-
-def log_service_method_returns(func):
-    """Log method returns for service classes."""
-    def wrap(*args, **kwargs):
-        result = func(*args, **kwargs)
-        logger.debug(f"METHOD \"{func.__name__}\": "
-                     f"returns \"{result}\".")
-        return result
-    return wrap
-
-
-def log_cli_option(option):
-    """Log base function usage."""
-    logger.debug(f"CLI OPTION: \"{option}\" invoked.")
-    return

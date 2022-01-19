@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from ..utils.logging import (
-    log_base_class
+    logger
 )
 
 
@@ -16,4 +16,4 @@ class Location:
 
     def __post_init__(self):
         """Add DEBUG logging to classes."""
-        log_base_class(self.__class__.__name__)
+        logger.debug(f"CLASS: \"{self.__class__.__name__}\" instantiated.")
