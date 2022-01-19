@@ -1,5 +1,5 @@
 from datetime import timedelta
-from astronomical.services.physics import (
+from astronomical.model.physics import (
     angular_velocity,
     a_sin_theta,
     gravitational_force,

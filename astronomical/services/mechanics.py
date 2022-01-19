@@ -8,7 +8,7 @@ from ..model.celestials import (
     OrbittalBody,
     SpinningBody
 )
-from .physics import (
+from ..model.physics import (
     angular_velocity,
     gravitational_force,
     law_of_periods

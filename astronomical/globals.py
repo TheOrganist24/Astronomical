@@ -6,7 +6,7 @@ FOR DELETION: Only keeping around for reference.
 from datetime import datetime, date, time, timedelta
 import math
 from typing import Optional, Dict
-from .services.physics import angular_velocity, gravitational_force, \
+from .model.physics import angular_velocity, gravitational_force, \
     law_of_periods, a_sin_theta
 from .interfaces.location import Location
 
