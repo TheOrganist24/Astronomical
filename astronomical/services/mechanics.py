@@ -1,6 +1,9 @@
 """This module calculates the orbittal mechanics."""
 
 from datetime import timedelta
+from ..utils.logging import (
+    log_service_method_returns
+)
 from ..model.celestials import (
     OrbittalBody,
     SpinningBody
@@ -15,6 +18,7 @@ from .physics import (
 class RotationalMechanicsService(SpinningBody):
     """Execute orbittal calculations."""
 
+    @log_service_method_returns
     def _calculate_axial_velocity(self) -> float:
         """Convert sidereal period to axial velocity.
 
@@ -26,6 +30,7 @@ class RotationalMechanicsService(SpinningBody):
 class OrbittalMechanicsService(OrbittalBody):
     """Execute orbittal calculations."""
 
+    @log_service_method_returns
     def _calculate_gravitational_force(self) -> float:
         """Apply Universal Law of Gravitation.
 
@@ -35,6 +40,7 @@ class OrbittalMechanicsService(OrbittalBody):
                                    self.parent.mass,
                                    self.semimajor_axis)
 
+    @log_service_method_returns
     def _calculate_orbittal_period(self) -> timedelta:
         """Apply Kepler's Law of Periods.
 
