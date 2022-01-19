@@ -4,12 +4,15 @@ from dataclasses import dataclass
 from datetime import (
     timedelta
 )
+from ..model.celestials import (
+    Body
+)
+from ..model.location import (
+    Location
+)
 from .mechanics import (
     RotationalMechanicsService,
     OrbittalMechanicsService
-)
-from ..model.celestials import (
-    Body
 )
 
 
@@ -32,6 +35,13 @@ class Moon(RotationalMechanicsService, OrbittalMechanicsService):
     """Solar system structure; the orbitter of an orbitting object."""
 
     parent: Planet
+
+
+@dataclass
+class PlanetaryLocation(Location):
+    """Location situated on a planet."""
+
+    planet: Planet
 
 
 sun = Star(name="The Sun",

@@ -2,8 +2,10 @@
 
 import configparser
 from os.path import expanduser, exists
-from ..model.location import PlanetaryLocation
-from ..services.solar_system import earth
+from ..services.solar_system import (
+    PlanetaryLocation,
+    earth
+)
 
 
 class Defaults:

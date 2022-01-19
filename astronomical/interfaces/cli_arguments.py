@@ -6,10 +6,18 @@ from suntime import (  # type: ignore
     Sun as Sun_Import,
     SunTimeException
 )
-from astronomical import logger
-from ..utils.configuration import Defaults
-from ..services.solar_system import earth
-from .location import Location
+from astronomical import (
+    logger
+)
+from ..utils.configuration import (
+    Defaults
+)
+from ..model.location import (
+    Location
+)
+from ..services.solar_system import (
+    earth
+)
 
 
 d = u"\N{DEGREE SIGN}"

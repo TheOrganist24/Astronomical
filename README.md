@@ -24,6 +24,9 @@ longitude = 0.1276
 latitude = 51.5072
 ```
 
+## Design Notes
+![Full Design](img/full_design.png "Full Design")
+
 ## Development
 ### Setting up Environment
 ```bash

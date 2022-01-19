@@ -4,7 +4,9 @@ from datetime import timedelta
 import math
 from typing import Tuple
 from loguru import logger
-from ..utils.logging import log_calculations
+from ..utils.logging import (
+    log_calculations
+)
 
 
 # Constants
