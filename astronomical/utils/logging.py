@@ -38,7 +38,13 @@ def log_base_functions(func):
     return wrap
 
 
+def log_base_class(base_class):
+    """Log base class instantiation."""
+    logger.debug(f"BASE CLASS: \"{base_class}\" instantiated.")
+    return
+
+
 def log_cli_option(option):
-    """Log base functions."""
+    """Log base function usage."""
     logger.debug(f"CLI OPTION: \"{option}\" invoked.")
     return

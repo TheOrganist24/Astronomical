@@ -4,6 +4,9 @@ from dataclasses import dataclass
 from datetime import (
     timedelta
 )
+from ..utils.logging import (
+    log_base_class
+)
 
 
 @dataclass
@@ -13,6 +16,10 @@ class Body:
     name: str
     mass: float
     radius: float
+
+    def __post_init__(self):
+        """Add DEBUG logging to classes."""
+        log_base_class(self.__class__.__name__)
 
 
 @dataclass
