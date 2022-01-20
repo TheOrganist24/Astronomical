@@ -2,6 +2,7 @@
 
 from datetime import timedelta
 import math
+import sys
 from typing import Tuple
 from ..utils.logging import (
     logger
@@ -22,10 +23,11 @@ def angular_velocity(T: timedelta) -> float:
     T = Period of rotation (orbit)
     """
     logger.debug(f"BASE FUNCTION: \"angular_velocity\" invoked.")
-    if T.total_seconds() == 0.0:
-        w = 0.0
-    else:
+    try:
         w = 360 / T.total_seconds()
+    except ZeroDivisionError as err:
+        logger.warning(f"FUNCTION: \"angular_velocity\" needs T > 0s {err}")
+        w = 0.0
     return w
 
 
@@ -55,7 +57,11 @@ def gravitational_force(M: float, m: float, r: float) -> float:
     r = Body displacement
     """
     logger.debug(f"BASE FUNCTION: \"gravitational_force\" invoked.")
-    F = G * (M*m) / r**2
+    try:
+        F = G * (M*m) / r**2
+    except ZeroDivisionError:
+        logger.warning(f"FUNCTION: \"gravitational_force\" needs r > 0m")
+        F = 0.0
     return F
 
 
@@ -107,6 +113,19 @@ def law_of_periods(M: float, m: float, a: float) -> timedelta:
     a = Semimajor axis
     """
     logger.debug(f"BASE FUNCTION: \"law_of_periods\" invoked.")
-    T_sqrd = ((4*math.pi**2) / (G * (M+m))) * a**3
-    T = timedelta(seconds=math.sqrt(T_sqrd))
+    try:
+        T_sqrd = ((4*math.pi**2) / (G * (M+m))) * a**3
+    except ZeroDivisionError:
+        logger.warning(f"FUNCTION: \"law_of_periods\" needs (M,m)>0kg, a>0m")
+        t_sqrd = 0.0
+    try:
+        seconds = math.sqrt(T_sqrd)
+    except ValueError as err:
+        if T_sqrd < 0:
+            logger.warning(f"FUNCTION: \"law_of_periods\" T^2 is negative")
+        else:
+            logger.error(f"FUNCTION: \"law_of_periods\" returned \"{err}\"")
+            sys.exit(1)
+        seconds = 0
+    T = timedelta(seconds=seconds)
     return T
