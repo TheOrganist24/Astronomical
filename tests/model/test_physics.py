@@ -78,3 +78,10 @@ class TestLawOfPeriods:
         T = law_of_periods(test_M, test_m, test_a)
         
         assert T.days == test_T.days  # round to days
+
+
+#class TestEquatorialCoordinates:
+#    def test_equatorial_coordinates_retruns_right_value(self):
+#        """RBICEP: Right"""
+#        test_time_since_vernal_equinox = timedelta(hours=30)
+#        test_sidereal_day

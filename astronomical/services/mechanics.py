@@ -23,7 +23,7 @@ class RotationalMechanicsService(SpinningBody):
 
         Returns angular velocity (degrees/s).
         """
-        result = angular_velocity(self.sidereal_period)
+        result = angular_velocity(self.sidereal_day)
         logger.debug(f"METHOD \"_calculate_axial_velocity\": "
                      f"returns \"{result}\".")
         return result

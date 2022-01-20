@@ -55,7 +55,7 @@ earth = Planet(name="Earth",
                eccentricity=0.014710219,
                orbittal_obliquity=23.44,
                parent=sun,
-               sidereal_period=timedelta(hours=23,
-                                         minutes=56,
-                                         seconds=4,
-                                         microseconds=90053))
+               sidereal_day=timedelta(hours=23,
+                                      minutes=56,
+                                      seconds=4,
+                                      microseconds=90053))

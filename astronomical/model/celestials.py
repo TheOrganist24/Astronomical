@@ -36,4 +36,4 @@ class OrbittalBody(Body):
 class SpinningBody(Body):
     """Base spinning body class; extends Body()."""
 
-    sidereal_period: timedelta
+    sidereal_day: timedelta
