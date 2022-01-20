@@ -165,7 +165,10 @@ def right_ascension(time_since_vernal_equinox: timedelta,
 
 @logger.catch
 def declination() -> float:
-    """Calculate declination of the realtive body above celestial equator."""
+    """Calculate declination of the realtive body above celestial equator.
+
+    The celestial equator is the projection of the equator into space.
+    """
     logger.debug(f"BASE FUNCTION: \"declination\" invoked.")
     return 0.0
 
