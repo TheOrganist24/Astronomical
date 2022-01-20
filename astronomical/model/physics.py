@@ -65,6 +65,7 @@ def gravitational_force(M: float, m: float, r: float) -> float:
     return F
 
 
+@logger.catch
 def law_of_orbits_aphelion(a: float, e: float) -> float:
     """Calculate aphelion from Kepler's Law or Orbits.
 
@@ -78,6 +79,7 @@ def law_of_orbits_aphelion(a: float, e: float) -> float:
     return R
 
 
+@logger.catch
 def law_of_orbits_perihelion(a: float, e: float) -> float:
     """Calculate aphelion from Kepler's Law or Orbits.
 
@@ -99,6 +101,7 @@ def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
     a = Semimajor axis
     e = eccentricity
     """
+    logger.debug(f"BASE FUNCTION: \"law_of_orbits\" invoked.")
     return law_of_orbits_aphelion(a, e), law_of_orbits_perihelion(a, e)
 
 
@@ -136,10 +139,12 @@ def law_of_periods(M: float, m: float, a: float) -> timedelta:
 @logger.catch
 def equatorial_coordinates() -> Tuple[timedelta, float]:
     """Calculate Right Ascension/Declination relative to equator."""
+    logger.debug(f"BASE FUNCTION: \"equatorial_coordinates\" invoked.")
     return right_ascension(timedelta(days=0), timedelta(days=0)), \
         declination()
 
 
+@logger.catch
 def right_ascension(time_since_vernal_equinox: timedelta,
                     synodic_day: timedelta) -> timedelta:
     """Calculate Right Ascension of relative body.
@@ -158,25 +163,37 @@ def right_ascension(time_since_vernal_equinox: timedelta,
     return ra
 
 
+@logger.catch
 def declination() -> float:
-    """Calculate declination from equator."""
+    """Calculate declination of the realtive body above celestial equator."""
     logger.debug(f"BASE FUNCTION: \"declination\" invoked.")
     return 0.0
 
 
 @logger.catch
 def elevation() -> Tuple[float, float]:
-    """Calculate Azimuth/Altitude relative to local horizon."""
+    """Calculate Azimuth/Altitude of body relative to local position."""
+    logger.debug(f"BASE FUNCTION: \"elevation\" invoked.")
     return azimuth(), altitude()
 
 
+@logger.catch
 def azimuth() -> float:
-    """Calculate Azimuth from local horizon."""
+    """Calculate Azimuth of body from local position.
+
+    Azimuth is the angle round the horizon where a relative body is. North is
+    defined as 0 degrees, with East at 90 degrees.
+    """
     logger.debug(f"BASE FUNCTION: \"azimuth\" invoked.")
     return 0.0
 
 
+@logger.catch
 def altitude() -> float:
-    """Calculate Altitude from local horizon."""
+    """Calculate Altitude from of bodylocal postition.
+
+    Altitude is the angle of the body above the horizon where 0 degrees is the
+    horizon, 90 degrees is directly over head, and -90 is directly beneath.
+    """
     logger.debug(f"BASE FUNCTION: \"altitude\" invoked.")
     return 0.0
