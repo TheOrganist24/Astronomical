@@ -12,6 +12,7 @@ Once installed run:
 astronomical --help
 ```
 
+
 ### Set a Default Location
 You can setup an optional location, if you don't it'll default to London.
 
@@ -24,8 +25,10 @@ longitude = 0.1276
 latitude = 51.5072
 ```
 
+
 ## Design Notes
 ![Full Design](img/full_design.png "Full Design")
+
 
 ### Logging Strategy
 Logging should be woven throughout the application. Log levels supported here are DEBUG, INFO, WARNING, ERROR, and CRITICAL.
@@ -42,9 +45,7 @@ Logging should be woven throughout the application. Log levels supported here ar
 * **ERROR**:
   * Base functions - capture any unhandled exceptions in the model class
   * Non-trivial service methods - any method in the service layer that does more than just call a base function
-* **CRITICAL**:
 
-**Nb.** Whenever the astronomical tool is used, objects are created for the earth and the sun, this triggers a DEBUG log on import.
 
 ## Development
 ### Setting up Environment
@@ -52,13 +53,13 @@ Logging should be woven throughout the application. Log levels supported here ar
 git clone git@gitlab.com:TheOrganist24/astronomical.git
 cd astronomical
 make dev-environment
-export LOG_LEVEL=ERROR  # Optional; supports DEBUG, INFO, WARNING, ERROR, CRITICAL
-poetry run python3 example.py
+export LOG_LEVEL=INFO  # Optional; supports DEBUG, INFO, WARNING, ERROR, CRITICAL
+poetry run astronomical --help
 ```
+
 
 ### Lint and Test
 Code should be compliant with PEPs 8, 256, 484, and 526.
 ```bash
-make lint
-make test
+make check  # calls `make lint; make test`
 ```
