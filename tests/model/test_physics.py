@@ -4,7 +4,8 @@ from astronomical.model.physics import (
     a_sin_theta,
     gravitational_force,
     law_of_orbits,
-    law_of_periods
+    law_of_periods,
+    right_ascension
 )
 
 
@@ -80,8 +81,14 @@ class TestLawOfPeriods:
         assert T.days == test_T.days  # round to days
 
 
-#class TestEquatorialCoordinates:
-#    def test_equatorial_coordinates_retruns_right_value(self):
-#        """RBICEP: Right"""
-#        test_time_since_vernal_equinox = timedelta(hours=30)
-#        test_sidereal_day
+class TestEquatorialCoordinates:
+    def test_right_ascension_returns_right_value(self):
+        """RBICEP: Right"""
+        test_time_since_vernal_equinox = timedelta(hours=30)
+        test_synodic_day = timedelta(hours=24)
+        test_ra = timedelta(hours=6)
+        
+        ra = right_ascension(test_time_since_vernal_equinox,
+                             test_synodic_day)
+                             
+        assert ra == test_ra
