@@ -140,23 +140,30 @@ def law_of_periods(M: float, m: float, a: float) -> timedelta:
 def equatorial_coordinates() -> Tuple[timedelta, float]:
     """Calculate Right Ascension/Declination relative to equator."""
     logger.debug(f"BASE FUNCTION: \"equatorial_coordinates\" invoked.")
-    return right_ascension(timedelta(days=0), timedelta(days=0)), \
+    return right_ascension(timedelta(days=0),
+                           timedelta(days=0),
+                           timedelta(days=0)), \
         declination()
 
 
 @logger.catch
 def right_ascension(time_since_vernal_equinox: timedelta,
+                    sidereal_day: timedelta,
                     sidereal_period: timedelta) -> timedelta:
     """Calculate Right Ascension of relative body.
 
     Resembles longitude in the equatorial coordinate system. It is the angular
     distance of the reletive body measured eastwards from the Vernal Equinox,
     or First Point of Aries.
+
+    This function returns the "Longitudinal" position of relative body given
+    the time since the vernam equinox.
+
     The return is a timedelta object with 24 hours being a full circle.
     """
     logger.debug(f"BASE FUNCTION: \"right_ascension\" invoked.")
     try:
-        ra = sidereal_period - (time_since_vernal_equinox % sidereal_period)
+        ra = timedelta(days=0)
     except ZeroDivisionError:
         logger.warning(f"FUNCTION: \"right_ascension\" "
                        f"requires non-zero synodic day")

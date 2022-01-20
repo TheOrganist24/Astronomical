@@ -47,7 +47,7 @@ class OrbittalMechanicsService(OrbittalBody):
     def _calculate_orbittal_period(self) -> timedelta:
         """Apply Kepler's Law of Periods.
 
-        Returns period (timedelta).
+        Returns period (timedelta); also known as the sidereal period.
         """
         result = law_of_periods(self.mass,
                                 self.parent.mass,
