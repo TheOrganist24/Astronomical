@@ -146,7 +146,7 @@ def equatorial_coordinates() -> Tuple[timedelta, float]:
 
 @logger.catch
 def right_ascension(time_since_vernal_equinox: timedelta,
-                    synodic_day: timedelta) -> timedelta:
+                    sidereal_period: timedelta) -> timedelta:
     """Calculate Right Ascension of relative body.
 
     Resembles longitude in the equatorial coordinate system. It is the angular
@@ -156,7 +156,7 @@ def right_ascension(time_since_vernal_equinox: timedelta,
     """
     logger.debug(f"BASE FUNCTION: \"right_ascension\" invoked.")
     try:
-        ra = time_since_vernal_equinox % synodic_day
+        ra = sidereal_period - (time_since_vernal_equinox % sidereal_period)
     except ZeroDivisionError:
         logger.warning(f"FUNCTION: \"right_ascension\" "
                        f"requires non-zero synodic day")

@@ -85,10 +85,10 @@ class TestEquatorialCoordinates:
     def test_right_ascension_returns_right_value(self):
         """RBICEP: Right"""
         test_angle_from_vernal_equinox = timedelta(days=50)
-        test_synodic_period = timedelta(days=200)
+        test_sidereal_period = timedelta(days=200)
         test_ra = timedelta(days=150)
         
         ra = right_ascension(test_angle_from_vernal_equinox,
-                             test_synodic_period)
+                             test_sidereal_period)
                              
         assert ra == test_ra
