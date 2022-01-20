@@ -38,7 +38,10 @@ Logging should be woven throughout the application. Log levels supported here ar
   * Interface class instantiations - highlight the beginning of a happy path for a particular option
   * Interface class method returns - to confirm the end of the happy path for a given option
 * **WARNING**:
+  * Any time there is a "try/except" structure
 * **ERROR**:
+  * Base functions - capture any unhandled exceptions
+  * Non-trivial service functions - any that do more than just call a base function
 * **CRITICAL**:
 
 **Nb.** Whenever the astronomical tool is used, objects are created for the earth and the sun, this triggers a DEBUG log on import.
