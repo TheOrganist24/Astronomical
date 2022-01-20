@@ -73,6 +73,7 @@ def law_of_orbits_aphelion(a: float, e: float) -> float:
     a = Semi-major axis
     e = eccentricity
     """
+    logger.debug(f"BASE FUNCTION: \"law_of_orbits_aphelion\" invoked.")
     R = a * (1+e)
     return R
 
@@ -85,6 +86,7 @@ def law_of_orbits_perihelion(a: float, e: float) -> float:
     a = Semimajor axis
     e = eccentricity
     """
+    logger.debug(f"BASE FUNCTION: \"law_of_orbits_perihelion\" invoked.")
     R = a * (1-e)
     return R
 
@@ -97,7 +99,6 @@ def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
     a = Semimajor axis
     e = eccentricity
     """
-    logger.debug(f"BASE FUNCTION: \"law_of_orbits\" invoked.")
     return law_of_orbits_aphelion(a, e), law_of_orbits_perihelion(a, e)
 
 
@@ -129,3 +130,40 @@ def law_of_periods(M: float, m: float, a: float) -> timedelta:
         seconds = 0
     T = timedelta(seconds=seconds)
     return T
+
+
+# Coordinate calculations for relative celestial bodies
+@logger.catch
+def declination_coordinates() -> Tuple[float, float]:
+    """Calculate Right Ascension/Declination relative to equator."""
+    return right_ascension(), declination()
+
+
+def right_ascension() -> float:
+    """Calculate Right Ascension from equator."""
+    logger.debug(f"BASE FUNCTION: \"right_ascension\" invoked.")
+    return 0.0
+
+
+def declination() -> float:
+    """Calculate declination from equator."""
+    logger.debug(f"BASE FUNCTION: \"declination\" invoked.")
+    return 0.0
+
+
+@logger.catch
+def elevation() -> Tuple[float, float]:
+    """Calculate Azimuth/Altitude relative to local horizon."""
+    return azimuth(), altitude()
+
+
+def azimuth() -> float:
+    """Calculate Azimuth from local horizon."""
+    logger.debug(f"BASE FUNCTION: \"azimuth\" invoked.")
+    return 0.0
+
+
+def altitude() -> float:
+    """Calculate Altitude from local horizon."""
+    logger.debug(f"BASE FUNCTION: \"altitude\" invoked.")
+    return 0.0
