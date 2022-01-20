@@ -141,16 +141,14 @@ def equatorial_coordinates() -> Tuple[timedelta, float]:
     """Calculate Right Ascension/Declination relative to equator."""
     logger.debug(f"BASE FUNCTION: \"equatorial_coordinates\" invoked.")
     return right_ascension(timedelta(days=0),
-                           timedelta(days=0),
                            timedelta(days=0)), \
         declination()
 
 
 @logger.catch
 def right_ascension(time_since_vernal_equinox: timedelta,
-                    sidereal_day: timedelta,
-                    sidereal_period: timedelta) -> timedelta:
-    """Calculate Right Ascension of relative body.
+                    synodic_day: timedelta) -> timedelta:
+    """Calculate Right Ascension of parent body.
 
     Resembles longitude in the equatorial coordinate system. It is the angular
     distance of the reletive body measured eastwards from the Vernal Equinox,
@@ -163,16 +161,16 @@ def right_ascension(time_since_vernal_equinox: timedelta,
     """
     logger.debug(f"BASE FUNCTION: \"right_ascension\" invoked.")
     try:
-        ra = timedelta(days=0)
+        time_through_day = time_since_vernal_equinox % synodic_day
     except ZeroDivisionError:
-        logger.warning(f"FUNCTION: \"right_ascension\" "
-                       f"requires non-zero synodic day")
-    return ra
+        logger.warning(f"FUNCTION: \"right_ascension\" synodic day > 0s")
+    ra_sun = time_through_day  # since the sun is at right ascension at noon
+    return time_through_day
 
 
 @logger.catch
 def declination() -> float:
-    """Calculate declination of the realtive body above celestial equator.
+    """Calculate declination of the parent body above celestial equator.
 
     The celestial equator is the projection of the equator into space.
     """

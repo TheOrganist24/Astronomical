@@ -84,13 +84,11 @@ class TestLawOfPeriods:
 class TestEquatorialCoordinates:
     def test_right_ascension_returns_right_value(self):
         """RBICEP: Right"""
-        test_angle_from_vernal_equinox = timedelta(days=50)
-        test_sidereal_day = timedelta(days=10)
-        test_sidereal_period = timedelta(days=200)
-        test_ra = timedelta(days=150)
+        test_angle_from_vernal_equinox = timedelta(days=100, hours=16)
+        test_synodic_day = timedelta(hours=30)
+        test_ra = timedelta(hours=16)
         
         ra = right_ascension(test_angle_from_vernal_equinox,
-                             test_sidereal_day,
-                             test_sidereal_period)
+                             test_synodic_day)
                              
         assert ra == test_ra
