@@ -40,8 +40,8 @@ Logging should be woven throughout the application. Log levels supported here ar
 * **WARNING**:
   * Any time there is a "try/except" structure
 * **ERROR**:
-  * Base functions - capture any unhandled exceptions
-  * Non-trivial service functions - any that do more than just call a base function
+  * Base functions - capture any unhandled exceptions in the model class
+  * Non-trivial service methods - any method in the service layer that does more than just call a base function
 * **CRITICAL**:
 
 **Nb.** Whenever the astronomical tool is used, objects are created for the earth and the sun, this triggers a DEBUG log on import.
