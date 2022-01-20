@@ -42,4 +42,4 @@ build:
 	poetry build
 
 ## custom
-pre-commit: check
+pre-commit: lint
