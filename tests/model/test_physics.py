@@ -19,15 +19,6 @@ class TestAngularVelocity:
         
         assert velocity == test_velocity
 
-    def test_angular_velocity_handles_zero_error(self):
-        """RBICEP: Boundary"""
-        test_period = timedelta(minutes=0)
-        test_velocity = 0
-        
-        velocity = angular_velocity(test_period)
-        
-        assert velocity == test_velocity
-
 
 class TestASinThetaVelocity:
     def test_asintheta_returns_right_value(self):

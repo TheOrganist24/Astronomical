@@ -7,7 +7,8 @@ from datetime import (
 from ..model.custom_types import (
     mass,
     radius,
-    eccentricity
+    eccentricity,
+    real_time
 )
 from ..model.celestials import (
     Body
@@ -60,7 +61,7 @@ earth = Planet(name="Earth",
                eccentricity=eccentricity(0.014710219),
                orbittal_obliquity=23.44,
                parent=sun,
-               sidereal_day=timedelta(hours=23,
+               sidereal_day=real_time(hours=23,
                                       minutes=56,
                                       seconds=4,
                                       microseconds=90053))

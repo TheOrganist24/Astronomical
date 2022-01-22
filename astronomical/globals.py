@@ -9,7 +9,8 @@ from typing import Optional, Dict
 from ..model.custom_types import (  # type: ignore
     mass,
     radius,
-    eccentricity
+    eccentricity,
+    real_time
 )
 from .model.physics import angular_velocity, gravitational_force, \
     law_of_periods, a_sin_theta
@@ -85,12 +86,12 @@ class CelestialBody:
     def orbittal_velocity(self, daughter: str) -> float:
         """Convert orbittal period to orbittal velocity."""
         return angular_velocity(
-            self.orbittal_period(
-                self.daughters[daughter].name))
+            real_time(self.orbittal_period(
+                      self.daughters[daughter].name)))
 
     def axial_velocity(self) -> float:
         """Convert sidereal period to axial velocity."""
-        return angular_velocity(self.sidereal_period)
+        return angular_velocity(real_time(self.sidereal_period))
 
     def declination(self,
                     daughter: str,

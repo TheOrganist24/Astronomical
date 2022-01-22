@@ -10,7 +10,8 @@ from ..utils.logging import (
 from ..model.custom_types import (
     mass,
     radius,
-    eccentricity
+    eccentricity,
+    real_time
 )
 
 
@@ -20,7 +21,7 @@ G = 6.67408*10**-11
 
 # Conversions
 @logger.catch
-def angular_velocity(T: timedelta) -> float:
+def angular_velocity(T: real_time) -> float:
     """Calculate angular velocity.
 
     Where:
@@ -28,11 +29,7 @@ def angular_velocity(T: timedelta) -> float:
     T = Period of rotation (orbit)
     """
     logger.debug(f"BASE FUNCTION: \"angular_velocity\" invoked.")
-    try:
-        w = 360 / T.total_seconds()
-    except ZeroDivisionError as err:
-        logger.warning(f"FUNCTION: \"angular_velocity\" needs T > 0s {err}")
-        w = 0.0
+    w = 360 / T.total_seconds()
     return w
 
 
@@ -62,11 +59,7 @@ def gravitational_force(M: mass, m: mass, r: radius) -> float:
     r = Body displacement
     """
     logger.debug(f"BASE FUNCTION: \"gravitational_force\" invoked.")
-    try:
-        F = G * (M*m) / r**2
-    except ZeroDivisionError:
-        logger.warning(f"FUNCTION: \"gravitational_force\" needs r > 0m")
-        F = 0.0
+    F = G * (M*m) / r**2
     return F
 
 
@@ -122,20 +115,8 @@ def law_of_periods(M: mass, m: mass, a: radius) -> timedelta:
     a = Semimajor axis
     """
     logger.debug(f"BASE FUNCTION: \"law_of_periods\" invoked.")
-    try:
-        T_sqrd = ((4*math.pi**2) / (G * (M+m))) * a**3
-    except ZeroDivisionError:
-        logger.warning(f"FUNCTION: \"law_of_periods\" needs (M,m)>0kg, a>0m")
-        t_sqrd = 0.0
-    try:
-        seconds = math.sqrt(T_sqrd)
-    except ValueError as err:
-        if T_sqrd < 0:
-            logger.warning(f"FUNCTION: \"law_of_periods\" T^2 is negative")
-        else:
-            logger.error(f"FUNCTION: \"law_of_periods\" returned \"{err}\"")
-            sys.exit(1)
-        seconds = 0
+    T_sqrd = ((4*math.pi**2) / (G * (M+m))) * a**3
+    seconds = math.sqrt(T_sqrd)
     T = timedelta(seconds=seconds)
     return T
 
@@ -146,13 +127,13 @@ def equatorial_coordinates() -> Tuple[timedelta, float]:
     """Calculate Right Ascension/Declination relative to equator."""
     logger.debug(f"BASE FUNCTION: \"equatorial_coordinates\" invoked.")
     return right_ascension(timedelta(days=0),
-                           timedelta(days=0)), \
+                           real_time(days=0)), \
         declination()
 
 
 @logger.catch
 def right_ascension(time_since_vernal_equinox: timedelta,
-                    synodic_day: timedelta) -> timedelta:
+                    synodic_day: real_time) -> timedelta:
     """Calculate Right Ascension of parent body.
 
     Resembles longitude in the equatorial coordinate system. It is the angular
@@ -165,10 +146,7 @@ def right_ascension(time_since_vernal_equinox: timedelta,
     The return is a timedelta object with 24 hours being a full circle.
     """
     logger.debug(f"BASE FUNCTION: \"right_ascension\" invoked.")
-    try:
-        time_through_day = time_since_vernal_equinox % synodic_day
-    except ZeroDivisionError:
-        logger.warning(f"FUNCTION: \"right_ascension\" synodic day > 0s")
+    time_through_day = time_since_vernal_equinox % synodic_day
     ra_sun = time_through_day  # since the sun is at right ascension at noon
     return time_through_day
 

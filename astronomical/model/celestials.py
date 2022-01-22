@@ -10,7 +10,8 @@ from ..utils.logging import (
 from ..model.custom_types import (
     mass,
     radius,
-    eccentricity
+    eccentricity,
+    real_time
 )
 
 
@@ -41,4 +42,4 @@ class OrbittalBody(Body):
 class SpinningBody(Body):
     """Base spinning body class; extends Body()."""
 
-    sidereal_day: timedelta
+    sidereal_day: real_time

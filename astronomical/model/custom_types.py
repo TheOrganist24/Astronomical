@@ -1,6 +1,9 @@
 """Create custom types for astronomical."""
 
 
+from datetime import timedelta
+
+
 class mass(float):
     """Custom type: mass (kg)."""
 
@@ -22,8 +25,8 @@ class radius(float):
     def __init__(self, *args, **kwargs):
         """Initialise radius."""
         super(radius, self).__init__()
-        if args[0] < 0.0:
-            raise TypeError("Radius cannot be negative")
+        if args[0] <= 0.0:
+            raise TypeError("Radius cannot be 0 or negative")
         self.value = args[0]
 
     def __str__(self):
@@ -45,3 +48,18 @@ class eccentricity(float):
     def __str__(self):
         """Return eccentricity representation."""
         return f"{self.value}"
+
+
+class real_time(timedelta):
+    """Custom type: real_time."""
+
+    def __new__(self, *args, **kwargs):
+        """Initialise real time."""
+        if kwargs["seconds"] <= 0:
+            raise TypeError("Real time must not be 0s")
+        self.value = kwargs["seconds"]
+        return super().__new__(self, *args, **kwargs)
+
+    def __str__(self):
+        """Return real time representation."""
+        return f"{self.value}s"
