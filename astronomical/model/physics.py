@@ -7,6 +7,11 @@ from typing import Tuple
 from ..utils.logging import (
     logger
 )
+from ..model.custom_types import (
+    mass,
+    radius,
+    eccentricity
+)
 
 
 # Constants
@@ -46,7 +51,7 @@ def a_sin_theta(a: float, theta: float) -> float:
 
 # Laws
 @logger.catch
-def gravitational_force(M: float, m: float, r: float) -> float:
+def gravitational_force(M: mass, m: mass, r: radius) -> float:
     """Calculate force between two bodies.
 
     According to Newton's Law of Universal Gravitation. Where:
@@ -66,7 +71,7 @@ def gravitational_force(M: float, m: float, r: float) -> float:
 
 
 @logger.catch
-def law_of_orbits_aphelion(a: float, e: float) -> float:
+def law_of_orbits_aphelion(a: radius, e: eccentricity) -> radius:
     """Calculate aphelion from Kepler's Law or Orbits.
 
     Where:
@@ -75,12 +80,12 @@ def law_of_orbits_aphelion(a: float, e: float) -> float:
     e = eccentricity
     """
     logger.debug(f"BASE FUNCTION: \"law_of_orbits_aphelion\" invoked.")
-    R = a * (1+e)
+    R: radius = radius(a * (1+e))
     return R
 
 
 @logger.catch
-def law_of_orbits_perihelion(a: float, e: float) -> float:
+def law_of_orbits_perihelion(a: radius, e: eccentricity) -> radius:
     """Calculate aphelion from Kepler's Law or Orbits.
 
     Where:
@@ -89,12 +94,12 @@ def law_of_orbits_perihelion(a: float, e: float) -> float:
     e = eccentricity
     """
     logger.debug(f"BASE FUNCTION: \"law_of_orbits_perihelion\" invoked.")
-    R = a * (1-e)
+    R: radius = radius(a * (1-e))
     return R
 
 
 @logger.catch
-def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
+def law_of_orbits(a: radius, e: eccentricity) -> Tuple[radius, radius]:
     """Calculate Kepler's Law of Orbits.
 
     Where:
@@ -106,7 +111,7 @@ def law_of_orbits(a: float, e: float) -> Tuple[float, float]:
 
 
 @logger.catch
-def law_of_periods(M: float, m: float, a: float) -> timedelta:
+def law_of_periods(M: mass, m: mass, a: radius) -> timedelta:
     """Calculate Kepler's Law of Orbits.
 
     Where:
@@ -155,7 +160,7 @@ def right_ascension(time_since_vernal_equinox: timedelta,
     or First Point of Aries.
 
     This function returns the "Longitudinal" position of relative body given
-    the time since the vernam equinox.
+    the time since the vernal equinox.
 
     The return is a timedelta object with 24 hours being a full circle.
     """

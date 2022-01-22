@@ -4,6 +4,11 @@ from datetime import timedelta
 from ..utils.logging import (
     logger
 )
+from ..model.custom_types import (
+    mass,
+    radius,
+    eccentricity
+)
 from ..model.celestials import (
     OrbittalBody,
     SpinningBody

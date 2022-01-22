@@ -6,6 +6,11 @@ FOR DELETION: Only keeping around for reference.
 from datetime import datetime, date, time, timedelta
 import math
 from typing import Optional, Dict
+from ..model.custom_types import (  # type: ignore
+    mass,
+    radius,
+    eccentricity
+)
 from .model.physics import angular_velocity, gravitational_force, \
     law_of_periods, a_sin_theta
 from .interfaces.location import Location
@@ -66,15 +71,16 @@ class CelestialBody:
 
     def orbittal_force(self, daughter: str) -> float:
         """Apply Universal Law of Gravitation to specific daughter."""
-        return gravitational_force(self.mass,
-                                   self.daughters[daughter].mass,
-                                   self.daughters[daughter].semimajor_axis)
+        return gravitational_force(mass(self.mass),
+                                   mass(self.daughters[daughter].mass),
+                                   radius(
+            self.daughters[daughter].semimajor_axis))
 
     def orbittal_period(self, daughter: str) -> timedelta:
         """Apply Kepler's Law of Periods to specific daughter."""
-        return law_of_periods(self.mass,
-                              self.daughters[daughter].mass,
-                              self.daughters[daughter].semimajor_axis)
+        return law_of_periods(mass(self.mass),
+                              mass(self.daughters[daughter].mass),
+                              radius(self.daughters[daughter].semimajor_axis))
 
     def orbittal_velocity(self, daughter: str) -> float:
         """Convert orbittal period to orbittal velocity."""

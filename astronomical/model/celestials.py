@@ -7,6 +7,11 @@ from datetime import (
 from ..utils.logging import (
     logger
 )
+from ..model.custom_types import (
+    mass,
+    radius,
+    eccentricity
+)
 
 
 @dataclass
@@ -14,8 +19,8 @@ class Body:
     """Base celestial body class."""
 
     name: str
-    mass: float
-    radius: float
+    mass: mass
+    radius: radius
 
     def __post_init__(self):
         """Add DEBUG logging to classes."""
@@ -26,8 +31,8 @@ class Body:
 class OrbittalBody(Body):
     """Base orbittal body class, extends Body()."""
 
-    semimajor_axis: float
-    eccentricity: float
+    semimajor_axis: radius
+    eccentricity: eccentricity
     orbittal_obliquity: float
     parent: Body
 
