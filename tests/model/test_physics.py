@@ -5,7 +5,8 @@ from astronomical.model.physics import (
     gravitational_force,
     law_of_orbits,
     law_of_periods,
-    right_ascension
+    right_ascension,
+    declination
 )
 
 
@@ -83,3 +84,16 @@ class TestEquatorialCoordinates:
                              test_synodic_day)
                              
         assert ra == test_ra
+
+    def test_declination_returns_right_value(self):
+        """RBICEP: Right"""
+        test_orbittal_obliquity = 45.0
+        test_sidereal_period = timedelta(days=4)
+        test_time_since_march_equinox = timedelta(days=3)
+        test_dec = -45.0
+        
+        dec = declination(test_orbittal_obliquity,
+                          test_sidereal_period,
+                          test_time_since_march_equinox)
+                             
+        assert dec == test_dec

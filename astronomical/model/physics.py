@@ -128,7 +128,9 @@ def equatorial_coordinates() -> Tuple[timedelta, float]:
     logger.debug(f"BASE FUNCTION: \"equatorial_coordinates\" invoked.")
     return right_ascension(timedelta(days=0),
                            real_time(days=0)), \
-        declination()
+        declination(0.0,
+                    real_time(seconds=1),
+                    timedelta(seconds=1))
 
 
 @logger.catch
@@ -152,13 +154,19 @@ def right_ascension(time_since_vernal_equinox: timedelta,
 
 
 @logger.catch
-def declination() -> float:
+def declination(orbittal_obliquity: float,
+                sidereal_period: real_time,
+                time_since_march_equinox: timedelta) -> float:
     """Calculate declination of the parent body above celestial equator.
 
-    The celestial equator is the projection of the equator into space.
+    The celestial equator is the projection of the equator into space. This
+    assumes that the orbitting body processes round it's orbit in a uniform
+    manner and not according to KII (equal areas swept in equal times).
     """
     logger.debug(f"BASE FUNCTION: \"declination\" invoked.")
-    return 0.0
+    orbit_completed = (time_since_march_equinox / sidereal_period)
+    dec = a_sin_theta(orbittal_obliquity, orbit_completed)
+    return dec
 
 
 @logger.catch
