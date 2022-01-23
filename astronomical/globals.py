@@ -6,7 +6,7 @@ FOR DELETION: Only keeping around for reference.
 from datetime import datetime, date, time, timedelta
 import math
 from typing import Optional, Dict
-from ..model.custom_types import (  # type: ignore
+from .model.custom_types import (  # type: ignore
     mass,
     radius,
     eccentricity,
