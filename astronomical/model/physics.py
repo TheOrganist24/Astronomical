@@ -188,7 +188,7 @@ def solar_hour_angle(synodic_day: real_time,
 def elevation() -> Tuple[float, float]:
     """Calculate Azimuth/Altitude of body relative to local position."""
     logger.debug(f"BASE FUNCTION: \"elevation\" invoked.")
-    return azimuth(), altitude()
+    return azimuth(), altitude(0.0, 0.0, 0.0)
 
 
 @logger.catch
@@ -203,11 +203,21 @@ def azimuth() -> float:
 
 
 @logger.catch
-def altitude() -> float:
+def altitude(latitude: float,
+             declination: float,
+             hour_angle: float) -> float:
     """Calculate Altitude from of local postition.
 
     Altitude is the angle of the body above the horizon where 0 degrees is the
     horizon, 90 degrees is directly over head, and -90 is directly beneath.
     """
     logger.debug(f"BASE FUNCTION: \"altitude\" invoked.")
-    return 0.0
+
+    lat: float = ((2*math.pi)/360) * latitude
+    dec: float = ((2*math.pi)/360) * declination
+    ha: float = ((2*math.pi)/360) * hour_angle
+
+    s_alt: float = math.sin(lat)*math.sin(dec) \
+        + math.cos(lat)*math.cos(dec)*math.cos(ha)
+    alt: float = (360/(2*math.pi)) * math.asin(s_alt)
+    return alt
