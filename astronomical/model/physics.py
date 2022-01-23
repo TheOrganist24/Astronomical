@@ -185,21 +185,51 @@ def solar_hour_angle(synodic_day: real_time,
 
 
 @logger.catch
-def elevation() -> Tuple[float, float]:
+def elevation(latitude: float,
+              declination: float,
+              hour_angle: float) -> Tuple[float, float]:
     """Calculate Azimuth/Altitude of body relative to local position."""
     logger.debug(f"BASE FUNCTION: \"elevation\" invoked.")
-    return azimuth(), altitude(0.0, 0.0, 0.0)
+
+    alt: float = altitude(latitude, declination, hour_angle)
+    az: float = azimuth(latitude, declination, hour_angle, alt)
+    return az, alt
 
 
 @logger.catch
-def azimuth() -> float:
+def azimuth(latitude: float,
+            declination: float,
+            hour_angle: float,
+            altitude: float) -> float:
     """Calculate Azimuth of body from local position.
 
     Azimuth is the angle round the horizon where a relative body is. North is
     defined as 0 degrees, with East at 90 degrees.
     """
     logger.debug(f"BASE FUNCTION: \"azimuth\" invoked.")
-    return 0.0
+
+    lat: float = ((2*math.pi)/360) * latitude
+    dec: float = ((2*math.pi)/360) * declination
+    ha: float = ((2*math.pi)/360) * hour_angle
+    alt: float = ((2*math.pi)/360) * altitude
+
+    s_az: float = (math.cos(lat)*math.sin(dec)
+                   - math.sin(lat)*math.cos(dec)*math.cos(ha)) \
+        / math.cos(alt)
+
+    # correct for Python3 rounding errors
+    if s_az < -1:
+        s_az = -1
+    elif s_az > 1:
+        s_az = 1
+
+    az: float
+    if hour_angle < 0.0:
+        az = (360/(2*math.pi)) * math.acos(s_az)
+    else:
+        az = 360 - ((360/(2*math.pi)) * math.acos(s_az))
+
+    return az
 
 
 @logger.catch
