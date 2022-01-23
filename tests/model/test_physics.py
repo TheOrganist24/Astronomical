@@ -1,4 +1,7 @@
 from datetime import timedelta
+from astronomical.model.custom_types import (
+  real_time
+)
 from astronomical.model.physics import (
     angular_velocity,
     a_sin_theta,
@@ -6,7 +9,8 @@ from astronomical.model.physics import (
     law_of_orbits,
     law_of_periods,
     right_ascension,
-    declination
+    declination,
+    solar_hour_angle
 )
 
 
@@ -97,3 +101,16 @@ class TestEquatorialCoordinates:
                           test_time_since_march_equinox)
                              
         assert dec == test_dec
+
+
+class TestSolarHourAngle:
+    def test_solar_hour_angle_returns_right_value(self):
+        """RBICEP: Right"""
+        test_synodic_day = real_time(hours=24)
+        test_time_since_midnight = timedelta(hours=13)
+        test_sha: float = 15.0
+        
+        sha = solar_hour_angle(test_synodic_day,
+                                            test_time_since_midnight)
+        
+        assert sha == test_sha

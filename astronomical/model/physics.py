@@ -123,14 +123,19 @@ def law_of_periods(M: mass, m: mass, a: radius) -> timedelta:
 
 # Coordinate calculations for relative celestial bodies
 @logger.catch
-def equatorial_coordinates() -> Tuple[timedelta, float]:
+def equatorial_coordinates(time_since_vernal_equinox: timedelta,
+                           synodic_day: real_time,
+                           orbittal_obliquity: float,
+                           sidereal_period: real_time,
+                           time_since_march_equinox: timedelta
+                           ) -> Tuple[timedelta, float]:
     """Calculate Right Ascension/Declination relative to equator."""
     logger.debug(f"BASE FUNCTION: \"equatorial_coordinates\" invoked.")
-    return right_ascension(timedelta(days=0),
-                           real_time(days=0)), \
-        declination(0.0,
-                    real_time(seconds=1),
-                    timedelta(seconds=1))
+    return right_ascension(time_since_vernal_equinox,
+                           synodic_day), \
+        declination(orbittal_obliquity,
+                    sidereal_period,
+                    time_since_march_equinox)
 
 
 @logger.catch
@@ -170,6 +175,16 @@ def declination(orbittal_obliquity: float,
 
 
 @logger.catch
+def solar_hour_angle(synodic_day: real_time,
+                     time_since_midnight: timedelta) -> float:
+    """Calculate soloar hour angle."""
+    second_angle: float = 360 / synodic_day.total_seconds()
+    elapsed_angle: float = time_since_midnight.total_seconds() * second_angle
+    solar_hour_angle: float = elapsed_angle - 180
+    return solar_hour_angle
+
+
+@logger.catch
 def elevation() -> Tuple[float, float]:
     """Calculate Azimuth/Altitude of body relative to local position."""
     logger.debug(f"BASE FUNCTION: \"elevation\" invoked.")
@@ -189,7 +204,7 @@ def azimuth() -> float:
 
 @logger.catch
 def altitude() -> float:
-    """Calculate Altitude from of bodylocal postition.
+    """Calculate Altitude from of local postition.
 
     Altitude is the angle of the body above the horizon where 0 degrees is the
     horizon, 90 degrees is directly over head, and -90 is directly beneath.

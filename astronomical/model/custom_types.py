@@ -55,9 +55,18 @@ class real_time(timedelta):
 
     def __new__(self, *args, **kwargs):
         """Initialise real time."""
-        if kwargs["seconds"] <= 0:
-            raise TypeError("Real time must not be 0s")
-        self.value = kwargs["seconds"]
+        if "seconds" in kwargs:
+            if kwargs["seconds"] <= 0:
+                raise TypeError("Real time must not be 0s")
+            self.value = kwargs["seconds"]
+        elif "minutes" in kwargs:
+            if kwargs["minutes"] <= 0:
+                raise TypeError("Real time must not be 0s")
+            self.value = kwargs["minutes"] * 60
+        elif "hours" in kwargs:
+            if kwargs["hours"] <= 0:
+                raise TypeError("Real time must not be 0s")
+            self.value = kwargs["hours"] * 60 * 60
         return super().__new__(self, *args, **kwargs)
 
     def __str__(self):
