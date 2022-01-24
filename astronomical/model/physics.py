@@ -244,3 +244,12 @@ def altitude(latitude: float,
         + math.cos(lat)*math.cos(dec)*math.cos(ha)
     alt: float = (360/(2*math.pi)) * math.asin(s_alt)
     return alt
+
+
+@logger.catch
+def synodic_day(year: float, day: float) -> real_time:
+    """Calculate synodic day from sidereal day and period."""
+    synodic_seconds: float = (year*day) / (year - day)
+    synodic_day = real_time(seconds=synodic_seconds)
+
+    return synodic_day

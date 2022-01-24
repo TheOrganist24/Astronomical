@@ -13,7 +13,7 @@ class RotationalMechanicsService(SpinningBody):
     """Execute orbittal calculations."""
 
     def _calculate_axial_velocity(self) -> float:
-        """Convert sidereal period to axial velocity.
+        """Convert sidereal day to axial velocity.
 
         Returns angular velocity (degrees/s).
         """
