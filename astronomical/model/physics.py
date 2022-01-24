@@ -16,7 +16,7 @@ from ..model.custom_types import (
 
 
 # Constants
-G = 6.67408*10**-11
+G: float = 6.67408*10**-11
 
 
 # Conversions
@@ -29,7 +29,7 @@ def angular_velocity(T: real_time) -> float:
     T = Period of rotation (orbit)
     """
     logger.debug(f"BASE FUNCTION: \"angular_velocity\" invoked.")
-    w = 360 / T.total_seconds()
+    w: float = 360 / T.total_seconds()
     return w
 
 
@@ -42,7 +42,7 @@ def a_sin_theta(a: float, theta: float) -> float:
     theta -> fractional revolution
     """
     logger.debug(f"BASE FUNCTION: \"a_sin_theta\" invoked.")
-    result = a * math.sin(theta * (2*math.pi))
+    result: float = a * math.sin(theta * (2*math.pi))
     return result
 
 
@@ -59,7 +59,7 @@ def gravitational_force(M: mass, m: mass, r: radius) -> float:
     r = Body displacement
     """
     logger.debug(f"BASE FUNCTION: \"gravitational_force\" invoked.")
-    F = G * (M*m) / r**2
+    F: float = G * (M*m) / r**2
     return F
 
 
@@ -104,7 +104,7 @@ def law_of_orbits(a: radius, e: eccentricity) -> Tuple[radius, radius]:
 
 
 @logger.catch
-def law_of_periods(M: mass, m: mass, a: radius) -> timedelta:
+def law_of_periods(M: mass, m: mass, a: radius) -> real_time:
     """Calculate Kepler's Law of Orbits.
 
     Where:
@@ -115,9 +115,9 @@ def law_of_periods(M: mass, m: mass, a: radius) -> timedelta:
     a = Semimajor axis
     """
     logger.debug(f"BASE FUNCTION: \"law_of_periods\" invoked.")
-    T_sqrd = ((4*math.pi**2) / (G * (M+m))) * a**3
-    seconds = math.sqrt(T_sqrd)
-    T = timedelta(seconds=seconds)
+    T_sqrd: float = ((4*math.pi**2) / (G * (M+m))) * a**3
+    seconds: float = math.sqrt(T_sqrd)
+    T: real_time = real_time(seconds=seconds)
     return T
 
 
@@ -153,8 +153,8 @@ def right_ascension(time_since_vernal_equinox: timedelta,
     The return is a timedelta object with 24 hours being a full circle.
     """
     logger.debug(f"BASE FUNCTION: \"right_ascension\" invoked.")
-    time_through_day = time_since_vernal_equinox % synodic_day
-    ra_sun = time_through_day  # since the sun is at right ascension at noon
+    time_through_day: timedelta = time_since_vernal_equinox % synodic_day
+    ra_sun: timedelta = time_through_day  # since the sun is at ra at noon
     return time_through_day
 
 
@@ -169,8 +169,8 @@ def declination(orbittal_obliquity: float,
     manner and not according to KII (equal areas swept in equal times).
     """
     logger.debug(f"BASE FUNCTION: \"declination\" invoked.")
-    orbit_completed = (time_since_march_equinox / sidereal_period)
-    dec = a_sin_theta(orbittal_obliquity, orbit_completed)
+    orbit_completed: float = (time_since_march_equinox / sidereal_period)
+    dec: float = a_sin_theta(orbittal_obliquity, orbit_completed)
     return dec
 
 
