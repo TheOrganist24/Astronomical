@@ -59,13 +59,6 @@ class PlanetaryLocation(Location):
         #     iterate backwards to find sunrise
         # else:
         #     iterate forwards
-        #
-        # altitude(self.latitude,
-        #          declination(self.planet.orbittal_obliquity,
-        #                      self.planet.sidereal_period,
-        #                      time_since_march_equinox)),
-        #          solar_hour_angle(self.planet._calculate_synodic_day(y, d),
-        #                           time_since_midnight)
         """
         # declare variables
         lat = self.latitude
@@ -84,7 +77,15 @@ class PlanetaryLocation(Location):
         dec = declination(self.planet.orbittal_obliquity,
                           sidereal_day,
                           time_since_march_equinox)
-        print(altitude(lat, dec, ha))
+
+        # iterate
+        if altitude(lat, dec, ha) >= 0.0 \
+                or time_since_midnight >= (syn_day) / 2:
+            # iterate back
+            print("")
+        else:
+            # iterate forward
+            print("")
         return real_time(seconds=1)
 
 
