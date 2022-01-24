@@ -1,19 +1,12 @@
 """Collection of Physics Equations for use in the rest of the package."""
 
-from datetime import timedelta
 import math
 import sys
+from datetime import timedelta
 from typing import Tuple
-from ..utils.logging import (
-    logger
-)
-from ..model.custom_types import (
-    mass,
-    radius,
-    eccentricity,
-    real_time
-)
 
+from ..model.custom_types import eccentricity, mass, radius, real_time
+from ..utils.logging import logger
 
 # Constants
 G: float = 6.67408*10**-11

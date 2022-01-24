@@ -1,23 +1,12 @@
 """This module calculates the orbittal mechanics."""
 
 from datetime import timedelta
-from ..utils.logging import (
-    logger
-)
-from ..model.custom_types import (
-    mass,
-    radius,
-    eccentricity
-)
-from ..model.celestials import (
-    OrbittalBody,
-    SpinningBody
-)
-from ..model.physics import (
-    angular_velocity,
-    gravitational_force,
-    law_of_periods
-)
+
+from ..model.celestials import OrbittalBody, SpinningBody
+from ..model.custom_types import eccentricity, mass, radius
+from ..model.physics import (angular_velocity, gravitational_force,
+                             law_of_periods)
+from ..utils.logging import logger
 
 
 class RotationalMechanicsService(SpinningBody):

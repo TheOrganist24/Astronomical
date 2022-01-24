@@ -3,15 +3,11 @@
 
 import argparse
 import sys
+
 import astronomical
-from .utils.logging import (
-    logger
-)
-from .interfaces.cli_arguments import (
-    Sun,
-    Alarms,
-    Time
-)
+
+from .interfaces.cli_arguments import Alarms, Sun, Time
+from .utils.logging import logger
 
 
 def main():

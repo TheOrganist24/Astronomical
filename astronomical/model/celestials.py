@@ -1,18 +1,10 @@
 """This module provides the dataclasses for celestials in astronomical."""
 
 from dataclasses import dataclass
-from datetime import (
-    timedelta
-)
-from ..utils.logging import (
-    logger
-)
-from ..model.custom_types import (
-    mass,
-    radius,
-    eccentricity,
-    real_time
-)
+from datetime import timedelta
+
+from ..model.custom_types import eccentricity, mass, radius, real_time
+from ..utils.logging import logger
 
 
 @dataclass

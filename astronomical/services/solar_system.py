@@ -1,25 +1,12 @@
 """This module calculates solar system mechanics."""
 
 from dataclasses import dataclass
-from datetime import (
-    timedelta
-)
-from ..model.custom_types import (
-    mass,
-    radius,
-    eccentricity,
-    real_time
-)
-from ..model.celestials import (
-    Body
-)
-from ..model.location import (
-    Location
-)
-from .mechanics import (
-    RotationalMechanicsService,
-    OrbittalMechanicsService
-)
+from datetime import timedelta
+
+from ..model.celestials import Body
+from ..model.custom_types import eccentricity, mass, radius, real_time
+from ..model.location import Location
+from .mechanics import OrbittalMechanicsService, RotationalMechanicsService
 
 
 @dataclass

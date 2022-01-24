@@ -2,23 +2,14 @@
 
 from datetime import date, datetime
 from typing import Tuple
-from suntime import (  # type: ignore
-    Sun as Sun_Import,
-    SunTimeException
-)
-from ..utils.configuration import (
-    Defaults
-)
-from ..utils.logging import (
-    logger
-)
-from ..model.location import (
-    Location
-)
-from ..services.solar_system import (
-    earth
-)
 
+from suntime import Sun as Sun_Import  # type: ignore
+from suntime import SunTimeException
+
+from ..model.location import Location
+from ..services.solar_system import earth
+from ..utils.configuration import Defaults
+from ..utils.logging import logger
 
 d = u"\N{DEGREE SIGN}"
 

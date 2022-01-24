@@ -7,10 +7,10 @@ FOR DELETION: Only keeping around for reference.
 
 from datetime import date, datetime
 from typing import Tuple
-from suntime import (  # type: ignore
-    Sun as Sun_Import,
-    SunTimeException
-)
+
+from suntime import Sun as Sun_Import  # type: ignore
+from suntime import SunTimeException
+
 from .location import Location
 
 

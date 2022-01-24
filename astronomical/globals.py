@@ -3,19 +3,15 @@
 FOR DELETION: Only keeping around for reference.
 """
 
-from datetime import datetime, date, time, timedelta
 import math
-from typing import Optional, Dict
-from .model.custom_types import (  # type: ignore
-    mass,
-    radius,
-    eccentricity,
-    real_time
-)
-from .model.physics import angular_velocity, gravitational_force, \
-    law_of_periods, a_sin_theta
-from .interfaces.location import Location
+from datetime import date, datetime, time, timedelta
+from typing import Dict, Optional
 
+from .interfaces.location import Location
+from .model.custom_types import (eccentricity, mass, radius,  # type: ignore
+                                 real_time)
+from .model.physics import (a_sin_theta, angular_velocity, gravitational_force,
+                            law_of_periods)
 
 reference_date = datetime
 

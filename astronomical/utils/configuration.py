@@ -1,11 +1,9 @@
 """Utility module for setting configurations."""
 
 import configparser
-from os.path import expanduser, exists
-from ..services.solar_system import (
-    PlanetaryLocation,
-    earth
-)
+from os.path import exists, expanduser
+
+from ..services.solar_system import PlanetaryLocation, earth
 
 
 class Defaults:

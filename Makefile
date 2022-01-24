@@ -21,12 +21,14 @@ clean:
 
 info:
 
-check: lint test
+check: format lint test
 
 ## less standard
 dev-environment:
 	cp pre-commit .git/hooks/
 	poetry install
+format:
+	$(EXECUTE) isort $(LINT_GROUP)
 lint:
 	$(EXECUTE) pycodestyle $(LINT_GROUP)
 	$(EXECUTE) pydocstyle $(LINT_GROUP)

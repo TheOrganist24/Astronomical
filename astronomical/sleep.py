@@ -3,12 +3,13 @@
 FOR DELETION: Only keeping around for reference.
 """
 
-from datetime import timedelta, date, datetime, time
-from typing import Optional, Tuple
 import math
+from datetime import date, datetime, time, timedelta
+from typing import Optional, Tuple
+
 import pytz
 
-from .interfaces import sun, location
+from .interfaces import location, sun
 
 utc = pytz.UTC
 

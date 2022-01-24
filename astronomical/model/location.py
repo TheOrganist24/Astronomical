@@ -1,9 +1,8 @@
 """This module provides the dataclasses for location in astronomical."""
 
 from dataclasses import dataclass
-from ..utils.logging import (
-    logger
-)
+
+from ..utils.logging import logger
 
 
 @dataclass
