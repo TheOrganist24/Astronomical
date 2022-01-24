@@ -10,7 +10,11 @@ from astronomical.model.physics import (
     law_of_periods,
     right_ascension,
     declination,
-    solar_hour_angle
+    equatorial_coordinates,
+    solar_hour_angle,
+    altitude,
+    azimuth,
+    elevation
 )
 
 
@@ -91,6 +95,9 @@ class TestEquatorialCoordinates:
 
     def test_declination_returns_right_value(self):
         """RBICEP: Right"""
+        test_angle_from_vernal_equinox = timedelta(days=100, hours=16)
+        test_synodic_day = timedelta(hours=30)
+        test_ra = timedelta(hours=16)
         test_orbittal_obliquity = 45.0
         test_sidereal_period = timedelta(days=4)
         test_time_since_march_equinox = timedelta(days=3)
@@ -101,6 +108,25 @@ class TestEquatorialCoordinates:
                           test_time_since_march_equinox)
                              
         assert dec == test_dec
+
+    def test_equatorial_coordinates_returns_right_value(self):
+        """RBICEP: Right"""
+        test_angle_from_vernal_equinox = timedelta(days=100, hours=16)
+        test_synodic_day = timedelta(hours=30)
+        test_ra = timedelta(hours=16)
+        test_orbittal_obliquity = 45.0
+        test_sidereal_period = timedelta(days=4)
+        test_time_since_march_equinox = timedelta(days=3)
+        test_dec = -45.0
+        
+        ra, dec = equatorial_coordinates(test_angle_from_vernal_equinox,
+                                         test_synodic_day,
+                                         test_orbittal_obliquity,
+                                         test_sidereal_period,
+                                         test_time_since_march_equinox)
+                             
+        assert ra == test_ra \
+            and dec == test_dec
 
 
 class TestSolarHourAngle:
@@ -114,3 +140,48 @@ class TestSolarHourAngle:
                                             test_time_since_midnight)
         
         assert sha == test_sha
+
+
+class TestElevationCoordinates:
+    def test_altitude_returns_right_value(self):
+        """RBICEP: Right"""
+        test_latitude = 45.0
+        test_declination = 20.0
+        test_hour_angle = 0.0
+        test_alt = 65
+        
+        alt = altitude(test_latitude,
+        	       test_declination,
+        	       test_hour_angle)
+                             
+        assert int(alt) == int(test_alt)
+
+    def test_azimuth_returns_right_value(self):
+        """RBICEP: Right"""
+        test_latitude = 45.0
+        test_declination = 20.0
+        test_hour_angle = 0.0
+        test_altitude = 65
+        test_az = 180
+        
+        az = azimuth(test_latitude,
+        	      test_declination,
+        	      test_hour_angle,
+        	      test_altitude)
+                             
+        assert int(az) == int(test_az)
+
+    def test_elevation_returns_right_value(self):
+        """RBICEP: Right"""
+        test_latitude = 45.0
+        test_declination = 20.0
+        test_hour_angle = 0.0
+        test_azimuth = 180
+        test_altitude = 65
+        
+        azimuth, altitude = elevation(test_latitude,
+        				test_declination,
+        				test_hour_angle)
+                             
+        assert int(azimuth) == int(test_azimuth) \
+            and int(altitude) == int(test_altitude)
