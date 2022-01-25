@@ -72,3 +72,16 @@ class real_time(timedelta):
     def __str__(self):
         """Return real time representation."""
         return f"{self.value}s"
+
+
+class angle(float):
+    """Custom type: angle."""
+
+    def __init__(self, *args, **kwargs):
+        """Initialise eccentricity."""
+        super(angle, self).__init__()
+        self.value = args[0]
+
+    def __str__(self):
+        """Return eccentricity representation."""
+        return f"{self.value}"+u"\N{DEGREE SIGN}"

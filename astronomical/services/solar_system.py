@@ -5,9 +5,10 @@ from datetime import datetime, timedelta
 from typing import List, Tuple
 
 from ..model.celestials import Body
-from ..model.custom_types import eccentricity, mass, radius, real_time
+from ..model.custom_types import angle, eccentricity, mass, radius, real_time
 from ..model.location import Location
-from ..model.physics import (altitude, declination, solar_hour_angle,
+from ..model.physics import (altitude, declination, elevation,
+                             equatorial_coordinates, solar_hour_angle,
                              synodic_day)
 from .mechanics import OrbittalMechanicsService, RotationalMechanicsService
 
@@ -52,8 +53,8 @@ class PlanetaryLocation(Location):
 
     planet: Planet
 
-    def _calculate_sun_times(self, instant: datetime = datetime.now()
-                             ) -> Tuple[datetime, datetime]:
+    def calculate_sun_times(self, instant: datetime = datetime.now()
+                            ) -> Tuple[datetime, datetime]:
         """Calculate the sunrise.
 
         For a given day, start at midnight and iterate through,
@@ -104,6 +105,42 @@ class PlanetaryLocation(Location):
 
         sunrise, sunset = horizon_crossing[0], horizon_crossing[1]
         return sunrise, sunset
+
+    def calculate_equatorial_coords(self, instant: datetime = datetime.now()
+                                    ) -> Tuple[angle, angle]:
+        """Calculate the right ascension and declination."""
+        time_since_vernal_equinox: timedelta = instant \
+            - self.planet.ref_march_equinox
+        time_since_march_equinox: timedelta = instant \
+            - self.planet.ref_march_equinox
+        eqc = equatorial_coordinates(time_since_vernal_equinox,
+                                     self.planet._calculate_synodic_day(),
+                                     self.planet.orbittal_obliquity,
+                                     self.planet._calculate_orbittal_period(),
+                                     time_since_march_equinox)
+        ra_calc, dec_calc = eqc
+        ra: angle = angle(360 * (ra_calc / timedelta(hours=24)))
+        dec = angle(dec_calc)
+        return ra, dec
+
+    def calculate_elevation(self, instant: datetime = datetime.now()
+                            ) -> Tuple[angle, angle]:
+        """Calculate the azimuth and altitude."""
+        syn_day: real_time = self.planet._calculate_synodic_day()
+        start = ((((instant - self.planet.ref_midnight) // syn_day) * syn_day)
+                 + self.planet.ref_midnight)
+        time_since_midnight = instant - start
+        time_since_march_equinox: timedelta = instant \
+            - self.planet.ref_march_equinox
+        dec = declination(self.planet.orbittal_obliquity,
+                          self.planet._calculate_orbittal_period(),
+                          time_since_march_equinox)
+        ha = solar_hour_angle(syn_day, time_since_midnight)
+
+        az_calc, alt_calc = elevation(self.latitude, dec, ha)
+        az: angle = angle(az_calc)
+        alt: angle = angle(alt_calc)
+        return az, alt
 
 
 sun = Star(name="The Sun",
