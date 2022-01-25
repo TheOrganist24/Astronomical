@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Tuple
+from typing import List, Tuple
 
 from ..model.celestials import Body
 from ..model.custom_types import eccentricity, mass, radius, real_time
@@ -53,54 +53,57 @@ class PlanetaryLocation(Location):
     planet: Planet
 
     def _calculate_sun_times(self, instant: datetime = datetime.now()
-                             ) -> Tuple[real_time, real_time]:
+                             ) -> Tuple[datetime, datetime]:
         """Calculate the sunrise.
 
-        # if altitude >= 0 or time is after noon:
-        #     iterate backwards to find sunrise
-        # else:
-        #     iterate forwards
+        For a given day, start at midnight and iterate through,
+        minute-by-minute. Capture the changes in |altitute| when closest to 0
+        which will correspond to sunrise and sunset (in that order).
         """
-        # declare variables
+        # redeclare or caclculate variables with simpler names
         lat = self.latitude
         lon = self.longitude
-        year: timedelta = self.planet._calculate_orbittal_period()
-        sidereal_period: real_time = self.planet._calculate_orbittal_period()
+        year: real_time = self.planet._calculate_orbittal_period()
         syn_day: real_time = self.planet._calculate_synodic_day()
+
+        # setup variables to aid with iterating through the day
         start = ((((instant - self.planet.ref_midnight) // syn_day) * syn_day)
                  + self.planet.ref_midnight)
-
         current_min_altitude: float = 0.0
         improving: bool = False
         previously_was_improving: bool = False
-        horizon_crossing: list = []
+        horizon_crossing: List[datetime] = []
 
         for minute_elapsed in range(0, int(syn_day.total_seconds()/60)):
             calc_time = start + timedelta(minutes=minute_elapsed)
 
-            # calculate variables
+            # calculate altitude arguments for this iteration
             time_since_march_equinox: timedelta = calc_time \
                 - self.planet.ref_march_equinox
             ha = (solar_hour_angle(syn_day, timedelta(minutes=minute_elapsed))
                   - lon)
             dec = declination(self.planet.orbittal_obliquity,
-                              sidereal_period,
+                              year,
                               time_since_march_equinox)
 
             calculated_altitude = abs(altitude(lat, dec, ha))
 
+            # detect whether there is an improvement in the altitude
             if calculated_altitude < current_min_altitude:
                 current_min_altitude = calculated_altitude
                 improving = True
             else:
                 improving = False
+            # detect minimum which indicates sunrise/set
             if not improving and previously_was_improving:
                 horizon_crossing.append(calc_time)
             if not improving and not previously_was_improving:
                 current_min_altitude = calculated_altitude
 
             previously_was_improving = improving
-        return horizon_crossing[0], horizon_crossing[1]
+
+        sunrise, sunset = horizon_crossing[0], horizon_crossing[1]
+        return sunrise, sunset
 
 
 sun = Star(name="The Sun",
