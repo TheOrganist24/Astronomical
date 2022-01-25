@@ -16,7 +16,7 @@ d = u"\N{DEGREE SIGN}"
 
 
 class Sun:
-    """Return sunrise/set times, elevation/azimuth, and distance."""
+    """Return sunrise/set times, and the sun's relative position."""
 
     def __init__(self) -> None:
         """Initialise variables."""
@@ -39,16 +39,15 @@ class Sun:
         return(f"Sun data:\n"
                f"- Rise-> set: \t\t\t{sunrise}-> {sunset}\n"
                f"- Right Ascension, Declination:\t({ra},{dec})\n"
-               f"- Elevation/Azimuth:\t\t({az},{alt})\n"
-               f"- Current Distance:\t\t{sunrise}")
+               f"- Elevation/Azimuth:\t\t({az},{alt})")
 
     def _sun_times(self,
                    day: date = date.today()) -> Tuple[datetime, datetime]:
         """Return sunrise and sunset times."""
-        # sun = Sun_Import(self.location.latitude, self.location.longitude)
-        # sunrise = sun.get_sunrise_time(day)
-        # sunset = sun.get_sunset_time(day)
-        sunrise, sunset = self.location.calculate_sun_times()
+        sun = Sun_Import(self.location.latitude, self.location.longitude)  # d
+        sunrise = sun.get_sunrise_time(day)  # disable
+        sunset = sun.get_sunset_time(day)  # disable
+        # sunrise, sunset = self.location.calculate_sun_times()  # enable
 
         logger.info(f"METHOD: completed.")
         return sunrise, sunset
