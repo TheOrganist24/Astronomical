@@ -3,7 +3,7 @@
 from datetime import timedelta
 
 from ..model.celestials import OrbittalBody, SpinningBody
-from ..model.custom_types import eccentricity, mass, radius
+from ..model.custom_types import eccentricity, mass, radius, real_time
 from ..model.physics import (angular_velocity, gravitational_force,
                              law_of_periods)
 from ..utils.logging import logger
@@ -38,7 +38,7 @@ class OrbittalMechanicsService(OrbittalBody):
                      f"returns \"{result}\".")
         return result
 
-    def _calculate_orbittal_period(self) -> timedelta:
+    def _calculate_orbittal_period(self) -> real_time:
         """Apply Kepler's Law of Periods.
 
         Returns period (timedelta); also known as the sidereal period.

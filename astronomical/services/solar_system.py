@@ -65,7 +65,7 @@ class PlanetaryLocation(Location):
         lat = self.latitude
         lon = self.longitude
         year: timedelta = self.planet._calculate_orbittal_period()
-        sidereal_day: real_time = self.planet.sidereal_day
+        sidereal_period: real_time = self.planet._calculate_orbittal_period()
         syn_day: real_time = self.planet._calculate_synodic_day()
         start = ((((instant - self.planet.ref_midnight) // syn_day) * syn_day)
                  + self.planet.ref_midnight)
@@ -84,7 +84,7 @@ class PlanetaryLocation(Location):
             ha = (solar_hour_angle(syn_day, timedelta(minutes=minute_elapsed))
                   - lon)
             dec = declination(self.planet.orbittal_obliquity,
-                              sidereal_day,
+                              sidereal_period,
                               time_since_march_equinox)
 
             calculated_altitude = abs(altitude(lat, dec, ha))
