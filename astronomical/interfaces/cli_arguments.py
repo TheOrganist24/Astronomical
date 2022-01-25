@@ -42,9 +42,11 @@ class Sun:
         class. That class should calculate this from first principles instead
         of pulling from an API.
         """
-        sun = Sun_Import(self.location.latitude, self.location.longitude)
-        sunrise = sun.get_sunrise_time(day)
-        sunset = sun.get_sunset_time(day)
+        # sun = Sun_Import(self.location.latitude, self.location.longitude)
+        # sunrise = sun.get_sunrise_time(day)
+        # sunset = sun.get_sunset_time(day)
+        sunrise, sunset = self.location._calculate_sun_times()
+
         logger.info(f"METHOD: completed.")
         return sunrise, sunset
 
