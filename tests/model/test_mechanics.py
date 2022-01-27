@@ -1,4 +1,5 @@
 from datetime import timedelta
+import unittest
 from astronomical.model.solar_system import sun
 from astronomical.model.mechanics import (
     RotationalMechanicsService,
@@ -6,7 +7,7 @@ from astronomical.model.mechanics import (
 )
 
 
-class TestRotationalMechanicsServiceClass:
+class TestRotationalMechanicsServiceClass(unittest.TestCase):
     def test_calculate_axial_velocity_returns_right_value(self):
         """RBICEP: Right"""
         test_name = "Test"
@@ -24,7 +25,7 @@ class TestRotationalMechanicsServiceClass:
         assert velocity == test_velocity
 
 
-class TestOrbittalMechanicsServiceClass:
+class TestOrbittalMechanicsServiceClass(unittest.TestCase):
     def test_calculate_gravitational_force_returns_right_value(self):
         """RBICEP: Right"""
         test_name = "Earth"

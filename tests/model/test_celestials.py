@@ -2,9 +2,10 @@
 # this is overkill - remove in future as only example
 
 import pytest
+import unittest
 from astronomical.model import celestials
 
-class TestBodyClass:
+class TestBodyClass(unittest.TestCase):
     def test_when_body_is_instatiated_that_values_are_returned(self):
         test_name = "Not the Earth"
         test_mass = 2

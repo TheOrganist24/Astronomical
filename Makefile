@@ -7,7 +7,7 @@ PACKAGE=astronomical
 
 # file groups
 LINT_GROUP=$(PACKAGE)
-TEST_GROUP=tests/.
+TEST_GROUP=tests/test_*.py tests/*/test_*.py
 
 # targets
 ## standard
@@ -35,7 +35,7 @@ lint:
 	$(EXECUTE) mypy $(LINT_GROUP)
 
 test:
-	$(EXECUTE) pytest $(TEST_GROUP)
+	$(EXECUTE) python3 -m unittest $(TEST_GROUP)
 
 coverage:
 	$(EXECUTE) pytest --cov=$(PACKAGE) $(TEST_GROUP)

@@ -1,4 +1,7 @@
+import unittest
 from astronomical import __version__
 
-def test_version():
-    assert __version__ == '0.1.0'
+
+class TestMainModule(unittest.TestCase):
+    def test_version(self):
+        assert __version__ == '0.1.0'
