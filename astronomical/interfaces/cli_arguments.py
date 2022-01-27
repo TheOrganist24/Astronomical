@@ -39,7 +39,7 @@ class Sun:
         return(f"Sun data:\n"
                f"- Rise-> set: \t\t\t{sunrise}-> {sunset}\n"
                f"- Right Ascension, Declination:\t({ra},{dec})\n"
-               f"- Elevation/Azimuth:\t\t({az},{alt})")
+               f"- Azimuth, Altitude:\t\t({az},{alt})")
 
     def _sun_times(self,
                    day: date = date.today()) -> Tuple[datetime, datetime]:
