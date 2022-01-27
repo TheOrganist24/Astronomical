@@ -1,6 +1,6 @@
 from datetime import timedelta
-from astronomical.services.solar_system import sun
-from astronomical.services.mechanics import (
+from astronomical.model.solar_system import sun
+from astronomical.model.mechanics import (
     RotationalMechanicsService,
     OrbittalMechanicsService
 )
