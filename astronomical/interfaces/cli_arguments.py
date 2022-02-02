@@ -71,9 +71,18 @@ class Sun:
 class Alarms:
     """Return alarm type objects for going to sleep and getting up."""
 
+    def __init__(self) -> None:
+        """Initialise variables."""
+        self.get_up = datetime.now()
+        self.start_work = datetime.now()
+
     def __str__(self) -> str:
         """Generate summary of class."""
-        return(f"Alarms:")
+        rise = self.get_up.strftime("%I:%M%p")
+        work = self.start_work.strftime("%I:%M%p")
+        return(f"Alarms:\n"
+               f"- Get up:\t{rise}\n"
+               f"- Start work:\t{work}")
 
 
 class Time:
