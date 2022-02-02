@@ -1,6 +1,7 @@
 """Command line interfaces for astronomical."""
 
-from datetime import date, datetime
+import math
+from datetime import date, datetime, time, timedelta
 from typing import Tuple
 
 from suntime import Sun as Sun_Import  # type: ignore
@@ -73,8 +74,12 @@ class Alarms:
 
     def __init__(self) -> None:
         """Initialise variables."""
-        self.get_up = datetime.now()
-        self.start_work = datetime.now()
+        logger.info(f"INTERFACE: \"{self.__class__.__name__}\" "
+                    f"instantiating.")
+        locale = Defaults()
+        self.location = locale.location()
+        self.get_up = self._set_alarm()
+        self.start_work = self.get_up + timedelta(hours=1)
 
     def __str__(self) -> str:
         """Generate summary of class."""
@@ -83,6 +88,19 @@ class Alarms:
         return(f"Alarms:\n"
                f"- Get up:\t{rise}\n"
                f"- Start work:\t{work}")
+
+    def _set_alarm(self) -> datetime:
+        ref_midnight = datetime.now().date() + timedelta(hours=24)
+        latest = datetime.combine(ref_midnight, time(hour=7))
+        earliest = datetime.combine(ref_midnight, time(hour=6))
+        margin = latest - earliest
+        year = self.location.planet._calculate_orbittal_period()
+        annual_procession = (datetime.combine(ref_midnight, time())
+                             - self.location.planet.ref_march_equinox) / year
+        math_diff = margin * math.sin((2*math.pi)*annual_procession)
+        diff = (math_diff + margin) / 2
+        alarm = latest - diff
+        return alarm
 
 
 class Time:
