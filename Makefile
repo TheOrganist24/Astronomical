@@ -13,9 +13,11 @@ TEST_GROUP=tests/test_*.py tests/*/test_*.py
 ## standard
 all:
 
-install:
+install: build
+	python3 -m pip install ./dist/astronomical-0.1.0-py3-none-any.whl
 
 uninstall:
+	python3 -m pip uninstall astronomical
 
 clean:
 

@@ -9,8 +9,8 @@ This module provides information about the sun, moon, seasons and tides accordin
 ## Get Started
 To install run from inside the directory:
 ```bash
-poetry build
-python3 -m pip install .dist/astronomical-<VERSION>-py3-none-any.whl
+make dev-environment
+make install
 astronomical --version
 ```
 
