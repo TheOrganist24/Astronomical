@@ -12,7 +12,5 @@ from .utils.logging import logger, setup_logging
 setup_logging()
 
 from .interfaces import cli_arguments  # noqa
-from .interfaces.location import Location  # noqa
-from .interfaces.sun import sun_times  # noqa
 
 __version__ = "0.1.0"
