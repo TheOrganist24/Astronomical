@@ -1,6 +1,7 @@
 # environment
 SHELL=/bin/bash
 EXECUTE=poetry run
+VERSION=$$(cat VERSION)
 
 # code
 PACKAGE=astronomical
@@ -11,26 +12,31 @@ TEST_GROUP=tests/test_*.py tests/*/test_*.py
 
 # targets
 ## standard
-all:
+all: build
 
-install: build
-	python3 -m pip install ./dist/astronomical-0.1.0-py3-none-any.whl
+install:
+	python3 -m pip install ./dist/$(PACKAGE)-$(VERSION)-py3-none-any.whl
 
 uninstall:
-	python3 -m pip uninstall astronomical
+	python3 -m pip uninstall $(PACKAGE)
 
 clean:
+	rm -rf dist
 
 info:
 
 check: format lint test
 
 ## less standard
-dev-environment:
+dev:
 	cp pre-commit .git/hooks/
 	poetry install
+
+pre-commit: lint
+
 format:
 	$(EXECUTE) isort $(LINT_GROUP)
+
 lint:
 	$(EXECUTE) pycodestyle $(LINT_GROUP)
 	$(EXECUTE) pydocstyle $(LINT_GROUP)
@@ -44,6 +50,3 @@ coverage:
 
 build:
 	poetry build
-
-## custom
-pre-commit: lint

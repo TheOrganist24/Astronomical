@@ -9,7 +9,7 @@ This module provides information about the sun, moon, seasons and tides accordin
 ## Get Started
 To install run from inside the directory:
 ```bash
-make dev-environment
+make
 make install
 astronomical --version
 ```
@@ -54,9 +54,9 @@ Logging should be woven throughout the application. Log levels supported here ar
 ```bash
 git clone git@gitlab.com:TheOrganist24/astronomical.git
 cd astronomical
-make dev-environment
+make dev
 export LOG_LEVEL=INFO  # Optional; supports DEBUG, INFO, WARNING, ERROR, CRITICAL
-poetry run astronomical --help
+poetry run astronomical --version
 ```
 
 
