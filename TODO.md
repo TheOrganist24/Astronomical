@@ -10,7 +10,14 @@
   - [ ] Improve accuracy of model
     - [ ] Investigate possible causes of loss of accuracy
 - [ ] Refactor to follow Hexagonal Architecture
-  - [ ] Sketch out architecture design
+  - [x] Sketch out architecture design
+  - [ ] Build "Real World Calculators" module
+  - [ ] Modify "Services/Requirements" module to provide Abstract Base Classes
+  - [ ] Modify cli interface to instantiate "Services/Requirements"
+- [ ] Ensure full test coverage
+  - [ ] Write Model tests
+  - [ ] Write Service tests
+  - [ ] Write Interface tests
 
 
 

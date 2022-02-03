@@ -5,8 +5,9 @@ import argparse
 import sys
 
 import astronomical
-from astronomical.interfaces.cli_arguments import Alarms, Sun, Time
-from astronomical.utils.logging import logger
+
+from ..interfaces.cli_arguments import Alarms, Sun, Time
+from ..utils.logging import logger
 
 
 def main():
