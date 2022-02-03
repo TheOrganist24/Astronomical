@@ -16,8 +16,18 @@
   - [ ] Modify cli interface to instantiate "Service/Requirements"
 - [ ] Ensure full test coverage
   - [ ] Write Model tests
+    - [ ] Custom Types
+    - [ ] Physics
+    - [x] Celestials (0.1.0)
+    - [ ] Location
+    - [x] Mechanics (0.1.0)
+    - [ ] Real World Calculations
   - [ ] Write Service tests
+    - [ ] Configuration
+    - [ ] Logging
+    - [ ] Requirements
   - [ ] Write Interface tests
+    - [ ] CLI
 
 
 
