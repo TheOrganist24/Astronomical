@@ -1,6 +1,6 @@
 # Actions for Astronomical
 ## For 1.0.0
-- [x] Build CLI with calls to desired functionality (0.2.0)
+- [x] Build CLI with calls to desired functionality (0.1.0)
 - [x] Build desired functionality (0.2.0)
   - [x] Sun position and horizon times (0.1.0)
   - [x] Annually cycling alarms (0.1.0)
