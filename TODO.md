@@ -1,10 +1,10 @@
 # Actions for Astronomical
 ## For 1.0.0
-- [x] Build CLI with calls to desired functionality
-- [x] Build desired functionality
-  - [x] Sun position and horizon times
-  - [x] Annually cycling alarms
-  - [x] NAC time calculator
+- [x] Build CLI with calls to desired functionality (0.2.0)
+- [x] Build desired functionality (0.2.0)
+  - [x] Sun position and horizon times (0.1.0)
+  - [x] Annually cycling alarms (0.1.0)
+  - [x] NAC time calculator (0.2.0)
 - [ ] Create own model to manage functionality
   - [x] Build basic Physics
   - [ ] Improve accuracy of model
