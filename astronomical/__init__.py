@@ -13,6 +13,4 @@ setup_logging()
 
 from .interfaces import cli_arguments  # noqa
 
-with open("VERSION") as version_src:
-    version = version_src.readline().rstrip()
-__version__ = version
+__version__ = 0.2.1
