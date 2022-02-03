@@ -67,7 +67,7 @@ poetry version <MAJOR,MINOR,PATCH>
 poetry version --short > VERSION
 ```
 
-Also don't forget to update `tests/test_astronomical.py`, although this will get caught by `make test`.
+Also don't forget to update `astronomical/__init__.py` and `tests/test_astronomical.py`.
 
 
 ### Lint and Test
