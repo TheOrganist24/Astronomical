@@ -1,4 +1,4 @@
-"""Command line interfaces for astronomical."""
+"""Requirements for astronomical."""
 
 import math
 from datetime import date, datetime, time, timedelta

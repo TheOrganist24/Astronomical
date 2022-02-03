@@ -6,7 +6,7 @@ import sys
 
 import astronomical
 
-from ..interfaces.cli_arguments import Alarms, Sun, Time
+from ..service.requirements import Alarms, Sun, Time
 from ..utils.logging import logger
 
 

@@ -7,10 +7,11 @@ from typing import List, Tuple
 from ..model.celestials import Body
 from ..model.custom_types import angle, eccentricity, mass, radius, real_time
 from ..model.location import Location
+from ..model.mechanics import (OrbittalMechanicsService,
+                               RotationalMechanicsService)
 from ..model.physics import (altitude, declination, elevation,
                              equatorial_coordinates, solar_hour_angle,
                              synodic_day)
-from .mechanics import OrbittalMechanicsService, RotationalMechanicsService
 
 
 @dataclass

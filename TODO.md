@@ -12,8 +12,8 @@
 - [ ] Refactor to follow Hexagonal Architecture
   - [x] Sketch out architecture design
   - [ ] Build "Real World Calculators" module
-  - [ ] Modify "Services/Requirements" module to provide Abstract Base Classes
-  - [ ] Modify cli interface to instantiate "Services/Requirements"
+  - [ ] Modify "Service/Requirements" module to provide Abstract Base Classes
+  - [ ] Modify cli interface to instantiate "Service/Requirements"
 - [ ] Ensure full test coverage
   - [ ] Write Model tests
   - [ ] Write Service tests
