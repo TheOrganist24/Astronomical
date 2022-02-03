@@ -11,8 +11,8 @@ from suntime import SunTimeException
 from ..model.custom_types import angle
 from ..model.location import Location
 from ..model.solar_system import earth
-from ..utils.configuration import Defaults
-from ..utils.logging import logger
+from ..service.configuration import Defaults
+from ..service.logging import logger
 
 d = u"\N{DEGREE SIGN}"
 

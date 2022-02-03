@@ -6,7 +6,7 @@ from ..model.celestials import OrbittalBody, SpinningBody
 from ..model.custom_types import eccentricity, mass, radius, real_time
 from ..model.physics import (angular_velocity, gravitational_force,
                              law_of_periods)
-from ..utils.logging import logger
+from ..service.logging import logger
 
 
 class RotationalMechanicsService(SpinningBody):

@@ -6,7 +6,7 @@ from datetime import timedelta
 from typing import Tuple
 
 from ..model.custom_types import eccentricity, mass, radius, real_time
-from ..utils.logging import logger
+from ..service.logging import logger
 
 # Constants
 G: float = 6.67408*10**-11

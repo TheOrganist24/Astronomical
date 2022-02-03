@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from ..utils.logging import logger
+from ..service.logging import logger
 
 
 @dataclass

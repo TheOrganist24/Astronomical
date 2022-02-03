@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import timedelta
 
 from ..model.custom_types import eccentricity, mass, radius, real_time
-from ..utils.logging import logger
+from ..service.logging import logger
 
 
 @dataclass

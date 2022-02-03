@@ -7,7 +7,7 @@ according to the user's current whereabouts and whenabouts.
 import os
 import sys
 
-from .utils.logging import logger, setup_logging
+from .service.logging import logger, setup_logging
 
 setup_logging()
 

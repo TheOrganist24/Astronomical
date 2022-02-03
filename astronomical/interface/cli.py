@@ -6,8 +6,8 @@ import sys
 
 import astronomical
 
+from ..service.logging import logger
 from ..service.requirements import Alarms, Sun, Time
-from ..utils.logging import logger
 
 
 def main():
