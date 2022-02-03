@@ -60,6 +60,16 @@ poetry run astronomical --version
 ```
 
 
+### Versioning
+Semantic versioning is used:
+```
+poetry version <MAJOR,MINOR,PATCH>
+poetry version --short > VERSION
+```
+
+Also don't forget to update `tests/test_astronomical.py`, although this will get caught by `make test`.
+
+
 ### Lint and Test
 Code should be compliant with PEPs 8, 256, 484, and 526.
 ```bash
