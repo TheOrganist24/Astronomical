@@ -6,16 +6,19 @@
   - [x] Annually cycling alarms (0.1.0)
   - [x] NAC time calculator (0.2.0)
 - [ ] Create own model to manage functionality
-  - [x] Build basic Physics
+  - [x] Build basic Physics (0.1.0)
   - [ ] Improve accuracy of model
     - [ ] Investigate possible causes of loss of accuracy
 - [ ] Refactor to follow Hexagonal Architecture
-  - [x] Sketch out architecture design
+  - [x] Sketch out architecture design (0.3.0)
   - [ ] Build "Real World Calculators" module
-    - [x] Build Alarms class
+    - [x] Build Alarms class (0.3.0)
     - [ ] Build Time class
   - [ ] Modify "Service/Requirements" module to provide Abstract Base Classes
   - [ ] Modify cli interface to instantiate "Service/Requirements"
+- [ ] Sort out Defaults
+  - [ ] (Re-)configure Default config imports
+  - [ ] Sort out sensible class defaults
 - [ ] Ensure full test coverage
   - [ ] Write Model tests
     - [ ] Custom Types
