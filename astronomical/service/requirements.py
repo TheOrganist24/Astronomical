@@ -10,7 +10,8 @@ from suntime import SunTimeException
 
 from ..model.custom_types import angle
 from ..model.location import Location
-from ..model.solar_system import earth
+from ..model.real_world_calculations import Alarms
+from ..model.solar_system import earth, PlanetaryLocation
 from ..service.configuration import Defaults
 from ..service.logging import logger
 
@@ -70,38 +71,26 @@ class Sun:
         return az, alt
 
 
-class Alarms:
+class AlarmsService:
     """Return alarm type objects for going to sleep and getting up."""
 
-    def __init__(self) -> None:
+    def __init__(self, alarm: Alarms) -> None:
         """Initialise variables."""
         logger.info(f"INTERFACE: \"{self.__class__.__name__}\" "
                     f"instantiating.")
-        locale = Defaults()
-        self.location = locale.location()
-        self.get_up = self._set_alarm()
-        self.start_work = self.get_up + timedelta(hours=1)
+        self.bedtime = alarm.sleep
+        self.get_up = alarm.wake
+        self.start_work = alarm.work
 
     def __str__(self) -> str:
         """Generate summary of class."""
+        sleep = self.bedtime.strftime("%I:%M%p")
         rise = self.get_up.strftime("%I:%M%p")
         work = self.start_work.strftime("%I:%M%p")
         return(f"Alarms:\n"
+               f"- Bedtime:\t{sleep}\n"
                f"- Get up:\t{rise}\n"
                f"- Start work:\t{work}")
-
-    def _set_alarm(self) -> datetime:
-        ref_midnight = datetime.now().date() + timedelta(hours=24)
-        latest = datetime.combine(ref_midnight, time(hour=7))
-        earliest = datetime.combine(ref_midnight, time(hour=6))
-        margin = latest - earliest
-        year = self.location.planet._calculate_orbittal_period()
-        annual_procession = (datetime.combine(ref_midnight, time())
-                             - self.location.planet.ref_march_equinox) / year
-        math_diff = margin * math.sin((2*math.pi)*annual_procession)
-        diff = (math_diff + margin) / 2
-        alarm = latest - diff
-        return alarm
 
 
 class Time:
