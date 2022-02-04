@@ -5,12 +5,12 @@ import argparse
 import sys
 
 import astronomical
+
 from ..model.location import Requirements
 from ..model.real_world_calculations import Alarms
 from ..service.configuration import Defaults
-
 from ..service.logging import logger
-from ..service.requirements import Sun, Time, AlarmsService
+from ..service.requirements import AlarmsService, Sun, Time
 
 
 def main():

@@ -11,7 +11,7 @@ from suntime import SunTimeException
 from ..model.custom_types import angle
 from ..model.location import Location
 from ..model.real_world_calculations import Alarms
-from ..model.solar_system import earth, PlanetaryLocation
+from ..model.solar_system import PlanetaryLocation, earth
 from ..service.configuration import Defaults
 from ..service.logging import logger
 
