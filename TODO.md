@@ -38,5 +38,10 @@
   - [ ] Break out `_calculate_latest_vernal_equinox` method from "Real World Calculations module (`Alarms` class)
   - [ ] Break out `_calculate_annual_progress` method from "Real World Calculations module (`Alarms` class)
 
-
+### Pre-Release Tasks
+- [ ] Is code coverage about 95%?
+- [ ] Is logging complete?
+- [ ] Are all versions correctly set to 1.0.0?
+- [ ] Are the documentation and diagrams up-to-date and representative?
+- [ ] Is there an up-to-date changelog?
 
