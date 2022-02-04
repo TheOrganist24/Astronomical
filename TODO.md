@@ -12,6 +12,8 @@
 - [ ] Refactor to follow Hexagonal Architecture
   - [x] Sketch out architecture design
   - [ ] Build "Real World Calculators" module
+    - [x] Build Alarms class
+    - [ ] Build Time class
   - [ ] Modify "Service/Requirements" module to provide Abstract Base Classes
   - [ ] Modify cli interface to instantiate "Service/Requirements"
 - [ ] Ensure full test coverage
@@ -28,6 +30,10 @@
     - [ ] Requirements
   - [ ] Write Interface tests
     - [ ] CLI
+- [ ] Ensure logging coverage
+- [ ] Tidy up tasks
+  - [ ] Break out `_calculate_latest_vernal_equinox` method from "Real World Calculations module (`Alarms` class)
+  - [ ] Break out `_calculate_annual_progress` method from "Real World Calculations module (`Alarms` class)
 
 
 
