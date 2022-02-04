@@ -23,7 +23,7 @@ class Location:
 class Requirements:
     """Sleep requirements."""
 
-    sleep: timedelta = timedelta(hours=8)
+    sleep: timedelta = timedelta(hours=7, minutes=10)
     latest_wake_up: time = time(hour=7)
     earliest_wake_up: time = time(hour=6)
     ablutions: timedelta = timedelta(hours=1)

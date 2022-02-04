@@ -29,12 +29,17 @@ class Alarms:
             - datetime.combine(tomorrow, self.needs.earliest_wake_up)
         final_wake_up: datetime = datetime.combine(tomorrow,
                                                    self.needs.latest_wake_up)
+        standard_duration: timedelta = self.needs.sleep
+        sleep_duration = self._calculate_sleep_time(now, year,
+                                                    latest_vernal_equinox,
+                                                    margin, standard_duration)
 
         self.wake: datetime = self._calculate_wake(now, year,
                                                    latest_vernal_equinox,
                                                    margin,
                                                    final_wake_up)
-        self.sleep: datetime = self.wake - self.needs.sleep
+        self.sleep: datetime = self.wake - sleep_duration
+
         self.work: datetime = self.wake + self.needs.ablutions
 
     def _calculate_latest_vernal_equinox(self, now: datetime,
@@ -45,6 +50,17 @@ class Alarms:
             // year_length.total_seconds()
         latest: datetime = ref_vernal_equinox + (years_since_ref * year_length)
         return latest
+
+    def _calculate_sleep_time(self, now: datetime, year_length: timedelta,
+                              vernal_equinox: datetime, margin: timedelta,
+                              normal_length: timedelta):
+        midnight: datetime = datetime.combine(now, time()) \
+            + timedelta(hours=24)
+        annual_progress: float = (2 * math.pi) * ((midnight - vernal_equinox)
+                                                  / year_length)
+        calc_length: timedelta = normal_length - (margin *
+                                                  math.sin(annual_progress))
+        return calc_length
 
     def _calculate_wake(self, now: datetime, year_length: timedelta,
                         vernal_equinox: datetime, margin: timedelta,
