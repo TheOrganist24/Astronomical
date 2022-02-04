@@ -11,9 +11,9 @@
     - [ ] Investigate possible causes of loss of accuracy
 - [ ] Refactor to follow Hexagonal Architecture
   - [x] Sketch out architecture design (0.3.0)
-  - [ ] Build "Real World Calculators" module
+  - [X] Build "Real World Calculators" module (0.3.0)
     - [x] Build Alarms class (0.3.0)
-    - [ ] Build Time class
+    - [X] Build Time class (0.3.0)
   - [ ] Modify "Service/Requirements" module to provide Abstract Base Classes
   - [ ] Modify cli interface to instantiate "Service/Requirements"
 - [ ] Sort out Defaults

@@ -7,10 +7,10 @@ import sys
 import astronomical
 
 from ..model.location import Requirements
-from ..model.real_world_calculations import Alarms
+from ..model.real_world_calculations import Alarms, Time
 from ..service.configuration import Defaults
 from ..service.logging import logger
-from ..service.requirements import AlarmsService, Sun, Time
+from ..service.requirements import AlarmsService, Sun, TimeService
 
 
 def main():
@@ -20,9 +20,10 @@ def main():
                         action="store_true")
     parser.add_argument("-s", "--sun", help=Sun.__doc__.lower()[:-1],
                         action="store_true")
-    parser.add_argument("-t", "--time", help=Time.__doc__.lower()[:-1],
+    parser.add_argument("-t", "--time", help=TimeService.__doc__.lower()[:-1],
                         action="store_true")
-    parser.add_argument("-a", "--alarms", help=Alarms.__doc__.lower()[:-1],
+    parser.add_argument("-a", "--alarms",
+                        help=AlarmsService.__doc__.lower()[:-1],
                         action="store_true")
     args = parser.parse_args()
 
@@ -40,7 +41,7 @@ def main():
         print(sun)
     elif args.time:
         logger.debug(f"CLI OPTION: \"time\" invoked.")
-        time = Time()
+        time = TimeService(Time(locale))
         print(time)
     elif args.alarms:
         logger.debug(f"CLI OPTION: \"alarms\" invoked.")

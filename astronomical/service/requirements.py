@@ -10,7 +10,7 @@ from suntime import SunTimeException
 
 from ..model.custom_types import angle
 from ..model.location import Location
-from ..model.real_world_calculations import Alarms
+from ..model.real_world_calculations import Alarms, Time
 from ..model.solar_system import PlanetaryLocation, earth
 from ..service.configuration import Defaults
 from ..service.logging import logger
@@ -93,48 +93,20 @@ class AlarmsService:
                f"- Start work:\t{work}")
 
 
-class Time:
+class TimeService:
     """Return current time as defined by me."""
 
-    def __init__(self) -> None:
+    def __init__(self, time: Time) -> None:
         """Initialise variables."""
         logger.info(f"INTERFACE: \"{self.__class__.__name__}\" "
                     f"instantiating.")
-        locale = Defaults()
-        self.location = locale.location()
-        self.gmt = datetime.now()
-        self.nac = self._calc_nac_time()
+        self.std = datetime.now()
+        self.nac = time.nac
 
     def __str__(self) -> str:
         """Generate summary of class."""
-        gmt = self.gmt.strftime("%I:%M%p")
+        std = self.std.strftime("%I:%M%p")
         nac = self.nac.strftime("%I:%M%p")
         return(f"Time:\n"
-               f"- GMT: {gmt}\n"
+               f"- STD: {std}\n"
                f"- NAC: {nac}")
-
-    def _calc_nac_time(self) -> datetime:
-        now = pytz.utc.localize(datetime.now())
-        day: date = date.today()
-        sun = Sun_Import(self.location.latitude, self.location.longitude)  # d
-        sunrise = sun.get_sunrise_time(day)  # disable
-        sunset = sun.get_sunset_time(day)  # disable
-        # sunrise, sunset = self.location.calculate_sun_times()  # enable
-
-        gs_per_n_day: float = (sunset - sunrise).total_seconds() / 43200
-        gs_per_n_night: float = (86400 - (sunset - sunrise).total_seconds()) \
-            / 43200
-
-        if now < sunrise:
-            ref_time = datetime.combine(date.today(), time())  # midnight
-            diff = (datetime.now() - ref_time) * gs_per_n_night
-            nac_now = ref_time + diff
-        elif now > sunset:
-            ref_time = datetime.combine(date.today(), time(hour=18))  # sunset
-            diff = (datetime.now() - ref_time) * gs_per_n_night
-            nac_now = ref_time + diff
-        else:
-            ref_time = datetime.combine(date.today(), time(hour=6))  # sunset
-            diff = (datetime.now() - ref_time) * gs_per_n_day
-            nac_now = ref_time + diff
-        return nac_now
