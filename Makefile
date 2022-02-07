@@ -50,3 +50,6 @@ coverage:
 
 build:
 	poetry build
+
+fresh: clean dev
+	poetry update

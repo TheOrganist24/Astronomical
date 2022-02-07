@@ -75,3 +75,15 @@ Code should be compliant with PEPs 8, 256, 484, and 526.
 ```bash
 make check  # calls `make lint; make test`
 ```
+
+
+### Workflow
+1. Review TODO list
+2. Work off `development` branch
+3. Refresh environment `make fresh`
+4. Design feature using TODO list and/or diagram (`DOCS:` commit)
+5. Write tests* (`TEST:` commit)
+6. Change or add code (`FUNC:` commit)
+7. [Version](#Versioning) bump
+8. Merge to `main`
+9. Tag `git tag -s $(cat VERSION)`
