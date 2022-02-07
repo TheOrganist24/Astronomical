@@ -48,21 +48,30 @@ class Moon(RotationalMechanicsService, OrbittalMechanicsService):
     parent: Planet
 
 
-@dataclass
 class PlanetaryLocation(Location):
     """Location situated on a planet."""
 
     planet: Planet
 
-    def calculate_sun_times(self, instant: datetime = datetime.now()
-                            ) -> Tuple[datetime, datetime]:
+    def __init__(self, name: str, longitude: float, latitude: float,
+                 planet: Planet) -> None:
+        """Initialise variables."""
+        super(PlanetaryLocation, self).__init__(name, longitude, latitude)
+        self.planet: Planet = planet
+        self.suntimes: Tuple[datetime, datetime] = self._calculate_sun_times()
+        self.equatorial_coords: Tuple[angle, angle] =\
+            self._calculate_equatorial_coords()
+        self.elevation: Tuple[angle, angle] = self._calculate_elevation()
+
+    def _calculate_sun_times(self, instant: datetime = datetime.now()
+                             ) -> Tuple[datetime, datetime]:
         """Calculate the sunrise.
 
         For a given day, start at midnight and iterate through,
         minute-by-minute. Capture the changes in |altitute| when closest to 0
         which will correspond to sunrise and sunset (in that order).
         """
-        # redeclare or caclculate variables with simpler names
+        # redeclare or calculate variables with simpler names
         lat = self.latitude
         lon = self.longitude
         year: real_time = self.planet._calculate_orbittal_period()
@@ -107,8 +116,8 @@ class PlanetaryLocation(Location):
         sunrise, sunset = horizon_crossing[0], horizon_crossing[1]
         return sunrise, sunset
 
-    def calculate_equatorial_coords(self, instant: datetime = datetime.now()
-                                    ) -> Tuple[angle, angle]:
+    def _calculate_equatorial_coords(self, instant: datetime = datetime.now()
+                                     ) -> Tuple[angle, angle]:
         """Calculate the right ascension and declination."""
         time_since_vernal_equinox: timedelta = instant \
             - self.planet.ref_march_equinox
@@ -124,8 +133,8 @@ class PlanetaryLocation(Location):
         dec = angle(dec_calc)
         return ra, dec
 
-    def calculate_elevation(self, instant: datetime = datetime.now()
-                            ) -> Tuple[angle, angle]:
+    def _calculate_elevation(self, instant: datetime = datetime.now()
+                             ) -> Tuple[angle, angle]:
         """Calculate the azimuth and altitude."""
         syn_day: real_time = self.planet._calculate_synodic_day()
         start = ((((instant - self.planet.ref_midnight) // syn_day) * syn_day)

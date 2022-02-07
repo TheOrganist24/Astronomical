@@ -10,7 +10,7 @@ from suntime import SunTimeException
 
 from ..model.custom_types import angle
 from ..model.location import Location
-from ..model.real_world_calculations import Alarms, Time
+from ..model.real_world_calculations import Alarms, State, Time
 from ..model.solar_system import PlanetaryLocation, earth
 from ..service.configuration import Defaults
 from ..service.logging import logger
@@ -18,18 +18,16 @@ from ..service.logging import logger
 d = u"\N{DEGREE SIGN}"
 
 
-class Sun:
+class SunService:
     """Return sunrise/set times, and the sun's relative position."""
 
-    def __init__(self) -> None:
+    def __init__(self, state: State) -> None:
         """Initialise variables."""
         logger.info(f"INTERFACE: \"{self.__class__.__name__}\" "
                     f"instantiating.")
-        locale = Defaults()
-        self.location = locale.location()
-        self.rise, self.set = self._sun_times()
-        self.ra, self.dec = self._equatorial_cooridnates()
-        self.az, self.alt = self._elevation()
+        self.rise, self.set = state.suntimes
+        self.ra, self.dec = state.equatorial_coords
+        self.az, self.alt = state.elevation
 
     def __str__(self) -> str:
         """Generate summary of class."""
@@ -43,32 +41,6 @@ class Sun:
                f"- Rise-> set: \t\t\t{sunrise}-> {sunset}\n"
                f"- Right Ascension, Declination:\t({ra},{dec})\n"
                f"- Azimuth, Altitude:\t\t({az},{alt})")
-
-    def _sun_times(self,
-                   day: date = date.today()) -> Tuple[datetime, datetime]:
-        """Return sunrise and sunset times."""
-        sun = Sun_Import(self.location.latitude, self.location.longitude)  # d
-        sunrise = sun.get_sunrise_time(day)  # disable
-        sunset = sun.get_sunset_time(day)  # disable
-        # sunrise, sunset = self.location.calculate_sun_times()  # enable
-
-        logger.info(f"METHOD: completed.")
-        return sunrise, sunset
-
-    def _equatorial_cooridnates(self, day: date = date.today()
-                                ) -> Tuple[angle, angle]:
-        """Return right ascension and declination angles."""
-        ra, dec = self.location.calculate_equatorial_coords()
-
-        logger.info(f"METHOD: completed.")
-        return ra, dec
-
-    def _elevation(self, day: date = date.today()) -> Tuple[angle, angle]:
-        """Return azimuth and altitude angles."""
-        az, alt = self.location.calculate_elevation()
-
-        logger.info(f"METHOD: completed.")
-        return az, alt
 
 
 class AlarmsService:

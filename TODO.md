@@ -9,13 +9,13 @@
   - [x] Build basic Physics (0.1.0)
   - [ ] Improve accuracy of model
     - [ ] Investigate possible causes of loss of accuracy
-- [ ] Refactor to follow Hexagonal Architecture
+- [x] Refactor to follow Hexagonal Architecture (0.3.0)
   - [x] Sketch out architecture design (0.3.0)
   - [X] Build "Real World Calculators" module (0.3.0)
     - [x] Build Alarms class (0.3.0)
     - [X] Build Time class (0.3.0)
-  - [ ] Modify "Service/Requirements" module to provide Abstract Base Classes
-  - [ ] Modify cli interface to instantiate "Service/Requirements"
+  - [x] Modify "Service/Requirements" module to provide Abstract Base Classes (0.3.0)
+  - [x] Modify cli interface to instantiate "Service/Requirements" (0.3.0)
 - [ ] Sort out Defaults
   - [ ] (Re-)configure Default config imports
   - [ ] Sort out sensible class defaults

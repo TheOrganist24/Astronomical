@@ -1,8 +1,10 @@
 """Utility module for setting configurations."""
 
 import configparser
+from datetime import datetime
 from os.path import exists, expanduser
 
+from ..model.real_world_calculations import State
 from ..model.solar_system import PlanetaryLocation, earth
 
 
@@ -58,3 +60,17 @@ class Defaults:
                                    self.defaults["location"]["latitude"],
                                    planet=earth)
         return locale
+
+    def state(self, instant: datetime = datetime.now()) -> State:
+        """Set user state.
+
+        If entire configuration ismissing, set to London.
+        """
+        if self._check_for_user_defined_defaults():
+            self._load_defaults()
+        else:
+            self.defaults["location"]["name"] = "London"
+            self.defaults["location"]["longitude"] = 0.1276
+            self.defaults["location"]["latitude"] = 51.5072
+        state = State(instant, self.location())
+        return state
