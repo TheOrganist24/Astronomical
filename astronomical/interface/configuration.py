@@ -19,12 +19,13 @@ class UserDefaults:
         self.loaded: bool = False
 
         config = self._load_config(path)
-        self.location: Optional[str] = config["name"]
-        self.longitude: Optional[float] = config["longitude"]
-        self.latitude: Optional[float] = config["latitude"]
+        self.location: str = config["name"]
+        self.longitude: float = config["longitude"]
+        self.latitude: float = config["latitude"]
         self.locale: Optional[PlanetaryLocation] = config["planet_location"]
 
     def _load_config(self, path: str) -> Dict:
+        self.loaded = True
         keys: List[str] = ["name", "longitude", "latitude", "planet_location"]
         data: Dict = dict.fromkeys(keys)
 
@@ -84,5 +85,4 @@ class UserDefaults:
                 print(ex)
                 return data
 
-        self.loaded = True
         return data

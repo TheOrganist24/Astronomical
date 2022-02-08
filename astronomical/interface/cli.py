@@ -3,14 +3,17 @@
 
 import argparse
 import sys
+from datetime import datetime
+
+from loguru import logger
 
 import astronomical
-
-from ..model.location import Requirements
-from ..model.real_world_calculations import Alarms, Time
-from ..service.configuration import Defaults
-from ..service.logging import logger
-from ..service.requirements import AlarmsService, SunService, TimeService
+from astronomical.interface.configuration import UserDefaults
+from astronomical.model.location import Requirements
+from astronomical.model.real_world_calculations import Alarms, Time
+from astronomical.service.configuration import DefaultService
+from astronomical.service.requirements import (AlarmsService, SunService,
+                                               TimeService)
 
 
 def main():
@@ -28,8 +31,7 @@ def main():
     args = parser.parse_args()
 
     # supply config
-    locale = Defaults().location()
-    state = Defaults().state()
+    defaults = DefaultService(UserDefaults(), datetime.now())
     requirements = Requirements()
 
     # parse main function arguments
@@ -38,13 +40,13 @@ def main():
         sys.exit(0)
     elif args.sun:
         logger.debug(f"CLI OPTION: \"sun\" invoked.")
-        sun = SunService(state)
+        sun = SunService(defaults.state)
         print(sun)
     elif args.time:
         logger.debug(f"CLI OPTION: \"time\" invoked.")
-        time = TimeService(Time(state))
+        time = TimeService(Time(defaults.state))
         print(time)
     elif args.alarms:
         logger.debug(f"CLI OPTION: \"alarms\" invoked.")
-        alarms = AlarmsService(Alarms(requirements, locale))
+        alarms = AlarmsService(Alarms(requirements, defaults.locale))
         print(alarms)
