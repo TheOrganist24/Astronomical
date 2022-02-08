@@ -1,6 +1,6 @@
 """This module provides interfaces classes for configuration."""
 import configparser
-from datetime import datetime
+from datetime import datetime, time, timedelta
 from os.path import expanduser
 from typing import Any, Dict, List, Optional
 
@@ -90,9 +90,14 @@ class UserDefaults:
         if "sleep" in config:
             sleep_data: Dict[str, Any] = {}  # type: ignore
             try:
-                sleep_data["name"] = config["star"]["name"]
-                sleep_data["mass"] = mass(float(config["star"]["mass"]))
-                sleep_data["radius"] = radius(float(config["star"]["radius"]))
+                sleep_data["sleep"] = timedelta(
+                    seconds=float(config["sleep"]["sleep"]))
+                sleep_data["earliest_wake_up"] = datetime.strptime(
+                    config["sleep"]["earliest_wake_up"], "%H:%M:%S").time()
+                sleep_data["latest_wake_up"] = datetime.strptime(
+                    config["sleep"]["latest_wake_up"], "%H:%M:%S").time()
+                sleep_data["ablutions"] = timedelta(
+                    seconds=float(config["sleep"]["ablutions"]))
                 requirement: SleepRequirements \
                     = SleepRequirements(**sleep_data)
             except TypeError as ex:

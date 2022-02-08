@@ -16,7 +16,7 @@ class DefaultService(Defaults):
             longitude = user_defaults.longitude
             latitude = user_defaults.latitude
             if user_defaults.locale is not None:
-                planet = user_defaults.locale
+                planet = user_defaults.locale.planet
                 if user_defaults.sleep is not None:
                     sleep = user_defaults.sleep
                     super().__init__(location=location, longitude=longitude,
