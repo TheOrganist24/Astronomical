@@ -9,6 +9,7 @@ PACKAGE=astronomical
 # file groups
 LINT_GROUP=$(PACKAGE)
 TEST_GROUP=tests/test_*.py tests/*/test_*.py
+CLEAN_GROUP=$(PACKAGE) tests/
 
 # targets
 ## standard
@@ -22,6 +23,7 @@ uninstall:
 
 clean:
 	rm -rf dist
+	pyclean $(CLEAN_GROUP)
 
 info:
 
