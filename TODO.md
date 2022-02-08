@@ -17,8 +17,9 @@
   - [x] Modify "Service/Requirements" module to provide Abstract Base Classes (0.3.0)
   - [x] Modify cli interface to instantiate "Service/Requirements" (0.3.0)
 - [ ] Sort out Defaults
-  - [ ] (Re-)configure Default config imports
+  - [x] (Re-)configure Default config imports
   - [ ] Sort out sensible class defaults
+  - [ ] Add Requirements to defaults
 - [ ] Ensure full test coverage
   - [ ] Write Model tests
     - [ ] Custom Types

@@ -1,6 +1,7 @@
 from datetime import timedelta
 import unittest
-from astronomical.model.solar_system import sun
+
+from astronomical.model.configuration import sun
 from astronomical.model.mechanics import (
     RotationalMechanicsService,
     OrbittalMechanicsService

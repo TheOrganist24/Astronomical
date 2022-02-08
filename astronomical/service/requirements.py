@@ -1,18 +1,12 @@
 """Requirements for astronomical."""
 
-import math
-from datetime import date, datetime, time, timedelta
-from typing import Tuple
+from datetime import datetime
 
 import pytz
 from suntime import Sun as Sun_Import  # type: ignore
-from suntime import SunTimeException
 
 from ..model.custom_types import angle
-from ..model.location import Location
 from ..model.real_world_calculations import Alarms, State, Time
-from ..model.solar_system import PlanetaryLocation, earth
-from ..service.configuration import Defaults
 from ..service.logging import logger
 
 d = u"\N{DEGREE SIGN}"

@@ -151,28 +151,3 @@ class PlanetaryLocation(Location):
         az: angle = angle(az_calc)
         alt: angle = angle(alt_calc)
         return az, alt
-
-
-sun = Star(name="The Sun",
-           mass=mass(1.9885*10**30),
-           radius=radius(696340000))
-
-earth = Planet(name="Earth",
-               mass=mass(5.9722*10**24),
-               radius=radius(6371000),
-               semimajor_axis=radius(149.598*10**9),
-               eccentricity=eccentricity(0.014710219),
-               orbittal_obliquity=23.44,
-               parent=sun,
-               sidereal_day=real_time(hours=23,
-                                      minutes=56,
-                                      seconds=4,
-                                      microseconds=90053),
-               ref_march_equinox=datetime(year=2021,
-                                          month=3,
-                                          day=20,
-                                          hour=9,
-                                          minute=37),
-               ref_midnight=datetime(year=1970,
-                                     month=1,
-                                     day=1))
