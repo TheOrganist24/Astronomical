@@ -37,6 +37,7 @@
 - [ ] Tidy up tasks
   - [ ] Break out `_calculate_latest_vernal_equinox` method from "Real World Calculations module (`Alarms` class)
   - [ ] Break out `_calculate_annual_progress` method from "Real World Calculations module (`Alarms` class)
+  - [ ] Remove `earth` and `sun` from Solar System module
 
 ### Pre-Release Tasks
 - [ ] Is code coverage about 95%?
