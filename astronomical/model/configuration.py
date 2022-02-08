@@ -1,5 +1,6 @@
 """This module provides base classes for configuration."""
-from datetime import datetime
+from dataclasses import dataclass
+from datetime import datetime, time, timedelta
 
 from astronomical.model.custom_types import (eccentricity, mass, radius,
                                              real_time)
@@ -31,10 +32,21 @@ earth = Planet(name="Earth",
                                      day=1))
 
 
+@dataclass
+class SleepRequirements:
+    """Sleep requirements."""
+
+    sleep: timedelta = timedelta(hours=7, minutes=10)
+    latest_wake_up: time = time(hour=7)
+    earliest_wake_up: time = time(hour=6)
+    ablutions: timedelta = timedelta(hours=1)
+
+
 class Defaults:
     """Base defaults class."""
 
-    def __init__(self, location: str = "London", longitude: float = 0.1276,
+    def __init__(self, sleep: SleepRequirements = SleepRequirements(),
+                 location: str = "London", longitude: float = 0.1276,
                  latitude: float = 51.5072, planet: Planet = earth,
                  instant: datetime = datetime.now()) -> None:
         """Initialise variables."""
@@ -45,3 +57,4 @@ class Defaults:
             = PlanetaryLocation(name=location, longitude=longitude,
                                 latitude=latitude, planet=planet)
         self.state: State = State(instant=instant, location=self.locale)
+        self.sleep_requirements = sleep

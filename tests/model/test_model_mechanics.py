@@ -1,11 +1,12 @@
 from datetime import timedelta
 import unittest
 
-from astronomical.model.configuration import sun
+from astronomical.model.custom_types import mass, radius
 from astronomical.model.mechanics import (
     RotationalMechanicsService,
     OrbittalMechanicsService
 )
+from astronomical.model.solar_system import Star
 
 
 class TestRotationalMechanicsServiceClass(unittest.TestCase):
@@ -29,13 +30,16 @@ class TestRotationalMechanicsServiceClass(unittest.TestCase):
 class TestOrbittalMechanicsServiceClass(unittest.TestCase):
     def test_calculate_gravitational_force_returns_right_value(self):
         """RBICEP: Right"""
+        test_sun = Star(name="The Sun",
+                        mass=mass(1.9885*10**30),
+                        radius=radius(696340000))
         test_name = "Earth"
         test_mass = 5.972*10**24
         test_radius = 6371*10**3
         test_semimajor_axis = 149.598*10**9
         test_eccentricity = 0.014710219
         test_orbittal_obliquity = 23.44
-        test_parent = sun
+        test_parent = test_sun
         test_f = 3.53*10**22
         
         orbitting_body = OrbittalMechanicsService(test_name,
@@ -51,13 +55,16 @@ class TestOrbittalMechanicsServiceClass(unittest.TestCase):
 
     def test_calculate_orbittal_period_returns_right_value(self):
         """RBICEP: Right"""
+        test_sun = Star(name="The Sun",
+                        mass=mass(1.9885*10**30),
+                        radius=radius(696340000))
         test_name = "Earth"
         test_mass = 5.972*10**24
         test_radius = 6371*10**3
         test_semimajor_axis = 149.598*10**9
         test_eccentricity = 0.014710219
         test_orbittal_obliquity = 23.44
-        test_parent = sun
+        test_parent = test_sun
         test_T = timedelta(days=365)
         
         orbitting_body = OrbittalMechanicsService(test_name,

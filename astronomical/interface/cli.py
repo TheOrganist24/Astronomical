@@ -9,7 +9,6 @@ from loguru import logger
 
 import astronomical
 from astronomical.interface.configuration import UserDefaults
-from astronomical.model.location import Requirements
 from astronomical.model.real_world_calculations import Alarms, Time
 from astronomical.service.configuration import DefaultService
 from astronomical.service.requirements import (AlarmsService, SunService,
@@ -32,7 +31,6 @@ def main():
 
     # supply config
     defaults = DefaultService(UserDefaults(), datetime.now())
-    requirements = Requirements()
 
     # parse main function arguments
     if args.version:
@@ -48,5 +46,10 @@ def main():
         print(time)
     elif args.alarms:
         logger.debug(f"CLI OPTION: \"alarms\" invoked.")
-        alarms = AlarmsService(Alarms(requirements, defaults.locale))
+        alarms = AlarmsService(
+            Alarms(defaults.sleep_requirements.sleep,
+                   defaults.sleep_requirements.earliest_wake_up,
+                   defaults.sleep_requirements.latest_wake_up,
+                   defaults.sleep_requirements.ablutions,
+                   defaults.locale))
         print(alarms)

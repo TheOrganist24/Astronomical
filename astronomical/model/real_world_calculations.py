@@ -5,7 +5,6 @@ from datetime import date, datetime, time, timedelta
 from typing import List, Tuple
 
 from astronomical.model.custom_types import angle, real_time
-from astronomical.model.location import Requirements
 from astronomical.model.physics import (altitude, declination, elevation,
                                         equatorial_coordinates,
                                         solar_hour_angle)
@@ -121,10 +120,14 @@ class State:
 class Alarms:
     """Alarms object."""
 
-    def __init__(self, requirements: Requirements,
+    def __init__(self, duration: timedelta, latest: time, earliest: time,
+                 ablutions: timedelta,
                  location: PlanetaryLocation) -> None:
         """Initialise variables."""
-        self.needs: Requirements = requirements
+        self.duration = duration
+        self.latest = latest
+        self.earliest = earliest
+        self.ablutions = ablutions
         self.locale: PlanetaryLocation = location
 
         now: datetime = datetime.now()
@@ -137,11 +140,11 @@ class Alarms:
         annual_progress =\
             self._calculate_annual_progress(now, year, latest_vernal_equinox)
         margin: timedelta = datetime.combine(tomorrow,
-                                             self.needs.latest_wake_up) \
-            - datetime.combine(tomorrow, self.needs.earliest_wake_up)
+                                             self.latest) \
+            - datetime.combine(tomorrow, self.earliest)
         final_wake_up: datetime = datetime.combine(tomorrow,
-                                                   self.needs.latest_wake_up)
-        standard_duration: timedelta = self.needs.sleep
+                                                   self.latest)
+        standard_duration: timedelta = self.duration
         sleep_duration = self._calculate_sleep_time(annual_progress,
                                                     margin, standard_duration)
 
@@ -150,7 +153,7 @@ class Alarms:
                                                    final_wake_up)
         self.sleep: datetime = self.wake - sleep_duration
 
-        self.work: datetime = self.wake + self.needs.ablutions
+        self.work: datetime = self.wake + self.ablutions
 
     def _calculate_latest_vernal_equinox(self, now: datetime,
                                          ref_vernal_equinox: datetime,

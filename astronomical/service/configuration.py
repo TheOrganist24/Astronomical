@@ -17,10 +17,23 @@ class DefaultService(Defaults):
             latitude = user_defaults.latitude
             if user_defaults.locale is not None:
                 planet = user_defaults.locale
-                super().__init__(location=location, longitude=longitude,
-                                 latitude=latitude,
-                                 planet=planet,  # type: ignore
-                                 instant=instant)
+                if user_defaults.sleep is not None:
+                    sleep = user_defaults.sleep
+                    super().__init__(location=location, longitude=longitude,
+                                     latitude=latitude,
+                                     planet=planet,  # type: ignore
+                                     instant=instant, sleep=sleep)
+                else:
+                    super().__init__(location=location, longitude=longitude,
+                                     latitude=latitude,
+                                     planet=planet,  # type: ignore
+                                     instant=instant)
             else:
-                super().__init__(location=location, longitude=longitude,
-                                 latitude=latitude, instant=instant)
+                if user_defaults.sleep is not None:
+                    sleep = user_defaults.sleep
+                    super().__init__(location=location, longitude=longitude,
+                                     latitude=latitude, instant=instant,
+                                     sleep=sleep)
+                else:
+                    super().__init__(location=location, longitude=longitude,
+                                     latitude=latitude, instant=instant)

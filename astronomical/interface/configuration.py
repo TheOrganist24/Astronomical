@@ -4,6 +4,7 @@ from datetime import datetime
 from os.path import expanduser
 from typing import Any, Dict, List, Optional
 
+from astronomical.model.configuration import SleepRequirements
 from astronomical.model.custom_types import (eccentricity, mass, radius,
                                              real_time)
 from astronomical.model.solar_system import Planet, PlanetaryLocation, Star
@@ -23,10 +24,12 @@ class UserDefaults:
         self.longitude: float = config["longitude"]
         self.latitude: float = config["latitude"]
         self.locale: Optional[PlanetaryLocation] = config["planet_location"]
+        self.sleep: Optional[SleepRequirements] = config["sleep"]
 
     def _load_config(self, path: str) -> Dict:
         self.loaded = True
-        keys: List[str] = ["name", "longitude", "latitude", "planet_location"]
+        keys: List[str] = ["name", "longitude", "latitude", "planet_location",
+                           "sleep"]
         data: Dict = dict.fromkeys(keys)
 
         config = configparser.ConfigParser()
@@ -84,5 +87,17 @@ class UserDefaults:
             except TypeError as ex:
                 print(ex)
                 return data
+        if "sleep" in config:
+            sleep_data: Dict[str, Any] = {}  # type: ignore
+            try:
+                sleep_data["name"] = config["star"]["name"]
+                sleep_data["mass"] = mass(float(config["star"]["mass"]))
+                sleep_data["radius"] = radius(float(config["star"]["radius"]))
+                requirement: SleepRequirements \
+                    = SleepRequirements(**sleep_data)
+            except TypeError as ex:
+                print(ex)
+                return data
+            data["sleep"] = requirement
 
         return data
