@@ -11,12 +11,13 @@ class TestConfigurationDefaultsClass(unittest.TestCase):
         test_longitude: float = 0.1276
         test_latitude: float = 51.5072
         test_planet_name: str = "Earth"
-        #test_state_time: datetime = datetime.now()
+        test_state_time: datetime = datetime.now()
 
-        defaults = Defaults()
+        # leave params unset except instant to handle microsecond discrepancy
+        defaults = Defaults(instant=test_state_time)
 
         assert defaults.location == test_location \
             and defaults.longitude == test_longitude \
             and defaults.latitude == test_latitude \
-            and defaults.locale.planet.name == test_planet_name #\
-            #and defaults.state.instant == test_state_time
+            and defaults.locale.planet.name == test_planet_name \
+            and defaults.state.instant == test_state_time
