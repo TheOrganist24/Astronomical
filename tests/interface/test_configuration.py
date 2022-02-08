@@ -6,6 +6,7 @@ from astronomical.interface.configuration import UserDefaults
 
 class TestUserDefaultsClass(unittest.TestCase):
     def test_external_default_location_is_users_home_dir(self):
+        """R BICEP: Right"""
         test_user_defaults_path = f"{expanduser('~')}/.astronomical"
 
         user_defaults = UserDefaults()
@@ -13,7 +14,8 @@ class TestUserDefaultsClass(unittest.TestCase):
         assert user_defaults.path == test_user_defaults_path
 
     def test_defaults_are_loaded(self):
-        test_config_location: str = "tests/data/config.ini"
+        """R BICEP: Right"""
+        test_config_location: str = "/home/nicholas/astronomical/tests/data/config.ini"
         test_location: str = "London"
         test_longitude: float = 0.1276
         test_latitude: float = 51.5072
