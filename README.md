@@ -65,7 +65,7 @@ git clone git@gitlab.com:TheOrganist24/astronomical.git
 cd astronomical
 git checkout development
 make dev
-export LOG_LEVEL=INFO  # Optional; supports DEBUG, INFO, WARNING, ERROR, CRITICAL
+export LOG_LEVEL=INFO  # Optional; supports TRACE, DEBUG, INFO, WARNING, ERROR, CRITICAL
 poetry run astronomical --version
 ```
 
