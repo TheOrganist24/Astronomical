@@ -1,4 +1,5 @@
-"""This module provides interfaces classes for configuration."""
+"""Interface module for handling user defined configuration."""
+
 import configparser
 from datetime import datetime, time, timedelta
 from os.path import expanduser
@@ -11,11 +12,35 @@ from astronomical.model.solar_system import Planet, PlanetaryLocation, Star
 
 
 class UserDefaults:
-    """Class for handling user defaults set externally."""
+    """Class for handling user defaults set externally.
+
+    Attributes
+    ----------
+    path (str)                  path to config
+    loaded (bool)               the loaded state
+    location (str)              name of the location
+    longitude (float)           positional longitude
+    latitude (float)            positional latitude
+    locale (PlanetaryLocation)  localized location to a planet
+    sleep (SleepRequirements)   sleeping pattern requirements
+
+    Public Methods
+    --------------
+    None
+    """
 
     def __init__(self, path: str = f"{expanduser('~')}/.astronomical"
                  ) -> None:
-        """Initialise variables."""
+        """Ingest user variables.
+
+        Parameters
+        ----------
+        path (str)      path to config ("~/.astronomical")
+
+        Returns
+        -------
+        None
+        """
         self.path = path
         self.loaded: bool = False
 
@@ -26,7 +51,17 @@ class UserDefaults:
         self.locale: Optional[PlanetaryLocation] = config["planet_location"]
         self.sleep: Optional[SleepRequirements] = config["sleep"]
 
-    def _load_config(self, path: str) -> Dict:
+    def _load_config(self, path: str) -> Dict[str, Any]:
+        """Load config and return as dictionary.
+
+        Parameters
+        ----------
+        path (str)          path to config (explicit)
+
+        Returns
+        -------
+        data (Dictionary)   data with supplied configuration
+        """
         self.loaded = True
         keys: List[str] = ["name", "longitude", "latitude", "planet_location",
                            "sleep"]

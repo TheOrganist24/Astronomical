@@ -1,4 +1,5 @@
-"""This module provides base classes for configuration."""
+"""Model module for providing sensible defaults."""
+
 from dataclasses import dataclass
 from datetime import datetime, time, timedelta
 
@@ -43,13 +44,41 @@ class SleepRequirements:
 
 
 class Defaults:
-    """Base defaults class."""
+    """Base defaults class for providing sensible defaults.
+
+    Attributes
+    ----------
+    location (str)              name of the location
+    longitude (float)           positional longitude
+    latitude (float)            positional latitude
+    locale (PlanetaryLocation)  localized location to a planet
+    state (State)               time dependent PlanetaryLocation
+    sleep (SleepRequirements)   sleeping pattern requirements
+
+    Public Methods
+    --------------
+    None
+    """
 
     def __init__(self, sleep: SleepRequirements = SleepRequirements(),
                  location: str = "London", longitude: float = 0.1276,
                  latitude: float = 51.5072, planet: Planet = earth,
                  instant: datetime = datetime.now()) -> None:
-        """Initialise variables."""
+        """Initialise with sensible defaults.
+
+        Parameters
+        ----------
+        sleep (SleepRequirements)   sleeping pattern requirements (as parent)
+        location (str)              name of the location ("London")
+        longitude (float)           positional longitude (0.1276)
+        latitude (float)            positional latitude (51.5072)
+        planet (Planet)             localized planet (earth)
+        instant (datetime)          required for parent (now)
+
+        Returns
+        -------
+        None
+        """
         self.location: str = location.title()
         self.longitude: float = longitude
         self.latitude: float = latitude

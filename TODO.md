@@ -19,7 +19,7 @@
 - [ ] Sort out Defaults
   - [x] (Re-)configure Default config imports
   - [ ] Sort out sensible class defaults
-  - [ ] Add Requirements to defaults
+  - [X] Add Requirements to defaults
 - [ ] Ensure full test coverage
   - [ ] Write Model tests
     - [ ] Custom Types
@@ -44,6 +44,7 @@
 - [ ] Is code coverage about 95%?
 - [ ] Is logging complete?
 - [ ] Are all versions correctly set to 1.0.0?
-- [ ] Are the documentation and diagrams up-to-date and representative?
+- [ ] Are Docstrings complete?
+- [ ] Are the README documentation and diagrams up-to-date and representative?
 - [ ] Is there an up-to-date changelog?
 
