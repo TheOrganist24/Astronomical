@@ -48,3 +48,14 @@
 - [ ] Are the README documentation and diagrams up-to-date and representative?
 - [ ] Is there an up-to-date changelog?
 
+
+## For 2.0.0
+- [ ] Create calendar items
+
+### Pre-Release Tasks
+- [ ] Is code coverage about 95%?
+- [ ] Is logging complete?
+- [ ] Are all versions correctly set to 1.0.0?
+- [ ] Are Docstrings complete?
+- [ ] Are the README documentation and diagrams up-to-date and representative?
+- [ ] Is there an up-to-date changelog?
