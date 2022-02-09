@@ -3,6 +3,10 @@ All notable changes to this project will be documented in theis file.
 
 ## Unreleased
 
+## 0.4.1 - 2022-02-09
+### Changed
+* Handled the lack of config file
+
 ## 0.4.0 - 2022-02-09
 ### Changed
 * Split out defaults into Model, Interface, and Service sections
