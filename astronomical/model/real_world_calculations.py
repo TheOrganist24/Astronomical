@@ -34,7 +34,7 @@ class State:
         # redeclare or calculate variables with simpler names
         lat = self.locale.latitude
         lon = self.locale.longitude
-        year: real_time = self.locale.planet._calculate_orbittal_period()
+        year: real_time = self.locale.planet._calculate_orbital_period()
         syn_day: real_time = self.locale.planet._calculate_synodic_day()
 
         # setup variables to aid with iterating through the day
@@ -54,7 +54,7 @@ class State:
                 - self.locale.planet.ref_march_equinox
             ha = (solar_hour_angle(syn_day, timedelta(minutes=minute_elapsed))
                   - lon)
-            dec = declination(self.locale.planet.orbittal_obliquity,
+            dec = declination(self.locale.planet.orbital_obliquity,
                               year,
                               time_since_march_equinox)
 
@@ -85,10 +85,10 @@ class State:
         time_since_march_equinox: timedelta = instant \
             - self.locale.planet.ref_march_equinox
         syn_day: real_time = self.locale.planet._calculate_synodic_day()
-        o_period: real_time = self.locale.planet._calculate_orbittal_period()
+        o_period: real_time = self.locale.planet._calculate_orbital_period()
         eqc = equatorial_coordinates(time_since_vernal_equinox,
                                      syn_day,
-                                     self.locale.planet.orbittal_obliquity,
+                                     self.locale.planet.orbital_obliquity,
                                      o_period,
                                      time_since_march_equinox)
         ra_calc, dec_calc = eqc
@@ -106,8 +106,8 @@ class State:
         time_since_midnight = instant - start
         time_since_march_equinox: timedelta = instant \
             - self.locale.planet.ref_march_equinox
-        dec = declination(self.locale.planet.orbittal_obliquity,
-                          self.locale.planet._calculate_orbittal_period(),
+        dec = declination(self.locale.planet.orbital_obliquity,
+                          self.locale.planet._calculate_orbital_period(),
                           time_since_march_equinox)
         ha = solar_hour_angle(syn_day, time_since_midnight)
 
@@ -132,7 +132,7 @@ class Alarms:
 
         now: datetime = datetime.now()
         tomorrow: date = (now + self.locale.planet.sidereal_day).date()
-        year: real_time = self.locale.planet._calculate_orbittal_period()
+        year: real_time = self.locale.planet._calculate_orbital_period()
         ref_vernal_equinox: datetime = self.locale.planet.ref_march_equinox
         latest_vernal_equinox: datetime = \
             self._calculate_latest_vernal_equinox(now, ref_vernal_equinox,

@@ -1,8 +1,8 @@
-"""This module calculates the orbittal mechanics."""
+"""This module calculates the orbital mechanics."""
 
 from datetime import timedelta
 
-from ..model.celestials import OrbittalBody, SpinningBody
+from ..model.celestials import OrbitalBody, SpinningBody
 from ..model.custom_types import eccentricity, mass, radius, real_time
 from ..model.physics import (angular_velocity, gravitational_force,
                              law_of_periods)
@@ -10,7 +10,7 @@ from ..service.logging import logger
 
 
 class RotationalMechanicsService(SpinningBody):
-    """Execute orbittal calculations."""
+    """Execute orbital calculations."""
 
     def _calculate_axial_velocity(self) -> float:
         """Convert sidereal day to axial velocity.
@@ -23,8 +23,8 @@ class RotationalMechanicsService(SpinningBody):
         return result
 
 
-class OrbittalMechanicsService(OrbittalBody):
-    """Execute orbittal calculations."""
+class OrbitalMechanicsService(OrbitalBody):
+    """Execute orbital calculations."""
 
     def _calculate_gravitational_force(self) -> float:
         """Apply Universal Law of Gravitation.
@@ -38,7 +38,7 @@ class OrbittalMechanicsService(OrbittalBody):
                      f"returns \"{result}\".")
         return result
 
-    def _calculate_orbittal_period(self) -> real_time:
+    def _calculate_orbital_period(self) -> real_time:
         """Apply Kepler's Law of Periods.
 
         Returns period (timedelta); also known as the sidereal period.
@@ -46,6 +46,6 @@ class OrbittalMechanicsService(OrbittalBody):
         result = law_of_periods(self.mass,
                                 self.parent.mass,
                                 self.semimajor_axis)
-        logger.debug(f"METHOD \"_calculate_orbittal_period\": "
+        logger.debug(f"METHOD \"_calculate_orbital_period\": "
                      f"returns \"{result}\".")
         return result

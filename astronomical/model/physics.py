@@ -118,7 +118,7 @@ def law_of_periods(M: mass, m: mass, a: radius) -> real_time:
 @logger.catch
 def equatorial_coordinates(time_since_vernal_equinox: timedelta,
                            synodic_day: real_time,
-                           orbittal_obliquity: float,
+                           orbital_obliquity: float,
                            sidereal_period: real_time,
                            time_since_march_equinox: timedelta
                            ) -> Tuple[timedelta, float]:
@@ -126,7 +126,7 @@ def equatorial_coordinates(time_since_vernal_equinox: timedelta,
     logger.debug(f"BASE FUNCTION: \"equatorial_coordinates\" invoked.")
     return right_ascension(time_since_vernal_equinox,
                            synodic_day), \
-        declination(orbittal_obliquity,
+        declination(orbital_obliquity,
                     sidereal_period,
                     time_since_march_equinox)
 
@@ -152,18 +152,18 @@ def right_ascension(time_since_vernal_equinox: timedelta,
 
 
 @logger.catch
-def declination(orbittal_obliquity: float,
+def declination(orbital_obliquity: float,
                 sidereal_period: real_time,
                 time_since_march_equinox: timedelta) -> float:
     """Calculate declination of the parent body above celestial equator.
 
     The celestial equator is the projection of the equator into space. This
-    assumes that the orbitting body processes round it's orbit in a uniform
+    assumes that the orbiting body processes round it's orbit in a uniform
     manner and not according to KII (equal areas swept in equal times).
     """
     logger.debug(f"BASE FUNCTION: \"declination\" invoked.")
     orbit_completed: float = (time_since_march_equinox / sidereal_period)
-    dec: float = a_sin_theta(orbittal_obliquity, orbit_completed)
+    dec: float = a_sin_theta(orbital_obliquity, orbit_completed)
     return dec
 
 

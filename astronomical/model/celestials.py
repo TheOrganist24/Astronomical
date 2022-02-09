@@ -1,10 +1,10 @@
 """This module provides the dataclasses for celestials in astronomical."""
 
 from dataclasses import dataclass
-from datetime import timedelta
 
-from ..model.custom_types import eccentricity, mass, radius, real_time
-from ..service.logging import logger
+from astronomical.model.custom_types import (eccentricity, mass, radius,
+                                             real_time)
+from astronomical.service.logging import logger
 
 
 @dataclass
@@ -23,30 +23,25 @@ class Body:
     radius: radius
 
     def __post_init__(self) -> None:
-        """Add DEBUG logging to classes.
-
-        Parameters
-        ----------
-        None
-        """
+        """Add DEBUG logging to class."""
         logger.debug(f"CLASS: \"{self.__class__.__name__}\" instantiated.")
 
 
 @dataclass
-class OrbittalBody(Body):
-    """Base orbittal body class, extending Body.
+class OrbitalBody(Body):
+    """Base orbital body class, extending Body.
 
     Attributes
     ----------
     semimajor_axis (radius)         "A" for parent
     eccentricity (eccentricity)     non-circularity of orbit
-    orbittal_obliquity (float)      axial tilt relative to orbit
+    orbital_obliquity (float)      axial tilt relative to orbit
     parent (Body)                   parent body; a star or planet
     """
 
     semimajor_axis: radius
     eccentricity: eccentricity
-    orbittal_obliquity: float
+    orbital_obliquity: float
     parent: Body
 
 

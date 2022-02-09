@@ -99,12 +99,12 @@ class TestEquatorialCoordinates(unittest.TestCase):
         test_angle_from_vernal_equinox = timedelta(days=100, hours=16)
         test_synodic_day = timedelta(hours=30)
         test_ra = timedelta(hours=16)
-        test_orbittal_obliquity = 45.0
+        test_orbital_obliquity = 45.0
         test_sidereal_period = timedelta(days=4)
         test_time_since_march_equinox = timedelta(days=3)
         test_dec = -45.0
         
-        dec = declination(test_orbittal_obliquity,
+        dec = declination(test_orbital_obliquity,
                           test_sidereal_period,
                           test_time_since_march_equinox)
                              
@@ -115,14 +115,14 @@ class TestEquatorialCoordinates(unittest.TestCase):
         test_angle_from_vernal_equinox = timedelta(days=100, hours=16)
         test_synodic_day = timedelta(hours=30)
         test_ra = timedelta(hours=16)
-        test_orbittal_obliquity = 45.0
+        test_orbital_obliquity = 45.0
         test_sidereal_period = timedelta(days=4)
         test_time_since_march_equinox = timedelta(days=3)
         test_dec = -45.0
         
         ra, dec = equatorial_coordinates(test_angle_from_vernal_equinox,
                                          test_synodic_day,
-                                         test_orbittal_obliquity,
+                                         test_orbital_obliquity,
                                          test_sidereal_period,
                                          test_time_since_march_equinox)
                              

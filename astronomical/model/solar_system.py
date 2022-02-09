@@ -7,7 +7,7 @@ from typing import List, Tuple
 from ..model.celestials import Body
 from ..model.custom_types import angle, eccentricity, mass, radius, real_time
 from ..model.location import Location
-from ..model.mechanics import (OrbittalMechanicsService,
+from ..model.mechanics import (OrbitalMechanicsService,
                                RotationalMechanicsService)
 from ..model.physics import (altitude, declination, elevation,
                              equatorial_coordinates, solar_hour_angle,
@@ -22,17 +22,17 @@ class Star(Body):
 
 
 @dataclass
-class Planet(RotationalMechanicsService, OrbittalMechanicsService):
-    """Solar system structure; an orbitting object."""
+class Planet(RotationalMechanicsService, OrbitalMechanicsService):
+    """Solar system structure; an orbiting object."""
 
     parent: Star
-    ref_march_equinox: datetime  # orbittal obliquity spring equinox
+    ref_march_equinox: datetime  # orbital obliquity spring equinox
     ref_midnight: datetime  # any old midnight
 
     def _calculate_synodic_day(self) -> real_time:
         """Calculate synodic day from sidereal day and period."""
         sidereal_period: timedelta = \
-            self._calculate_orbittal_period()
+            self._calculate_orbital_period()
         year: float = sidereal_period.total_seconds()
         day: float = self.sidereal_day.total_seconds()
 
@@ -42,8 +42,8 @@ class Planet(RotationalMechanicsService, OrbittalMechanicsService):
 
 
 @dataclass
-class Moon(RotationalMechanicsService, OrbittalMechanicsService):
-    """Solar system structure; the orbitter of an orbitting object."""
+class Moon(RotationalMechanicsService, OrbitalMechanicsService):
+    """Solar system structure; the orbiter of an orbiting object."""
 
     parent: Planet
 
@@ -68,13 +68,13 @@ class PlanetaryLocation(Location):
         """Calculate the sunrise.
 
         For a given day, start at midnight and iterate through,
-        minute-by-minute. Capture the changes in |altitute| when closest to 0
+        minute-by-minute. Capture the changes in |altitude| when closest to 0
         which will correspond to sunrise and sunset (in that order).
         """
         # redeclare or calculate variables with simpler names
         lat = self.latitude
         lon = self.longitude
-        year: real_time = self.planet._calculate_orbittal_period()
+        year: real_time = self.planet._calculate_orbital_period()
         syn_day: real_time = self.planet._calculate_synodic_day()
 
         # setup variables to aid with iterating through the day
@@ -93,7 +93,7 @@ class PlanetaryLocation(Location):
                 - self.planet.ref_march_equinox
             ha = (solar_hour_angle(syn_day, timedelta(minutes=minute_elapsed))
                   - lon)
-            dec = declination(self.planet.orbittal_obliquity,
+            dec = declination(self.planet.orbital_obliquity,
                               year,
                               time_since_march_equinox)
 
@@ -125,8 +125,8 @@ class PlanetaryLocation(Location):
             - self.planet.ref_march_equinox
         eqc = equatorial_coordinates(time_since_vernal_equinox,
                                      self.planet._calculate_synodic_day(),
-                                     self.planet.orbittal_obliquity,
-                                     self.planet._calculate_orbittal_period(),
+                                     self.planet.orbital_obliquity,
+                                     self.planet._calculate_orbital_period(),
                                      time_since_march_equinox)
         ra_calc, dec_calc = eqc
         ra: angle = angle(360 * (ra_calc / timedelta(hours=24)))
@@ -142,8 +142,8 @@ class PlanetaryLocation(Location):
         time_since_midnight = instant - start
         time_since_march_equinox: timedelta = instant \
             - self.planet.ref_march_equinox
-        dec = declination(self.planet.orbittal_obliquity,
-                          self.planet._calculate_orbittal_period(),
+        dec = declination(self.planet.orbital_obliquity,
+                          self.planet._calculate_orbital_period(),
                           time_since_march_equinox)
         ha = solar_hour_angle(syn_day, time_since_midnight)
 

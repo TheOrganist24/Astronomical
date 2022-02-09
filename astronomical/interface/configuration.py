@@ -98,8 +98,8 @@ class UserDefaults:
                         = radius(float(config["planet"]["semimajor_axis"]))
                     planet_data["eccentricity"] \
                         = eccentricity(float(config["planet"]["eccentricity"]))
-                    planet_data["orbittal_obliquity"] \
-                        = float(config["planet"]["orbittal_obliquity"])
+                    planet_data["orbital_obliquity"] \
+                        = float(config["planet"]["orbital_obliquity"])
                     planet_data["sidereal_day"] \
                         = real_time(
                             seconds=float(config["planet"]["sidereal_day"]))
