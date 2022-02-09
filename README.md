@@ -8,6 +8,8 @@ This module provides information about the sun, moon, seasons and tides accordin
 ## Get Started
 To install run from inside the directory:
 ```bash
+git clone git@gitlab.com:TheOrganist24/astronomical.git
+cd astronomical
 make
 make install
 astronomical --version
@@ -61,6 +63,7 @@ Logging should be woven throughout the application. Log levels supported here ar
 ```bash
 git clone git@gitlab.com:TheOrganist24/astronomical.git
 cd astronomical
+git checkout development
 make dev
 export LOG_LEVEL=INFO  # Optional; supports DEBUG, INFO, WARNING, ERROR, CRITICAL
 poetry run astronomical --version
@@ -87,11 +90,11 @@ poetry version <major/minor/patch>
 poetry version --short > VERSION
 ```
 
-Also don't forget to update the [package `__init__.py`](astronomical/__init__.py) and [package tests](tests/test_astronomical.py).
-
 
 ### Lint and Test
 Code should be compliant with PEPs 8, 256, 484, and 526.
 ```bash
 make check  # calls `make lint; make test`
 ```
+
+Also don't forget to update the [package `__init__.py`](astronomical/__init__.py) and [package tests](tests/test_astronomical.py).
