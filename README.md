@@ -84,6 +84,7 @@ make check  # calls `make lint; make test`
 4. Design feature using TODO list and/or diagram (`DOCS:` commit)
 5. Write tests* (`TEST:` commit)
 6. Change or add code (`FUNC:` commit)
-7. [Version](#Versioning) bump
-8. Merge to `main`
-9. Tag `git tag -s $(cat VERSION)`
+7. Update TODO list versioning and transfer completed items to CHANGELOG
+8. [Version](#Versioning) bump
+9. Merge to `main`
+10. Tag `git tag -s $(cat VERSION)`
