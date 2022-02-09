@@ -1,7 +1,7 @@
 """Interface module for handling user defined configuration."""
 
 import configparser
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 from os.path import expanduser
 from typing import Any, Dict, List, Optional
 
@@ -23,10 +23,6 @@ class UserDefaults:
     latitude (float)            positional latitude
     locale (PlanetaryLocation)  localized location to a planet
     sleep (SleepRequirements)   sleeping pattern requirements
-
-    Public Methods
-    --------------
-    None
     """
 
     def __init__(self, path: str = f"{expanduser('~')}/.astronomical"

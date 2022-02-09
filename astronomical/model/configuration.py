@@ -54,10 +54,6 @@ class Defaults:
     locale (PlanetaryLocation)  localized location to a planet
     state (State)               time dependent PlanetaryLocation
     sleep (SleepRequirements)   sleeping pattern requirements
-
-    Public Methods
-    --------------
-    None
     """
 
     def __init__(self, sleep: SleepRequirements = SleepRequirements(),
