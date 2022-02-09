@@ -30,7 +30,8 @@ def main():
     args = parser.parse_args()
 
     # supply config
-    defaults = DefaultService(UserDefaults(), datetime.now())
+    instant: datetime = datetime.now()
+    defaults = DefaultService(UserDefaults(), instant)
 
     # parse main function arguments
     if args.version:
@@ -42,7 +43,7 @@ def main():
         print(sun)
     elif args.time:
         logger.debug(f"CLI OPTION: \"time\" invoked.")
-        time = TimeService(Time(defaults.state))
+        time = TimeService(Time(defaults.state, instant))
         print(time)
     elif args.alarms:
         logger.debug(f"CLI OPTION: \"alarms\" invoked.")

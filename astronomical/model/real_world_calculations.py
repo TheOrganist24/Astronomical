@@ -18,17 +18,19 @@ class State:
         """Initialise variables."""
         self.instant: datetime = instant
         self.locale: PlanetaryLocation = location
-        self.suntimes: Tuple[datetime, datetime] = self._calculate_sun_times()
+        self.suntimes: Tuple[datetime, datetime] \
+            = self._calculate_sun_times(instant)
         self.equatorial_coords: Tuple[angle, angle] =\
-            self._calculate_equatorial_coords()
-        self.elevation: Tuple[angle, angle] = self._calculate_elevation()
+            self._calculate_equatorial_coords(instant)
+        self.elevation: Tuple[angle, angle] \
+            = self._calculate_elevation(instant)
 
-    def _calculate_sun_times(self, instant: datetime = datetime.now()
+    def _calculate_sun_times(self, instant: datetime
                              ) -> Tuple[datetime, datetime]:
         """Calculate the sunrise.
 
         For a given day, start at midnight and iterate through,
-        minute-by-minute. Capture the changes in |altitute| when closest to 0
+        minute-by-minute. Capture the changes in |altitude| when closest to 0
         which will correspond to sunrise and sunset (in that order).
         """
         # redeclare or calculate variables with simpler names
@@ -77,8 +79,7 @@ class State:
         sunrise, sunset = horizon_crossing[0], horizon_crossing[1]
         return sunrise, sunset
 
-    def _calculate_equatorial_coords(self, instant: datetime = datetime.now()
-                                     ) -> Tuple[angle, angle]:
+    def _calculate_equatorial_coords(self, instant) -> Tuple[angle, angle]:
         """Calculate the right ascension and declination."""
         time_since_vernal_equinox: timedelta = instant \
             - self.locale.planet.ref_march_equinox
@@ -96,8 +97,7 @@ class State:
         dec = angle(dec_calc)
         return ra, dec
 
-    def _calculate_elevation(self, instant: datetime = datetime.now()
-                             ) -> Tuple[angle, angle]:
+    def _calculate_elevation(self, instant) -> Tuple[angle, angle]:
         """Calculate the azimuth and altitude."""
         syn_day: real_time = self.locale.planet._calculate_synodic_day()
         start = ((((instant - self.locale.planet.ref_midnight) // syn_day)
@@ -200,8 +200,7 @@ class Time:
     6pm respectively.
     """
 
-    def __init__(self, state: State,
-                 std_time: datetime = datetime.now()) -> None:
+    def __init__(self, state: State, std_time: datetime) -> None:
         """Initialise object."""
         sunrise, sunset = state.suntimes
         day_length: timedelta = state.locale.planet.sidereal_day

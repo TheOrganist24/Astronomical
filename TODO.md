@@ -18,7 +18,7 @@
   - [x] Modify cli interface to instantiate "Service/Requirements" (0.3.0)
 - [ ] Sort out Defaults
   - [x] (Re-)configure Default config imports
-  - [ ] Sort out sensible class defaults
+  - [x] Sort out sensible class defaults
   - [X] Add Requirements to defaults
 - [ ] Ensure full test coverage
   - [ ] Write Model tests
