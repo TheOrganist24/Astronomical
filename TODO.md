@@ -5,10 +5,8 @@
   - [x] Sun position and horizon times (0.1.0)
   - [x] Annually cycling alarms (0.1.0)
   - [x] NAC time calculator (0.2.0)
-- [ ] Create own model to manage functionality
+- [x] Create own model to manage functionality (0.1.0)
   - [x] Build basic Physics (0.1.0)
-  - [ ] Improve accuracy of model
-    - [ ] Investigate possible causes of loss of accuracy
 - [x] Refactor to follow Hexagonal Architecture (0.3.0)
   - [x] Sketch out architecture design (0.3.0)
   - [X] Build "Real World Calculators" module (0.3.0)
@@ -39,6 +37,7 @@
   - [ ] Break out `_calculate_latest_vernal_equinox` method from "Real World Calculations module (`Alarms` class)
   - [ ] Break out `_calculate_annual_progress` method from "Real World Calculations module (`Alarms` class)
   - [ ] Remove `earth` and `sun` from Solar System module
+  - [ ] Ensure diagram is logically laid out
 
 ### Pre-Release Tasks
 - [ ] Is code coverage about 95%?
@@ -51,6 +50,8 @@
 
 ## For 2.0.0
 - [ ] Create calendar items
+- [ ] Improve own model to manage functionality
+  - [ ] Investigate possible causes of loss of accuracy
 
 ### Pre-Release Tasks
 - [ ] Is code coverage about 95%?
