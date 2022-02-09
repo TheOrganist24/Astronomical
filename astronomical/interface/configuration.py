@@ -3,7 +3,7 @@
 import configparser
 from datetime import datetime, timedelta
 from os.path import expanduser
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from astronomical.model.configuration import SleepRequirements
 from astronomical.model.custom_types import (eccentricity, mass, radius,
@@ -31,7 +31,8 @@ class UserDefaults:
 
         Parameters
         ----------
-        path (str)      path to config ("~/.astronomical")
+        path (str)              path to config ("~/.astronomical")
+        config (dictionary)     configuration parameters
 
         Returns
         -------
@@ -39,13 +40,7 @@ class UserDefaults:
         """
         self.path = path
         self.loaded: bool = False
-
-        config = self._load_config(path)
-        self.location: str = config["name"]
-        self.longitude: float = config["longitude"]
-        self.latitude: float = config["latitude"]
-        self.locale: Optional[PlanetaryLocation] = config["planet_location"]
-        self.sleep: Optional[SleepRequirements] = config["sleep"]
+        self.config = self._load_config(path)
 
     def _load_config(self, path: str) -> Dict[str, Any]:
         """Load config and return as dictionary.
@@ -59,9 +54,7 @@ class UserDefaults:
         data (Dictionary)   data with supplied configuration
         """
         self.loaded = True
-        keys: List[str] = ["name", "longitude", "latitude", "planet_location",
-                           "sleep"]
-        data: Dict = dict.fromkeys(keys)
+        data: Dict[str, Any] = {}
 
         config = configparser.ConfigParser()
         config.read(path)
@@ -109,12 +102,7 @@ class UserDefaults:
                             "%Y-%m-%d %H:%M:%S")
                     planet_data["parent"] = star
                     planet: Planet = Planet(**planet_data)
-                    planet_location: PlanetaryLocation \
-                        = PlanetaryLocation(name=data["name"],
-                                            longitude=data["longitude"],
-                                            latitude=data["latitude"],
-                                            planet=planet)
-                    data["planet_location"] = planet_location
+                    data["planet"] = planet
             except TypeError as ex:
                 print(ex)
                 return data
@@ -135,5 +123,4 @@ class UserDefaults:
                 print(ex)
                 return data
             data["sleep"] = requirement
-
         return data

@@ -21,8 +21,7 @@ earth = Planet(name="Earth",
                parent=sun,
                sidereal_day=real_time(hours=23,
                                       minutes=56,
-                                      seconds=4,
-                                      microseconds=90053),
+                                      seconds=4),
                ref_march_equinox=datetime(year=2021,
                                           month=3,
                                           day=20,
@@ -37,7 +36,7 @@ earth = Planet(name="Earth",
 class SleepRequirements:
     """Sleep requirements."""
 
-    sleep: timedelta = timedelta(hours=7, minutes=10)
+    sleep: timedelta = timedelta(hours=8)
     latest_wake_up: time = time(hour=7)
     earliest_wake_up: time = time(hour=6)
     ablutions: timedelta = timedelta(hours=1)

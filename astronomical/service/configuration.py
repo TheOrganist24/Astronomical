@@ -59,13 +59,11 @@ class DefaultService(Defaults):
         """
         default_data: Dict[str, Any] = {}
         if user_defaults.loaded:
-            default_data["instant"] = instant
-            default_data["location"] = user_defaults.location
-            default_data["longitude"] = user_defaults.longitude
-            default_data["latitude"] = user_defaults.latitude
+            default_data = user_defaults.config
 
-            if user_defaults.locale is not None:
-                default_data["planet"] = user_defaults.locale.planet
-            if user_defaults.sleep is not None:
-                default_data["sleep"] = user_defaults.sleep
+            # Handle naming differences between Default class and user config
+            if "name" in default_data:
+                default_data["location"] = default_data["name"]
+                default_data.pop("name")
+            default_data["instant"] = instant
         return default_data
