@@ -10,6 +10,7 @@ PACKAGE=astronomical
 LINT_GROUP=$(PACKAGE)
 TEST_GROUP=tests/test_*.py tests/*/test_*.py
 CLEAN_GROUP=$(PACKAGE) tests/
+DELETE_GROUP=$(dist .pytest_cache .mypy_cache)
 
 # targets
 ## standard
@@ -22,7 +23,7 @@ uninstall:
 	python3 -m pip uninstall $(PACKAGE)
 
 clean:
-	rm -rf dist
+	rm -rf $(DELETE_GROUP)
 	pyclean $(CLEAN_GROUP)
 
 info:
