@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "astronomical"
-version = "0.4.0"
+version = "0.4.1"
 description = "Library of utilities related to astronomical movements."
 authors = ["TheOrganist24 <code@theorganist24.co.uk>"]
 license = "MIT"

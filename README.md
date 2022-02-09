@@ -90,11 +90,11 @@ poetry version <major/minor/patch>
 poetry version --short > VERSION
 ```
 
+Also don't forget to update the [package `__init__.py`](astronomical/__init__.py) and [package tests](tests/test_astronomical.py).
+
 
 ### Lint and Test
 Code should be compliant with PEPs 8, 256, 484, and 526.
 ```bash
 make check  # calls `make lint; make test`
 ```
-
-Also don't forget to update the [package `__init__.py`](astronomical/__init__.py) and [package tests](tests/test_astronomical.py).
