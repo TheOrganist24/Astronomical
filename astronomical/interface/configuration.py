@@ -3,12 +3,13 @@
 import configparser
 from datetime import datetime, timedelta
 from os.path import expanduser
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from astronomical.model.configuration import SleepRequirements
 from astronomical.model.custom_types import (eccentricity, mass, radius,
                                              real_time)
-from astronomical.model.solar_system import Planet, PlanetaryLocation, Star
+from astronomical.model.solar_system import Planet, Star
+from astronomical.service.logging import logger
 
 
 class UserDefaults:
@@ -123,4 +124,6 @@ class UserDefaults:
                 print(ex)
                 return data
             data["sleep"] = requirement
+        logger.info(f"METHOD: \"_load_config\" "
+                    f"returning data.")
         return data

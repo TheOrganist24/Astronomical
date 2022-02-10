@@ -5,6 +5,7 @@ from typing import Any, Dict
 
 from astronomical.interface.configuration import UserDefaults
 from astronomical.model.configuration import Defaults
+from astronomical.service.logging import logger
 
 
 class DefaultService(Defaults):
@@ -36,6 +37,8 @@ class DefaultService(Defaults):
         -------
         None
         """
+        logger.info(f"INTERFACE: \"{self.__class__.__name__}\" "
+                    f"instantiating.")
         default_data: Dict[str, Any] \
             = self._create_kwargs_for_parent(user_defaults, instant)
         super().__init__(**default_data)

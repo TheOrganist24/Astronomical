@@ -9,6 +9,7 @@ from loguru import logger
 def setup_logging():
     """Initialise logging and return logger."""
     log_levels = [
+        "TRACE",  # as much as possible
         "DEBUG",  # only for diagnosis
         "INFO",  # things are working as expected
         "WARNING",  # nothing is broken, just something unexpected happened
