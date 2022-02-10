@@ -48,15 +48,7 @@
 - [ ] Is there an up-to-date changelog?
 
 
-## For 2.0.0
+## Future
 - [ ] Create calendar items
 - [ ] Improve own model to manage functionality
   - [ ] Investigate possible causes of loss of accuracy
-
-### Pre-Release Tasks
-- [ ] Is code coverage about 95%?
-- [ ] Is logging complete?
-- [ ] Are all versions correctly set to 2.0.0?
-- [ ] Are Docstrings complete?
-- [ ] Are the README documentation and diagrams up-to-date and representative?
-- [ ] Is there an up-to-date changelog?

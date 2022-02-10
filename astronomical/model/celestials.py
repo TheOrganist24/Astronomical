@@ -23,8 +23,8 @@ class Body:
     radius: radius
 
     def __post_init__(self) -> None:
-        """Add DEBUG logging to class."""
-        logger.debug(f"CLASS: \"{self.__class__.__name__}\" instantiated.")
+        """Add TRACE logging to class."""
+        logger.trace(f"CLASS: \"{self.__class__.__name__}\" instantiated.")
 
 
 @dataclass

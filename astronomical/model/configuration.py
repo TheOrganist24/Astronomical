@@ -7,6 +7,7 @@ from astronomical.model.custom_types import (eccentricity, mass, radius,
                                              real_time)
 from astronomical.model.real_world_calculations import State
 from astronomical.model.solar_system import Planet, PlanetaryLocation, Star
+from astronomical.service.logging import logger
 
 sun = Star(name="The Sun",
            mass=mass(1.9885*10**30),
@@ -82,3 +83,4 @@ class Defaults:
                                 latitude=latitude, planet=planet)
         self.state: State = State(instant=instant, location=self.locale)
         self.sleep_requirements = sleep
+        logger.trace(f"CLASS: \"{self.__class__.__name__}\" instantiated.")
