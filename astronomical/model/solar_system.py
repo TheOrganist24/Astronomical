@@ -4,14 +4,15 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import List, Tuple
 
-from ..model.celestials import Body
-from ..model.custom_types import angle, eccentricity, mass, radius, real_time
-from ..model.location import Location
-from ..model.mechanics import (OrbitalMechanicsService,
-                               RotationalMechanicsService)
-from ..model.physics import (altitude, declination, elevation,
-                             equatorial_coordinates, solar_hour_angle,
-                             synodic_day)
+from astronomical.model.celestials import Body
+from astronomical.model.custom_types import angle, real_time
+from astronomical.model.location import Location
+from astronomical.model.mechanics import (OrbitalMechanicsService,
+                                          RotationalMechanicsService)
+from astronomical.model.physics import (altitude, declination, elevation,
+                                        equatorial_coordinates,
+                                        solar_hour_angle, synodic_day)
+from astronomical.service.logging import logger
 
 
 @dataclass
@@ -38,6 +39,8 @@ class Planet(RotationalMechanicsService, OrbitalMechanicsService):
 
         syn_day: real_time = synodic_day(year, day)
 
+        logger.debug(f"METHOD \"_calculate_synodic_day\": "
+                     f"returns \"{syn_day}\".")
         return syn_day
 
 
@@ -114,6 +117,8 @@ class PlanetaryLocation(Location):
             previously_was_improving = improving
 
         sunrise, sunset = horizon_crossing[0], horizon_crossing[1]
+        logger.debug(f"METHOD \"_calculate_sun_times\": "
+                     f"returns \"{sunrise}, {sunset}\".")
         return sunrise, sunset
 
     def _calculate_equatorial_coords(self, instant: datetime = datetime.now()
@@ -131,6 +136,8 @@ class PlanetaryLocation(Location):
         ra_calc, dec_calc = eqc
         ra: angle = angle(360 * (ra_calc / timedelta(hours=24)))
         dec = angle(dec_calc)
+        logger.debug(f"METHOD \"_calculate_equatorial_coords\": "
+                     f"returns \"{ra}, {dec}\".")
         return ra, dec
 
     def _calculate_elevation(self, instant: datetime = datetime.now()
@@ -150,4 +157,6 @@ class PlanetaryLocation(Location):
         az_calc, alt_calc = elevation(self.latitude, dec, ha)
         az: angle = angle(az_calc)
         alt: angle = angle(alt_calc)
+        logger.debug(f"METHOD \"_calculate_elevation\": "
+                     f"returns \"{az}, {alt}\".")
         return az, alt

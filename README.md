@@ -45,7 +45,7 @@ Logging should be woven throughout the application. Log levels supported here ar
   * Class instantiations - only done at the most base classes in the model layer to denote the usage of any class
   * Base function invocations - only done on core functions found in the model layer to denote the usage of it
 * **DEBUG**:
-  * Service class method returns - done in the service layer to highlight the outputs of service class methods
+  * Model class method returns - done in the service layer to highlight the outputs of service class methods
   * Command line tool argument - done in the package script to show which option is being used
 * **INFO**:
   * Interface class instantiations - highlight the beginning of a happy path for a particular option

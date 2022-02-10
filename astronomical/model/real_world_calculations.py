@@ -9,6 +9,7 @@ from astronomical.model.physics import (altitude, declination, elevation,
                                         equatorial_coordinates,
                                         solar_hour_angle)
 from astronomical.model.solar_system import PlanetaryLocation
+from astronomical.service.logging import logger
 
 
 class State:
@@ -77,6 +78,8 @@ class State:
             previously_was_improving = improving
 
         sunrise, sunset = horizon_crossing[0], horizon_crossing[1]
+        logger.debug(f"METHOD \"_calculate_sun_times\": "
+                     f"returns \"{sunrise}, {sunset}\".")
         return sunrise, sunset
 
     def _calculate_equatorial_coords(self, instant) -> Tuple[angle, angle]:
@@ -95,6 +98,8 @@ class State:
         ra_calc, dec_calc = eqc
         ra: angle = angle(360 * (ra_calc / timedelta(hours=24)))
         dec = angle(dec_calc)
+        logger.debug(f"METHOD \"_calculate_equatorial_coords\": "
+                     f"returns \"{ra}, {dec}\".")
         return ra, dec
 
     def _calculate_elevation(self, instant) -> Tuple[angle, angle]:
@@ -114,6 +119,8 @@ class State:
         az_calc, alt_calc = elevation(self.locale.latitude, dec, ha)
         az: angle = angle(az_calc)
         alt: angle = angle(alt_calc)
+        logger.debug(f"METHOD \"_calculate_elevation\": "
+                     f"returns \"{az}, {alt}\".")
         return az, alt
 
 
@@ -162,6 +169,8 @@ class Alarms:
         years_since_ref: float = (now - ref_vernal_equinox).total_seconds() \
             // year_length.total_seconds()
         latest: datetime = ref_vernal_equinox + (years_since_ref * year_length)
+        logger.debug(f"METHOD \"_calculate_latest_vernal_equinox\": "
+                     f"returns \"{latest}\".")
         return latest
 
     def _calculate_annual_progress(self, now: datetime,
@@ -172,6 +181,8 @@ class Alarms:
             + timedelta(hours=24)
         annual_progress: float = (2 * math.pi) * ((midnight - vernal_equinox)
                                                   / year_length)
+        logger.debug(f"METHOD \"_calculate_annual_progress\": "
+                     f"returns \"{annual_progress}\".")
         return annual_progress
 
     def _calculate_sleep_time(self, annual_progress: float, margin: timedelta,
@@ -179,6 +190,8 @@ class Alarms:
         """Calculate sleep duration."""
         calc_length: timedelta = normal_length - (margin *
                                                   math.sin(annual_progress))
+        logger.debug(f"METHOD \"_calculate_sleep_time\": "
+                     f"returns \"{calc_length}\".")
         return calc_length
 
     def _calculate_wake(self, annual_progress: float, margin: timedelta,
@@ -187,6 +200,8 @@ class Alarms:
         offset: timedelta = ((margin * math.sin(annual_progress)) / 2) \
             + (margin / 2)
         alarm: datetime = final_wake_up - offset
+        logger.debug(f"METHOD \"_calculate_wake\": "
+                     f"returns \"{alarm}\".")
         return alarm
 
 
@@ -240,4 +255,6 @@ class Time:
             NACs = timedelta(seconds=NACs_elapsed) + timedelta(seconds=64800)
 
         NAC_time: datetime = midnight + NACs
+        logger.debug(f"METHOD \"_calculate_nac_time\": "
+                     f"returns \"{NAC_time}\".")
         return NAC_time
