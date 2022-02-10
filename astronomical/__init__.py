@@ -11,4 +11,4 @@ from .service.logging import logger, setup_logging
 
 setup_logging()
 
-__version__ = "0.4.1"
+__version__ = "0.5.0"

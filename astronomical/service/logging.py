@@ -2,13 +2,15 @@
 
 import os
 import sys
+from os.path import expanduser
+from typing import List
 
 from loguru import logger
 
 
 def setup_logging():
     """Initialise logging and return logger."""
-    log_levels = [
+    log_levels: List[str] = [
         "TRACE",  # as much as possible
         "DEBUG",  # only for diagnosis
         "INFO",  # things are working as expected
@@ -17,7 +19,7 @@ def setup_logging():
         "CRITICAL"  # everything is on fire
     ]
     logger.remove()
-    logger.add("astronomical.log", level="INFO")
+    logger.add(f"{expanduser('~')}/.local/astronomical.log", level="INFO")
     log_level = os.getenv("LOG_LEVEL")
     if not log_level:
         logger.add(sys.stdout, level="ERROR")

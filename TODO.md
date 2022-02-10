@@ -32,7 +32,7 @@
     - [ ] Requirements
   - [ ] Write Interface tests
     - [ ] CLI
-- [ ] Ensure logging coverage
+- [X] Ensure logging coverage (0.5.0)
 - [ ] Tidy up tasks
   - [ ] Break out `_calculate_latest_vernal_equinox` method from "Real World Calculations module (`Alarms` class)
   - [ ] Break out `_calculate_annual_progress` method from "Real World Calculations module (`Alarms` class)

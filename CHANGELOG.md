@@ -3,6 +3,15 @@ All notable changes to this project will be documented in theis file.
 
 ## Unreleased
 
+## 0.5.0 / 2022-02-10
+### Added
+* TRACE logging
+
+### Changed
+* INFO logging
+* DEBUG logging
+* Changed the log file location to `.local/`
+
 ## 0.4.1 - 2022-02-09
 ### Changed
 * Handled the lack of config file
