@@ -48,18 +48,17 @@ class Defaults:
 
     Attributes
     ----------
-    location (str)              name of the location
-    longitude (float)           positional longitude
-    latitude (float)            positional latitude
-    locale (PlanetaryLocation)  localized location to a planet
     state (State)               time dependent PlanetaryLocation
     sleep (SleepRequirements)   sleeping pattern requirements
     """
 
-    def __init__(self, sleep: SleepRequirements = SleepRequirements(),
-                 location: str = "London", longitude: float = 0.1276,
+    def __init__(self, location: str = "London", longitude: float = 0.1276,
                  latitude: float = 51.5072, planet: Planet = earth,
-                 instant: datetime = datetime.now()) -> None:
+                 instant: datetime = datetime.now(),
+                 sleep_duration: timedelta = timedelta(hours=8),
+                 latest_wake_up: time = time(hour=7),
+                 earliest_wake_up: time = time(hour=6),
+                 ablutions: timedelta = timedelta(hours=1)) -> None:
         """Initialise with sensible defaults.
 
         Parameters
@@ -75,12 +74,12 @@ class Defaults:
         -------
         None
         """
-        self.location: str = location.title()
-        self.longitude: float = longitude
-        self.latitude: float = latitude
-        self.locale: PlanetaryLocation\
+        locale: PlanetaryLocation\
             = PlanetaryLocation(name=location, longitude=longitude,
                                 latitude=latitude, planet=planet)
-        self.state: State = State(instant=instant, location=self.locale)
-        self.sleep_requirements = sleep
+        self.state: State = State(instant=instant, location=locale)
+        self.sleep = SleepRequirements(sleep=sleep_duration,
+                                       latest_wake_up=latest_wake_up,
+                                       earliest_wake_up=earliest_wake_up,
+                                       ablutions=ablutions)
         logger.trace(f"CLASS: \"{self.__class__.__name__}\" instantiated.")

@@ -48,9 +48,9 @@ def main():
     elif args.alarms:
         logger.debug(f"CLI OPTION: \"alarms\" invoked.")
         alarms = AlarmsService(
-            Alarms(defaults.sleep_requirements.sleep,
-                   defaults.sleep_requirements.earliest_wake_up,
-                   defaults.sleep_requirements.latest_wake_up,
-                   defaults.sleep_requirements.ablutions,
-                   defaults.locale))
+            Alarms(defaults.sleep.sleep,
+                   defaults.sleep.earliest_wake_up,
+                   defaults.sleep.latest_wake_up,
+                   defaults.sleep.ablutions,
+                   defaults.state.locale))
         print(alarms)

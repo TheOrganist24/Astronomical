@@ -14,10 +14,12 @@
     - [X] Build Time class (0.3.0)
   - [x] Modify "Service/Requirements" module to provide Abstract Base Classes (0.3.0)
   - [x] Modify cli interface to instantiate "Service/Requirements" (0.3.0)
-- [x] Sort out Defaults (0.4.0)
+- [ ] Sort out Defaults
   - [x] (Re-)configure Default config imports (0.4.0)
   - [x] Sort out sensible class defaults (0.4.0)
   - [X] Add Requirements to defaults (0.4.0)
+  - [x] Simplify model and interface defaults to create State only
+  - [ ] Add validation to model config import
 - [ ] Ensure full test coverage
   - [ ] Write Model tests
     - [ ] Custom Types

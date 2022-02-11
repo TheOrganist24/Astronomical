@@ -108,22 +108,18 @@ class UserDefaults:
                 print(ex)
                 return data
         if "sleep" in config:
-            sleep_data: Dict[str, Any] = {}  # type: ignore
             try:
-                sleep_data["sleep"] = timedelta(
+                data["sleep_duration"] = timedelta(
                     seconds=float(config["sleep"]["sleep"]))
-                sleep_data["earliest_wake_up"] = datetime.strptime(
+                data["earliest_wake_up"] = datetime.strptime(
                     config["sleep"]["earliest_wake_up"], "%H:%M:%S").time()
-                sleep_data["latest_wake_up"] = datetime.strptime(
+                data["latest_wake_up"] = datetime.strptime(
                     config["sleep"]["latest_wake_up"], "%H:%M:%S").time()
-                sleep_data["ablutions"] = timedelta(
+                data["ablutions"] = timedelta(
                     seconds=float(config["sleep"]["ablutions"]))
-                requirement: SleepRequirements \
-                    = SleepRequirements(**sleep_data)
             except TypeError as ex:
                 print(ex)
                 return data
-            data["sleep"] = requirement
         logger.info(f"METHOD: \"_load_config\" "
                     f"returning data.")
         return data
